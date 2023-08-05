@@ -8,7 +8,7 @@
 #ifndef INCLUDED_XENGINE_COLORS_H
 #define INCLUDED_XENGINE_COLORS_H
 
-#include <Math/Inc/WNTRmath.h>
+#include <Math/Inc/NMath.h>
 
 namespace NEngine {
 

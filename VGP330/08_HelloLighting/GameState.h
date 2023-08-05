@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Inc/AppState.h"
-#include "Inc/WNTRengine.h"
+#include "Inc/NEngine.h"
 
 using namespace NEngine;
 using namespace NEngine::Graphics;

@@ -12,7 +12,7 @@
     <ClInclude Include="Inc\Common.h">
       <Filter>Inc</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\WNTRengine.h">
+    <ClInclude Include="Inc\NEngine.h">
       <Filter>Inc</Filter>
     </ClInclude>
     <ClInclude Include="Src\Precompiled.h">
@@ -32,7 +32,7 @@
     <ClCompile Include="Src\App.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\WNTRengine.cpp">
+    <ClCompile Include="Src\NEngine.cpp">
       <Filter>Src</Filter>
     </ClCompile>
   </ItemGroup>

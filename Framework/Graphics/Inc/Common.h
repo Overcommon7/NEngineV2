@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Core/Inc/Core.h>
-#include <Math/Inc/WNTRmath.h>
+#include <Math/Inc/NMath.h>
 
 #include <d3d11_1.h>
 #include <d3dcompiler.h>

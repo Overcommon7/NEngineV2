@@ -18,7 +18,7 @@
     <ClInclude Include="Inc\Constants.h">
       <Filter>Inc</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\WNTRmath.h">
+    <ClInclude Include="Inc\NMath.h">
       <Filter>Inc</Filter>
     </ClInclude>
     <ClInclude Include="Inc\Matrix4.h">
@@ -41,7 +41,7 @@
     <ClCompile Include="Src\Precompiled.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\WNTRmath.cpp">
+    <ClCompile Include="Src\NMath.cpp">
       <Filter>Src</Filter>
     </ClCompile>
   </ItemGroup>

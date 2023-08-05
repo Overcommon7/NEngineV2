@@ -1,4 +1,4 @@
-#include <../Engine/Inc/WNTRengine.h>
+#include <../Engine/Inc/NEngine.h>
 #include "GameState.h"
 
 using namespace NEngine;

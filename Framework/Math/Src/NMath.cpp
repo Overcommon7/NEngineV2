@@ -1,5 +1,5 @@
 #include "Precompiled.h"
-#include "WNTRmath.h"
+#include "NMath.h"
 
 using namespace NEngine::NMath;
 
