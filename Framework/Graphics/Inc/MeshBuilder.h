@@ -25,5 +25,7 @@ namespace NEngine::Graphics
 		//Cylinder
 		static MeshPC CreateCylinderPC(int slices, int rings);
 
+		//Screen Quad
+		static MeshPX CreateScreenQuad();
 	};
 }

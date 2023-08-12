@@ -498,3 +498,17 @@ MeshPC MeshBuilder::CreateCylinderPC(int slices, int rings)
 
 	return mesh;
 }
+
+MeshPX NEngine::Graphics::MeshBuilder::CreateScreenQuad()
+{
+	MeshPX mesh;
+
+	mesh.vertices.push_back({ { -1.f, -1.f, 0.f }, { 0.f, 1.f } });
+	mesh.vertices.push_back({ { -1.f, 1.f, 0.f }, { 0.f, 0.f } });
+	mesh.vertices.push_back({ { 1.f, 1.f, 0.f }, { 1.f, 0.f } });
+	mesh.vertices.push_back({ { 1.f, -1.f, 0.f }, { 1.f, 1.f } });
+
+	mesh.indices = { 0, 1, 2, 0, 2, 3 };
+
+	return mesh;
+}
