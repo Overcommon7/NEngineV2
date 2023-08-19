@@ -51,7 +51,8 @@ void StandardEffect::Begin()
 }
 void StandardEffect::End()
 {
-	//Nothing RN
+	if (shadowMap != nullptr)
+		Texture::UnbindPS(4);
 }
 
 void StandardEffect::Render(const RenderObject& renderObject)
@@ -60,19 +61,8 @@ void StandardEffect::Render(const RenderObject& renderObject)
 	const auto& matView = mCamera->GetViewMatrix();
 	const auto& matProj = mCamera->GetProjectionMatrix();
 
-	
-	TransformData transformData;
-	transformData.world = Transpose(matWorld);
-	transformData.wvp = Transpose(matWorld * matView * matProj);
-	transformData.viewPosition = mCamera->GetPosition();
-	mTransformBuffer.Update(transformData);
-
-	mLightingBuffer.Update(*mDirectionalLight);
-
-	mMaterialBuffer.Update(renderObject.material);
-
-
 	SettingData settingData;
+	settingData.useShadowMap = mSettingData.useShadowMap > 0 && shadowMap != nullptr;
 	settingData.useDiffuseMap = mSettingData.useDiffuseMap > 0 && renderObject.diffuseMapId != 0;
 	settingData.useNormalMap = mSettingData.useNormalMap > 0 && renderObject.normalMapId != 0;
 	settingData.useDiffuseMap = mSettingData.useDiffuseMap > 0 && renderObject.diffuseMapId != 0;
@@ -80,7 +70,26 @@ void StandardEffect::Render(const RenderObject& renderObject)
 	settingData.useSpecMap = mSettingData.useSpecMap > 0 && renderObject.specMapId != 0;
 	settingData.useCelShading = mSettingData.useCelShading;
 	settingData.bumpWeight = mSettingData.bumpWeight;
+	
+	TransformData transformData;
+	transformData.world = Transpose(matWorld);
+	transformData.wvp = Transpose(matWorld * matView * matProj);
+	transformData.viewPosition = mCamera->GetPosition();
+	if (settingData.useShadowMap)
+	{
+		const auto& matLightView = mLightCamera->GetViewMatrix();
+		const auto& matLightProj = mLightCamera->GetProjectionMatrix();
+
+		transformData.lwvp = Transpose(matWorld * matLightView * matLightProj);
+
+		shadowMap->BindPS(4);
+	}
+
 	mSettingBuffer.Update(mSettingData);
+	mTransformBuffer.Update(transformData);
+	mLightingBuffer.Update(*mDirectionalLight);
+	mMaterialBuffer.Update(renderObject.material);
+
 
 	auto tm = TextureManager::Get();
 	tm->BindPS(renderObject.diffuseMapId, 0);
@@ -96,9 +105,19 @@ void StandardEffect::SetCamera(const Camera& camera)
 	mCamera = &camera;
 }
 
+void NEngine::Graphics::StandardEffect::SetLightCamera(const Camera& camera)
+{
+	mLightCamera = &camera;
+}
+
 void StandardEffect::SetDirectionalLight(const DirectionalLight& directionalLight)
 {
 	mDirectionalLight = &directionalLight;
+}
+
+void NEngine::Graphics::StandardEffect::SetShadowMap(const Texture& shadowMap)
+{
+	this->shadowMap = &shadowMap;
 }
 
 void StandardEffect::DebugUI()
@@ -130,6 +149,11 @@ void StandardEffect::DebugUI()
 		if (ImGui::Checkbox("UseCelShading##", &useCelShading))
 		{
 			mSettingData.useCelShading = (useCelShading) ? 1 : 0;
+		}
+		bool useShadows = mSettingData.useShadowMap;
+		if (ImGui::Checkbox("UseShadows", &useShadows))
+		{
+			mSettingData.useShadowMap = (useShadows) ? 1 : 0;
 		}
 	}
 }

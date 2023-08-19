@@ -28,3 +28,4 @@
 #include "ModelIO.h"
 #include "ModelManager.h"
 #include "PostProcessing.h"
+#include "ShadowEffect.h"

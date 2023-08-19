@@ -26,7 +26,9 @@ namespace NEngine::Graphics
 		void Render(const RenderObject& renderObject);
 
 		void SetCamera(const Camera& camera);
+		void SetLightCamera(const Camera& camera);
 		void SetDirectionalLight(const DirectionalLight& directionalLight);
+		void SetShadowMap(const Texture& shadowMap);
 
 		void DebugUI();
 
@@ -35,6 +37,7 @@ namespace NEngine::Graphics
 		{
 			NMath::Matrix4 world;
 			NMath::Matrix4 wvp;
+			NMath::Matrix4 lwvp;
 			NMath::Vector3 viewPosition;
 			float padding = 0;
 		};
@@ -46,8 +49,9 @@ namespace NEngine::Graphics
 			int useBumpMap    = 0;
 			int useSpecMap    = 0;
 			int useCelShading = 0;
+			int useShadowMap = 0;
 			float bumpWeight  = 1.0f;
-			float padding[2]  = { 0.0f };
+			float padding  = { 0.0f };
 		};
 
 
@@ -59,6 +63,7 @@ namespace NEngine::Graphics
 		LightingBuffer mLightingBuffer;
 		MaterialBuffer mMaterialBuffer;
 		SettingBuffer mSettingBuffer;
+		const Texture* shadowMap;
 
 		//ConstantBuffer mTransformBuffer;
 		VertexShader mVertexShader;
@@ -67,6 +72,7 @@ namespace NEngine::Graphics
 
 		SettingData mSettingData;
 		const Camera* mCamera = nullptr;
+		const Camera* mLightCamera = nullptr;
 		const DirectionalLight* mDirectionalLight = nullptr;
 	};
 }
