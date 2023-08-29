@@ -31,11 +31,11 @@ VS_OUTPUT VS(VS_INPUT input)
     return output;
 }
 
-float4 HorizantalBlurPS(VS_OUTPUT input)
+float4 HorizantalBlurPS(VS_OUTPUT input) : SV_Target
 {
     float2 offset = float2(2.0f / screenWidth, 0.0f);
     float4 finalColor = textureMap.Sample(textureSampler, input.texCoord) * gaussianWeights[0];
-    for (int i = 1; i < i < 5; ++i)
+    for (int i = 1; i < 5; ++i)
     {
         finalColor += textureMap.Sample(textureSampler, input.texCoord + (offset * i)) * gaussianWeights[i];
         finalColor += textureMap.Sample(textureSampler, input.texCoord - (offset * i)) * gaussianWeights[i];
@@ -44,11 +44,11 @@ float4 HorizantalBlurPS(VS_OUTPUT input)
     return finalColor * multiplier;
 }
 
-float4 VerticalBlurPS(VS_OUTPUT input)
+float4 VerticalBlurPS(VS_OUTPUT input) : SV_Target
 {
     float2 offset = float2(2.0f / screenHeight, 0.0f);
     float4 finalColor = textureMap.Sample(textureSampler, input.texCoord) * gaussianWeights[0];
-    for (int i = 1; i < i < 5; ++i)
+    for (int i = 1; i < 5; ++i)
     {
         finalColor += textureMap.Sample(textureSampler, input.texCoord + (offset * i)) * gaussianWeights[i];
         finalColor += textureMap.Sample(textureSampler, input.texCoord - (offset * i)) * gaussianWeights[i];

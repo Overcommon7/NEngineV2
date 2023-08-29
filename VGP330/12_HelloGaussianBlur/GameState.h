@@ -21,6 +21,7 @@ protected:
 	DirectionalLight mDirectionalLight;
 
 	StandardEffect mStandardEffect;
+	GaussianBlur mGaussianBlurEffect;
 	PostProcessingEffect mPostProceessingEffect;
 
 	RenderObject mSun;
@@ -29,6 +30,10 @@ protected:
 
 	RenderTarget mBaseRenderTarget;
 	RenderTarget mBloomRenderTarget;
+
+	float mEarthOffset = 8.0f;
+	float mEarthRotation = 0.0f;
+	float mEarthRevolution = 0.0f;
 };
 
 

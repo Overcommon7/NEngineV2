@@ -19,8 +19,14 @@ void GameState::Initialize()
     mStandardEffect.SetCamera(mCamera);
     mStandardEffect.SetDirectionalLight(mDirectionalLight);
 
+    mGaussianBlurEffect.Initalize();
+    mGaussianBlurEffect.SetBlurIterations(10);
+    mGaussianBlurEffect.SetBlurSaturation(1.0f);
+    mGaussianBlurEffect.SetSourceTexture(mBloomRenderTarget);
+
     mPostProceessingEffect.Initialize(L"../../Assets/Shaders/PostProcess.fx");
     mPostProceessingEffect.SetTexture(&mBaseRenderTarget);
+    mPostProceessingEffect.SetTexture(&mGaussianBlurEffect.GetResultTexture(), 1);
 
     auto gs = GraphicsSystem::Get();
     const auto screenWidth = gs->GetBackBufferWidth();
@@ -62,7 +68,9 @@ void GameState::Terminate()
     mBloomRenderTarget.Terminate();
     mBaseRenderTarget.Terminate();
     mPostProceessingEffect.Terminate();
+    mGaussianBlurEffect.Terminate();
     mStandardEffect.Terminate();
+    
 }
 
 void GameState::Render()
@@ -75,8 +83,25 @@ void GameState::Render()
 
     SimpleDraw::AddGroundPlane(20, Colors::White);
     SimpleDraw::Render(mCamera);
-
     mBaseRenderTarget.EndRender();
+
+    mBloomRenderTarget.BeginRender();
+
+    Material dummyMaterial;
+    dummyMaterial.materialPower = 1.0f;
+    std::swap(mEarth.material, dummyMaterial);
+
+    mStandardEffect.Begin();
+    mStandardEffect.Render(mSun);
+    mStandardEffect.Render(mEarth);
+    mStandardEffect.End();
+
+    std::swap(mEarth.material, dummyMaterial);
+    mBloomRenderTarget.EndRender();
+    
+    mGaussianBlurEffect.Begin();
+    mGaussianBlurEffect.Render(mScreenQuad);
+    mGaussianBlurEffect.End();
 
     mPostProceessingEffect.Begin();
     mPostProceessingEffect.Render(mScreenQuad);
@@ -113,6 +138,10 @@ void GameState::Update(float deltaTime)
         mCamera.Yaw(input->GetMouseMoveX() * turnSpeed);
         mCamera.Pitch(input->GetMouseMoveY() * turnSpeed);
     }
+
+    Vector3 earthPosition = { 0.0f, 0.0f, -mEarthOffset };
+    mEarth.transform.position = TransformCoord(earthPosition, Matrix4::RotationY(mEarthRevolution));
+    mEarth.transform.rotation.y = mEarthRotation;
 }
 
 void GameState::DebugUI()
@@ -127,8 +156,16 @@ void GameState::DebugUI()
             ImGui::ColorEdit4("Diffuse##Light", &mDirectionalLight.diffuse.r);
             ImGui::ColorEdit4("Specular##Light", &mDirectionalLight.specular.r);
         }
+
+        ImGui::Text("Earth");
+        ImGui::DragFloat("Offset", &mEarthOffset, 0.01f);
+        ImGui::DragFloat("Rotation", &mEarthRotation, 0.01f);
+        ImGui::DragFloat("Revolution", &mEarthRevolution, 0.01f);
+
+
         mStandardEffect.DebugUI();
         mPostProceessingEffect.DebugUI();
+        mGaussianBlurEffect.DebugUI();
     ImGui::End();
 
 }
