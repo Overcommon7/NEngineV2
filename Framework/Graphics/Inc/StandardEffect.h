@@ -51,7 +51,7 @@ namespace NEngine::Graphics
 			int useCelShading = 0;
 			int useShadowMap = 0;
 			float bumpWeight  = 1.0f;
-			float padding  = { 0.0f };
+			float depthBias = 0.f;
 		};
 
 

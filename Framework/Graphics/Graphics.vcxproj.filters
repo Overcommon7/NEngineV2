@@ -99,6 +99,9 @@
     <ClInclude Include="Inc\ShadowEffect.h">
       <Filter>Inc</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\GaussianBlur.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -162,6 +165,9 @@
       <Filter>Src</Filter>
     </ClCompile>
     <ClCompile Include="Src\ShadowEffect.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GaussianBlur.cpp">
       <Filter>Src</Filter>
     </ClCompile>
   </ItemGroup>

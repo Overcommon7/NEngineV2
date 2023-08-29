@@ -70,6 +70,7 @@ void StandardEffect::Render(const RenderObject& renderObject)
 	settingData.useSpecMap = mSettingData.useSpecMap > 0 && renderObject.specMapId != 0;
 	settingData.useCelShading = mSettingData.useCelShading;
 	settingData.bumpWeight = mSettingData.bumpWeight;
+	settingData.depthBias = mSettingData.depthBias;
 	
 	TransformData transformData;
 	transformData.world = Transpose(matWorld);
@@ -139,7 +140,7 @@ void StandardEffect::DebugUI()
 		{
 			mSettingData.useBumpMap = (useBumpMap) ? 1 : 0;
 		}
-		ImGui::DragFloat("BumpWeight##", &mSettingData.bumpWeight, 0.1f, 0.0f, 2.0f);
+		
 		bool useSpecMap = mSettingData.useSpecMap > 0;
 		if (ImGui::Checkbox("UseSpecMap##", &useSpecMap))
 		{
@@ -155,5 +156,8 @@ void StandardEffect::DebugUI()
 		{
 			mSettingData.useShadowMap = (useShadows) ? 1 : 0;
 		}
+
+		ImGui::DragFloat("BumpWeight##", &mSettingData.bumpWeight, 0.1f, 0.0f, 2.0f);
+		ImGui::DragFloat("DepthBias##", &mSettingData.depthBias, 0.000001f, 0.0f, 1.0f, "%.6f");
 	}
 }

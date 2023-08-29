@@ -29,3 +29,4 @@
 #include "ModelManager.h"
 #include "PostProcessing.h"
 #include "ShadowEffect.h"
+#include "GaussianBlur.h"

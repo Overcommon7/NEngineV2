@@ -34,6 +34,7 @@ cbuffer SettingBuffer : register(b3)
     bool useCelShading;
     bool useShadowMap;
     float bumpWeight;
+    float depthBias;
 }
 
 
@@ -148,7 +149,7 @@ float4 PS(VS_OUTPUT input) : SV_Target
         {
             float4 savedColor = shadowMap.Sample(textureSampler, float2(u, v));
             float savedDepth = savedColor.r;
-            if (savedDepth > actualDepth)
+            if (savedDepth > actualDepth + depthBias)
             {
                 finalColor = (ambient + materialEmissive) * diffuseMapColor;
             }    

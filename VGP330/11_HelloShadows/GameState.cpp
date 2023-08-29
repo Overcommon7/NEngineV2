@@ -88,7 +88,7 @@ void GameState::Update(float deltaTime)
         mCamera.Pitch(input->GetMouseMoveY() * turnSpeed);
     }
 
-    mShadowEffect.SetFocus({ mCamera.GetPosition().x, 0, mCamera.GetPosition().y });
+    mShadowEffect.SetFocus({ mCamera.GetPosition().x, 0, mCamera.GetPosition().z });
 
 }
 
