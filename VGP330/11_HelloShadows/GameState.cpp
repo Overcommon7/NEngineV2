@@ -24,12 +24,19 @@ void GameState::Initialize()
     mShadowEffect.Initialize();
     mShadowEffect.SetDirectionalLight(mDirectionalLight);
 
+    mTerrainEffect.Initialize();
+    mTerrainEffect.SetCamera(mCamera);
+    mTerrainEffect.SetLightCamera(mShadowEffect.GetLightCamera());
+    mTerrainEffect.SetDirectionalLight(mDirectionalLight);
+
     auto model = ModelManager::Get()->LoadModel("../../Assets/Models/space-soldier/space-soldier.model");
     mCharacter = CreateRenderGroup(model);
 
-    Mesh groundMesh = MeshBuilder::CreateGroundPlane(20, 20, 1.0f);
-    ground.meshBuffer.Initialize(groundMesh);
-    ground.diffuseMapId = TextureManager::Get()->LoadTexture("misc/basketball.jpg");
+    mTerrain.Initialize("../../Assets/Textures/terrain/heightmap_512x512.raw", 15.f);
+
+    ground.meshBuffer.Initialize(mTerrain.mesh);
+    ground.diffuseMapId = TextureManager::Get()->LoadTexture("terrain/grass_2048.jpg");
+    ground.specMapId = TextureManager::Get()->LoadTexture("terrain/dirt_seamless.jpg");
     ground.material.ambient = { 0.3f, 0.3f, 0.3f, 1.0f };
     ground.material.diffuse = { 0.8f, 0.8f, 0.8f, 1.0f };
     ground.material.specular = { 0.9f, 0.9f, 0.9f, 1.0f };
@@ -43,6 +50,7 @@ void GameState::Terminate()
     mStandardEffect.Terminate();
     ground.Terminate();
     mShadowEffect.Terminate();
+    mTerrainEffect.Terminate();
 }
 
 void GameState::Render()
@@ -51,9 +59,13 @@ void GameState::Render()
         DrawRenderGroup(mShadowEffect, mCharacter);
     mShadowEffect.End();
 
+    mTerrainEffect.Begin();
+        mTerrainEffect.Render(ground);
+    mTerrainEffect.End();
+
     mStandardEffect.Begin();
         DrawRenderGroup(mStandardEffect, mCharacter);
-        mStandardEffect.Render(ground);
+        //mStandardEffect.Render(ground);
     mStandardEffect.End();
 }
 
@@ -106,6 +118,7 @@ void GameState::DebugUI()
         }
         mStandardEffect.DebugUI();
         mShadowEffect.DebugUI();
+        mTerrainEffect.DebugUI();
     ImGui::End();
 
 }

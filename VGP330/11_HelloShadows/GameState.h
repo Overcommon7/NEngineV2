@@ -22,6 +22,8 @@ protected:
 	StandardEffect mStandardEffect;
 	RenderGroup mCharacter;
 	RenderObject ground;
+	Terrain mTerrain;
+	TerrainEffect mTerrainEffect;
 	ShadowEffect mShadowEffect;
 };
 

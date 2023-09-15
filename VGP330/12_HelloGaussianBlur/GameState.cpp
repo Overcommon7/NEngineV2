@@ -81,7 +81,7 @@ void GameState::Render()
     mStandardEffect.Render(mEarth);
     mStandardEffect.End();
 
-    SimpleDraw::AddGroundPlane(20, Colors::White);
+    SimpleDraw::AddGroundPlane(40, Colors::White);
     SimpleDraw::Render(mCamera);
     mBaseRenderTarget.EndRender();
 
