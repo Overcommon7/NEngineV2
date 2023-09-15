@@ -10,14 +10,14 @@ using namespace NEngine;
 
 namespace
 {
-	inline constexpr const char* modeNames[] = {
+	inline constexpr const char* const modeNames[] = {
 			 "None",
 			 "Monochrome",
 			 "Invert",
 			 "Mirror",
 			 "Blur",
 			 "Combine2",
-			 "MotionBlur"
+			 "CRT"
 	};
 }
 
@@ -27,12 +27,14 @@ void NEngine::Graphics::PostProcessingEffect::Initialize(const std::filesystem::
 	mPixelShader.Initialize(filepath);
 
 	mSampler.Initialize(Sampler::Filter::Point, Sampler::AddressMode::Wrap);
+	mLinearSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 	mPostProcessBuffer.Initialize();
 }
 
 void NEngine::Graphics::PostProcessingEffect::Terminate()
 {
 	mSampler.Terminate();
+	mLinearSampler.Terminate();
 	mPixelShader.Terminate();
 	mVertexShader.Terminate();
 	mPostProcessBuffer.Terminate();
@@ -43,6 +45,7 @@ void NEngine::Graphics::PostProcessingEffect::Begin()
 	mVertexShader.Bind();
 	mPixelShader.Bind();
 	mSampler.BindPS(0);
+	mLinearSampler.BindPS(1);
 	
 	for (uint32_t i = 0; i < mTextures.size(); ++i)
 	{
@@ -80,8 +83,23 @@ void NEngine::Graphics::PostProcessingEffect::Begin()
 	case Mode::Combine2:
 
 		break;
-	case Mode::MotionBlur:
-		break;
+	case Mode::CRT:
+	{
+		auto gs = GraphicsSystem::Get();
+		const auto screenWidth = gs->GetBackBufferHeight();
+		const auto screenHeight = gs->GetBackBufferWidth();
+
+		data.params0 = params.darken;
+		data.params1 = params.useBilinear ? 1 : -1;
+		data.params2 = params.useBleeding ? 1 : -1;
+		data.params3 = params.useNoise ? 1 : -1;
+		data.scanlineSize = params.scanlineSize;
+		data.screenSize = NMath::Vector2(screenWidth, screenHeight);
+		data.curvatureAmount = params.curvatureAmount;
+		data.noiseIntensity = params.noiseIntensity;
+		data.colorBleed = params.colorBleed;
+	}	
+	break;
 	}
 
 
@@ -119,6 +137,17 @@ void NEngine::Graphics::PostProcessingEffect::DebugUI()
 			ImGui::DragFloat2("MirrorScale", &params.mirrorScale.x, 0.1f, -5, 5);
 		else if (mMode == Mode::Blur)
 			ImGui::DragFloat("BlurStrength", &params.blurStrength, 0.1f, 0, 10);
+		else if (mMode == Mode::CRT)
+		{
+			ImGui::DragFloat2("ScanlineSize", &params.scanlineSize.x, 0.1f, 1, 10);
+			ImGui::DragFloat("DarkenAmount", &params.darken, 0.01f, 0.05f, 1.f);		
+			ImGui::DragFloat("CurvatureAmount", &params.curvatureAmount, 0.01f, 0.05f, 0.5f);		
+			ImGui::DragFloat("ColorBleedAmount", &params.colorBleed, 0.05f, 0.1f, 0.5f);		
+			ImGui::DragFloat("NoiseIntensity", &params.noiseIntensity, 0.05f, 0.05f, 0.5f);
+			ImGui::Checkbox("UseBilinearFiltering", &params.useBilinear);
+			ImGui::Checkbox("UseNoise", &params.useNoise);
+			ImGui::Checkbox("UseColorBleeding", &params.useBleeding);
+		}
 
 	}
 }

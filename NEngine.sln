@@ -55,7 +55,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelImporter", "Tools\Mode
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "12_HelloGaussianBlur", "VGP330\12_HelloGaussianBlur\12_HelloGaussianBlur.vcxproj", "{C5CC492D-62F7-4F46-AE60-966FD0EABFBD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "11_HelloShadows", "VGP330\11_HelloShadows\11_HelloShadows.vcxproj", "{8F6CD798-DEED-4A25-AB9F-07E8FE0E33D4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "13_HelloCRTShader", "VGP330\13_HelloCRTShader\13_HelloCRTShader.vcxproj", "{8F6CD798-DEED-4A25-AB9F-07E8FE0E33D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
