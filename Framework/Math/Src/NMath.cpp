@@ -26,3 +26,4 @@ const Matrix4 Matrix4::Identity({ 1, 0, 0, 0,
 
 const Quaternion Quaternion::Identity = { 0.0f, 0.0f, 0.0f, 1.0f };
 const Quaternion Quaternion::Zero = { 0.0f, 0.0f, 0.0f, 0.0f };
+

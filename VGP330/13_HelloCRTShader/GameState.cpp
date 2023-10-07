@@ -30,12 +30,9 @@ void GameState::Initialize()
     MeshPX screenMesh = MeshBuilder::CreateScreenQuad();
     mScreenQuad.meshBuffer.Initialize(screenMesh);
 
-
-
     auto tm = TextureManager::Get();
     tm->SetRootDirectory("../../Assets/Textures/");
-
-    
+   
 
     mSun.diffuseMapId = tm->LoadTexture(L"planets/sun.jpg");
     mSun.meshBuffer.Initialize(MeshBuilder::CreateSphere(1024, 512, 5.0f));
@@ -59,6 +56,7 @@ void GameState::Initialize()
 
 void GameState::Terminate()
 {
+
     mEarth.Terminate();
     mSun.Terminate();
     mRenderTarget.Terminate();
@@ -72,6 +70,7 @@ void GameState::Render()
 {
     SimpleDraw::AddGroundPlane(20, Colors::White);
     SimpleDraw::Render(mCamera);
+
 
     mRenderTarget.BeginRender();
     mStandardEffect.Begin();
