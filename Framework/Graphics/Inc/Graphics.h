@@ -2,6 +2,8 @@
 
 #include "Common.h"
 
+#include "Animation.h"
+#include "AnimationBuilder.h"
 #include "BlendState.h"
 #include "Camera.h"
 #include "Colors.h"
@@ -9,6 +11,7 @@
 #include "DebugUI.h"
 #include "GaussianBlur.h"
 #include "GraphicsSystem.h"
+#include "Keyframe.h"
 #include "LightType.h"
 #include "Material.h"
 #include "MeshBuffer.h"
@@ -25,6 +28,7 @@
 #include "ShadowEffect.h"
 #include "SimpleDraw.h"
 #include "StandardEffect.h"
+#include "Skeleton.h"
 #include "Terrain.h"
 #include "TerrainEffect.h"
 #include "Texture.h"

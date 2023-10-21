@@ -2,6 +2,7 @@
 
 #include "MeshTypes.h"
 #include "Material.h"
+#include "Skeleton.h"
 
 namespace NEngine::Graphics
 {
@@ -24,5 +25,6 @@ namespace NEngine::Graphics
 
 		vector<MeshData> meshData;
 		vector<MaterialData> materialData;
+		std::unique_ptr<Skeleton> skeleton;
 	};
 }

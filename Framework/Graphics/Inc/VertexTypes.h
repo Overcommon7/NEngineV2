@@ -40,9 +40,14 @@ namespace NEngine::Graphics
 	struct Vertex
 	{
 		VERTEX_FORMAT(VE_Position | VE_Normal | VE_Tangent | VE_TexCoord | VE_BlendIndex | VE_BlendWeight);
+		inline static const int MaxBones = 4;
+
 		NMath::Vector3 position;
 		NMath::Vector3 normal;
 		NMath::Vector3 tangent;
 		NMath::Vector2 uvCoord;
+		int boneIndices[MaxBones] = {};
+		float boneWeights[MaxBones] = {};
+
 	};
 }

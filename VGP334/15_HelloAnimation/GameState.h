@@ -20,13 +20,12 @@ protected:
 	Camera mCamera;
 	DirectionalLight mDirectionalLight;
 	StandardEffect mStandardEffect;
-	RenderGroup mCharacter;
 	RenderObject mGround;
-	RenderTarget mRenderTarget;
+	RenderObject mBall;
 
-	float mYaw;
-	float mPitch;
-	float mRoll;
+	Animation mBallAnimation;
+
+	float mAnimationTime;
 };
 
 
