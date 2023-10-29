@@ -41,6 +41,8 @@ NEngine::Graphics::ModelId NEngine::Graphics::ModelManager::LoadModel(const std:
 		modelPtr = std::make_unique<Model>();
 		NEngine::Graphics::ModelIO::LoadModel(filepath, *modelPtr);
 		NEngine::Graphics::ModelIO::LoadMaterial(filepath, *modelPtr);
+		NEngine::Graphics::ModelIO::LoadSkeleton(filepath, *modelPtr);
+		NEngine::Graphics::ModelIO::LoadAnimations(filepath, *modelPtr);
 	}
 	return modelId;
 }

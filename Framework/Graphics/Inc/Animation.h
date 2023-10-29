@@ -13,6 +13,7 @@ namespace NEngine::Graphics
 
 	private:
 		friend class AnimationBuilder;
+		friend class AnimationIO;
 
 		NMath::Vector3 GetPosition(float time) const;
 		NMath::Quaternion GetRotation(float time) const;

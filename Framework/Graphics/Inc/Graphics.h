@@ -3,7 +3,10 @@
 #include "Common.h"
 
 #include "Animation.h"
+#include "Animator.h"
 #include "AnimationBuilder.h"
+#include "AnimationClip.h"
+#include "AnimationUtil.h"
 #include "BlendState.h"
 #include "Camera.h"
 #include "Colors.h"

@@ -1,0 +1,1 @@
+-scale 0.01 ../../Assets/Models/SillyDancing/SillyDancing.fbx  ../../Assets/Models/SillyDancing/SillyDancing.model

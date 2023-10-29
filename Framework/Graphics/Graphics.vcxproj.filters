@@ -123,6 +123,9 @@
     <ClInclude Include="Inc\Skeleton.h">
       <Filter>Inc</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\AnimationUtil.h" />
+    <ClInclude Include="Inc\AnimationClip.h" />
+    <ClInclude Include="Inc\Animator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -203,5 +206,8 @@
     <ClCompile Include="Src\AnimationBuilder.cpp">
       <Filter>Src</Filter>
     </ClCompile>
+    <ClCompile Include="Src\AnimationUtil.cpp" />
+    <ClCompile Include="Src\AnimationClip.cpp" />
+    <ClCompile Include="Src\Animator.cpp" />
   </ItemGroup>
 </Project>

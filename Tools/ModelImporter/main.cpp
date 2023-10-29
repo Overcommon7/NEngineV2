@@ -6,10 +6,13 @@
 
 #include <cstdio>
 #include <iostream>
+#include "main.h"
 
 using namespace NEngine;
 using namespace NEngine::Graphics;
 using namespace NEngine::NMath;
+
+using BoneIndexLookup = std::unordered_map<string, uint32_t>;
 
 struct Arguments
 {
@@ -48,7 +51,7 @@ Vector3 ToVector3(const aiVector3D& v)
 	};
 }
 
-Quaternion ToQuaternion3(const aiQuaternion& q)
+Quaternion ToQuaternion(const aiQuaternion& q)
 {
 	return{
 		static_cast<float>(q.x),
@@ -168,6 +171,62 @@ std::string FindTexture(const aiScene* scene, const aiMaterial* aiMaterial, aiTe
 	return textureName.filename().generic_string();
 }
 
+Bone* BuildSkeleton(const aiNode& sceneNode, Bone* parent, Skeleton& skeleton, BoneIndexLookup& boneIndexLookup)
+{
+	Bone* bone = nullptr;
+	string boneName = sceneNode.mName.C_Str();
+	auto iter = boneIndexLookup.find(boneName);
+	if (iter != boneIndexLookup.end())
+	{
+		bone = skeleton.bones[iter->second].get();
+	}
+	else
+	{
+		bone = skeleton.bones.emplace_back(std::make_unique<Bone>()).get();
+		bone->index = (int)skeleton.bones.size() - 1;
+		bone->offsetTransform = Matrix4::Identity;
+		bone->name = boneName.empty() ? "NoName" : std::move(boneName);
+		boneIndexLookup.emplace(bone->name, bone->index);
+	}
+
+	if (skeleton.root == nullptr && parent == nullptr)
+	{
+		skeleton.root = bone;
+	}
+
+	bone->parent = parent;
+	bone->parentIndex = parent ? parent->index : -1;
+	bone->toParentTransform = ToMatrix4(sceneNode.mTransformation);
+	bone->children.reserve(sceneNode.mNumChildren);
+
+	for (uint32_t i = 0; i < sceneNode.mNumChildren; ++i)
+	{
+		Bone* child = BuildSkeleton(*(sceneNode.mChildren[i]), bone, skeleton, boneIndexLookup);
+		bone->children.push_back(child);
+		bone->childrenIndicies.push_back(child->index);
+	}
+
+	return bone;
+}
+
+uint32_t GetBoneIndex(const aiBone* nodeBone, const BoneIndexLookup& boneIndexLookup)
+{
+	string boneName = nodeBone->mName.C_Str();
+	ASSERT(!boneName.empty(), "ERROR: ai Bone does not have a name");
+	auto iter = boneIndexLookup.find(boneName);
+	ASSERT(iter != boneIndexLookup.end(), "ERROR aiBone was not found in the index map");
+	return iter->second;
+}
+
+void SetBoneOffsetTransform(const aiBone* nodeBone, Skeleton& skeleton, const BoneIndexLookup& boneIndexLookup)
+{
+	auto boneIndex = GetBoneIndex(nodeBone, boneIndexLookup);
+	Bone* bone = skeleton.bones[boneIndex].get();
+	bone->offsetTransform = ToMatrix4(nodeBone->mOffsetMatrix);
+}
+
+
+
 int main(int argc, char* argv[])
 {
 	const std::optional<Arguments> argOpt = ParseArgs(argc, argv);
@@ -191,8 +250,50 @@ int main(int argc, char* argv[])
 	std::cout << "Importing " << args.inputFileName.generic_string() << "..." << std::endl;
 
 	Model model;
+	BoneIndexLookup boneIndexLookup;
+
+	if (scene->hasSkeletons())
+	{
+		
+
+	}
+
 	if (scene->HasMeshes())
 	{
+		std::cout << "Build skeleton...\n";
+
+		model.skeleton = std::make_unique<Skeleton>();
+		BuildSkeleton(*scene->mRootNode, nullptr, *model.skeleton, boneIndexLookup);
+		for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex)
+		{
+			const auto aiMesh = scene->mMeshes[meshIndex];
+
+			if (aiMesh->mPrimitiveTypes != aiPrimitiveType_TRIANGLE)
+			{
+				continue;
+			}
+
+			if (aiMesh->HasBones())
+			{
+				for (uint32_t b = 0; b < aiMesh->mNumBones; ++b)
+				{
+					SetBoneOffsetTransform(aiMesh->mBones[b], *model.skeleton, boneIndexLookup);
+				}
+			}
+			
+		}
+
+		for (auto& bone : model.skeleton->bones)
+		{
+			bone->offsetTransform._41 *= args.scale;
+			bone->offsetTransform._42 *= args.scale;
+			bone->offsetTransform._43 *= args.scale;
+
+			bone->toParentTransform._41 *= args.scale;
+			bone->toParentTransform._42 *= args.scale;
+			bone->toParentTransform._43 *= args.scale;
+		}
+
 		std::cout << "Reading Mesh Data..." << std::endl;
 		for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex)
 		{
@@ -277,11 +378,63 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	std::cout << "Saving Model..." << std::endl;
+	if (scene->HasAnimations())
+	{
+		cout << "Building Animations..\n";
+
+		for (uint32_t animIndex = 0; animIndex < scene->mNumAnimations; ++animIndex)
+		{
+			const auto aiAnimation = scene->mAnimations[animIndex];
+			auto& animClip = model.animationClips.emplace_back();
+			if (aiAnimation->mName.length > 0)
+				animClip.name = aiAnimation->mName.C_Str();
+			else animClip.name = "Anim" + to_string(animIndex);
+
+			animClip.tickDuration = (float)aiAnimation->mDuration;
+			animClip.ticksPerSecond = (float)aiAnimation->mTicksPerSecond;
+
+			cout << "Reading bone animations for " << animClip.name << '\n';
+
+			animClip.boneAnimations.resize(model.skeleton->bones.size());
+			for (uint32_t boneAnimIndex = 0; boneAnimIndex < aiAnimation->mNumChannels; ++boneAnimIndex)
+			{
+				const auto aiBoneAnim = aiAnimation->mChannels[boneAnimIndex];
+				const int boneIndex = boneIndexLookup[aiBoneAnim->mNodeName.C_Str()];
+				auto& boneAnimation = animClip.boneAnimations[boneIndex];
+				boneAnimation = std::make_unique<Animation>();
+
+				AnimationBuilder builder;
+				for (uint32_t keyIndex = 0; keyIndex < aiBoneAnim->mNumPositionKeys; ++keyIndex)
+				{
+					auto& posKey = aiBoneAnim->mPositionKeys[keyIndex];
+					builder.AddPositionKey(ToVector3(posKey.mValue)* args.scale, (float)posKey.mTime);
+				}
+				for (uint32_t keyIndex = 0; keyIndex < aiBoneAnim->mNumRotationKeys; ++keyIndex)
+				{
+					auto& rotKey = aiBoneAnim->mRotationKeys[keyIndex];
+					builder.AddRotationKey(ToQuaternion(rotKey.mValue) * args.scale, (float)rotKey.mTime);
+				}
+				for (uint32_t keyIndex = 0; keyIndex < aiBoneAnim->mNumScalingKeys; ++keyIndex)
+				{
+					auto& scaleKey = aiBoneAnim->mScalingKeys[keyIndex];
+					builder.AddScaleKey(ToVector3(scaleKey.mValue), (float)scaleKey.mTime);
+				}
+				*boneAnimation = builder.Build();
+			}
+		}							   
+	}
+
+	std::cout << "Saving Model..." << "\n" ;
 	ModelIO::SaveModel(args.outputFileName, model);
 
-	std::cout << "Saving Material..." << std::endl;
+	std::cout << "Saving Material..." << "\n";
 	ModelIO::SaveMaterial(args.outputFileName, model);
+
+	std::cout << "Saving Skeleton...\n";
+	ModelIO::SaveSkeleton(args.outputFileName, model);
+
+	std::cout << "Saving Animations...\n";
+	ModelIO::SaveAnimations(args.outputFileName, model);
 
 	return 0;
 }

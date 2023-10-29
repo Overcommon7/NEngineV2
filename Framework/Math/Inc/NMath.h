@@ -80,6 +80,31 @@ namespace NEngine::NMath
 		return { x, y, z };
 	}
 
+	inline Vector3 GetTranslation(const Matrix4& m)
+	{
+		return { m._41, m._42, m._43 };
+	}
+
+	inline Vector3 GetRight(const Matrix4& m)
+	{
+		return { m._11, m._12, m._13 };
+	}
+
+	inline Vector3 GetUp(const Matrix4& m)
+	{
+		return { m._21, m._22, m._23 };
+	}
+
+	inline Vector3 GetScale(const Matrix4& m)
+	{
+		return { m._11, m._22, m._33 };
+	}
+
+	inline Vector3 GetLook(const Matrix4& m)
+	{
+		return { m._31, m._32, m._33 };
+	}
+
 	inline Vector3 TransformCoord(const Vector3& v, const Matrix4& m)
 	{
 		float x = v.x * m._11 + v.y * m._21 + v.z * m._31 + m._41;
