@@ -143,6 +143,10 @@ void NEngine::Graphics::ModelIO::SaveModel(std::filesystem::path filepath, const
 				file << v.tangent.v[i] << ' ';
 			for (int i = 0; i < 2; i++)
 				file << v.uvCoord.v[i] << ' ';
+			for (int i = 0; i < 4; i++)
+				file << v.boneWeights[i] << ' ';
+			for (int i = 0; i < 4; i++)
+				file << v.boneIndices[i] << ' ';
 			file << '\n';
 		}
 
@@ -186,11 +190,13 @@ void NEngine::Graphics::ModelIO::LoadModel(std::filesystem::path filepath, Model
 
 		for (auto& v : mesh.vertices)
 		{
-			fscanf_s(file, "%f %f %f %f %f %f %f %f %f %f %f \n",
+			fscanf_s(file, "%f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %d %d %d %d \n",
 				&v.position.x, &v.position.y, &v.position.z,
 				&v.normal.x,   &v.normal.y,   &v.normal.z,
 				&v.tangent.x,  &v.tangent.y,  &v.tangent.z,
-				&v.uvCoord.x,  &v.uvCoord.y);
+				&v.uvCoord.x,  &v.uvCoord.y, 
+				&v.boneWeights[0], &v.boneWeights[1], &v.boneWeights[2], &v.boneWeights[3],
+				&v.boneIndices[0], &v.boneIndices[1], &v.boneIndices[2], &v.boneIndices[3]);
 		}
 
 		uint32_t indexCount = 0;

@@ -8,6 +8,8 @@
 namespace NEngine::Graphics {
 
 	struct Model;
+	struct Skeleton;
+	class Animator;
 
 	class RenderObject 
 	{
@@ -31,11 +33,14 @@ namespace NEngine::Graphics {
 		ModelId modelId;
 
 		MeshBuffer meshBuffer;
+
+		const Skeleton* skeleton = nullptr;
+		const Animator* animator = nullptr;
 	};
 
 	using RenderGroup = std::vector<RenderObject>;
-	[[nodiscard]] RenderGroup CreateRenderGroup(const Model& model);
-	[[nodiscard]] RenderGroup CreateRenderGroup(const ModelId& id);
+	[[nodiscard]] RenderGroup CreateRenderGroup(const Model& model, const Animator* animator = nullptr);
+	[[nodiscard]] RenderGroup CreateRenderGroup(const ModelId& id, const Animator* animator = nullptr);
 	void CleanupRenderGroup(RenderGroup& renderGroup);
 
 	template<class Effect>

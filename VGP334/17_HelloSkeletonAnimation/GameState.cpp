@@ -22,8 +22,8 @@ void GameState::Initialize()
     //auto tm = TextureManager::Get();
 
     mId = ModelManager::Get()->LoadModel("../../Assets/Models/SillyDancing/SillyDancing.model");
-    mCharacter = CreateRenderGroup(mId);
     mAnimator.Initialize(mId);
+    mCharacter = CreateRenderGroup(mId, &mAnimator);
 
     Mesh groundMesh = MeshBuilder::CreateGroundPlane(20, 20, 1.0f);
     mGround.meshBuffer.Initialize(groundMesh);
@@ -108,15 +108,11 @@ void GameState::DebugUI()
             ImGui::ColorEdit4("Specular##Light", &mDirectionalLight.specular.r);
         }
         ImGui::Checkbox("DrawSkeleton", &mDrawSkeleton);
-        if (mDrawSkeleton)
+        static int clip = -1;
+        if (ImGui::InputInt("Clip", &clip) && clip >= 0)
         {
-            static int clip = -1;
-            if (ImGui::InputInt("Clip", &clip) && clip >= 0)
-            {
-                if (mAnimator.GetAnimationCount() > clip)
-                    mAnimator.PlayAnimation(clip, true);
-            }
-                
+            if (mAnimator.GetAnimationCount() > clip)
+                mAnimator.PlayAnimation(clip, true);
         }
         mStandardEffect.DebugUI();
     ImGui::End();

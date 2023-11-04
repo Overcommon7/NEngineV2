@@ -33,8 +33,14 @@ cbuffer SettingBuffer : register(b3)
     bool useSpecMap;
     bool useCelShading;
     bool useShadowMap;
+    bool useSkinning;
     float bumpWeight;
     float depthBias;
+}
+
+cbuffer BoneTransformBuffer : register(b4)
+{
+    matrix boneTransforms[256];
 }
 
 
@@ -46,12 +52,38 @@ Texture2D shadowMap : register(t4);
 
 SamplerState textureSampler : register(s0);
 
+static matrix Identity =
+{
+    1, 0, 0, 0,
+    0, 1, 0, 0, 
+    0, 0, 1, 0, 
+    0, 0, 0, 1, 
+};
+
+matrix GetBoneTransform(int4 indices, float4 weights)
+{
+    if (length(weights) <= 0.0f)
+    {
+        return Identity;
+    }
+    
+    matrix transform = boneTransforms[indices[0]] * weights[0];
+    for (int i = 1; i < 4; ++i)
+    {
+        transform += boneTransforms[indices[i]] * weights[i];
+    }
+
+    return transform;
+}
+
 struct VS_INPUT
 {
 	float3 position : POSITION;
 	float3 normal : NORMAL;
 	float3 tangent : TANGENT;
 	float2 texCoord : TEXCOORD;
+    int4 blendIndices : BLENDINDICES;
+    float4 blendWeights : BLENDWEIGHT;
 };
 
 struct VS_OUTPUT
@@ -71,6 +103,15 @@ VS_OUTPUT VS(VS_INPUT input)
 	
     matrix toWorld = world;
     matrix toNDC = wvp;
+    
+    if (useSkinning)
+    {
+        matrix boneTransform = GetBoneTransform(input.blendIndices, input.blendWeights);
+        toWorld = mul(boneTransform, toWorld);
+        toNDC = mul(boneTransform, toNDC);
+
+    }
+    
     float3 localPosition = input.position;
     if(useBumpMap){
         float bumpColor = (2.0f * bumpMap.SampleLevel(textureSampler, input.texCoord, 0.0f).r) - 1.0f;

@@ -1,12 +1,13 @@
 #include "Precompiled.h"
 #include "RenderObject.h"
 #include "Model.h"
+#include "Animator.h"
 
 
 using namespace NEngine;
 using namespace NEngine::Graphics;
 
-RenderGroup NEngine::Graphics::CreateRenderGroup(const Model& model)
+RenderGroup NEngine::Graphics::CreateRenderGroup(const Model& model, const Animator* animator)
 {
 	RenderGroup renderGroup;
 	renderGroup.reserve(model.meshData.size());
@@ -32,17 +33,18 @@ RenderGroup NEngine::Graphics::CreateRenderGroup(const Model& model)
 		}
 
 		renderObject.meshBuffer.Initialize(meshData.mesh);
-
+		renderObject.skeleton = model.skeleton.get();
+		renderObject.animator = animator;
 	}
 	return renderGroup;
 }
 
-RenderGroup NEngine::Graphics::CreateRenderGroup(const ModelId& id)
+RenderGroup NEngine::Graphics::CreateRenderGroup(const ModelId& id, const Animator* animator)
 {
 	auto model = ModelManager::Get()->GetModel(id);
 	ASSERT(model != nullptr, "Rendergroup");
 
-	RenderGroup group = CreateRenderGroup(*model);
+	RenderGroup group = CreateRenderGroup(*model, animator);
 	for (auto& object : group)
 		object.modelId = id;
 	return group;
