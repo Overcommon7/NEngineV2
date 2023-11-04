@@ -8,6 +8,5 @@ namespace NEngine::Graphics
 	{
 		Bone* root = nullptr;
 		vector<std::unique_ptr<Bone>> bones;
-
 	};
 }

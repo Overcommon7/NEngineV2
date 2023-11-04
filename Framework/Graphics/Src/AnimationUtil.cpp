@@ -45,18 +45,6 @@ void NEngine::Graphics::AnimationUtil::
 	{
 		boneTransforms.resize(model->skeleton->bones.size(), NMath::Matrix4::Identity);
 		ComputeBoneTransformRecursize(model->skeleton->root, boneTransforms, animator);
-
-		for (auto& bone : model->skeleton->bones)
-		{
-			if (!bone->parent) continue;
-			Bone* boneChain = bone.get();
-			while (boneChain->parent)
-			{
-				boneTransforms[bone->index] = boneTransforms[bone->index] * boneTransforms[bone->parentIndex];
-				boneChain = boneChain->parent;
-			}
-				
-		}
 	}
 }
 

@@ -62,7 +62,7 @@ NMath::Matrix4 Animator::GetToParentTransform(const Bone* bone) const
 	const auto& animClip = model->animationClips[mClipIndex];
 	auto& animation = animClip.boneAnimations[bone->index];
 	if (!animation)
-		return bone->toParentTransform;
+		return NMath::Matrix4::Identity;
 
 	return animation->GetTransform(mAnimationTick).GetMatrix4();
 }

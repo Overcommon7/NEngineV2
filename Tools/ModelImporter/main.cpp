@@ -407,12 +407,12 @@ int main(int argc, char* argv[])
 				for (uint32_t keyIndex = 0; keyIndex < aiBoneAnim->mNumPositionKeys; ++keyIndex)
 				{
 					auto& posKey = aiBoneAnim->mPositionKeys[keyIndex];
-					builder.AddPositionKey(ToVector3(posKey.mValue)* args.scale, (float)posKey.mTime);
+					builder.AddPositionKey(ToVector3(posKey.mValue) * args.scale, (float)posKey.mTime);
 				}
 				for (uint32_t keyIndex = 0; keyIndex < aiBoneAnim->mNumRotationKeys; ++keyIndex)
 				{
 					auto& rotKey = aiBoneAnim->mRotationKeys[keyIndex];
-					builder.AddRotationKey(ToQuaternion(rotKey.mValue) * args.scale, (float)rotKey.mTime);
+					builder.AddRotationKey(ToQuaternion(rotKey.mValue), (float)rotKey.mTime);
 				}
 				for (uint32_t keyIndex = 0; keyIndex < aiBoneAnim->mNumScalingKeys; ++keyIndex)
 				{

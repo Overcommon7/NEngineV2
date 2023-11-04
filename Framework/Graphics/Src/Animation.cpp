@@ -57,11 +57,15 @@ Vector3 Animation::GetPosition(float time) const
 			float t = GetLerpTime(mPositionKeys[i - 1].time, mPositionKeys[i].time, time, mPositionKeys[i].easeType);
 			return NMath::Lerp(mPositionKeys[i - 1].Key, mPositionKeys[i].Key, t);
 		}
-
-		if (!mPositionKeys.empty())
+		else
 		{
-			return mPositionKeys.back().Key;
+			return mPositionKeys.front().Key;
 		}
+	}
+
+	if (!mPositionKeys.empty())
+	{
+		return mPositionKeys.back().Key;
 	}
 
 	return Vector3::Zero;
@@ -79,11 +83,15 @@ Quaternion Animation::GetRotation(float time) const
 			float t = GetLerpTime(mRotationKeys[i - 1].time, mRotationKeys[i].time, time, mRotationKeys[i].easeType);
 			return NMath::Quaternion::Slerp(mRotationKeys[i - 1].Key, mRotationKeys[i].Key, t);
 		}
-
-		if (!mRotationKeys.empty())
+		else
 		{
-			return mRotationKeys.back().Key;
+			return mRotationKeys[i].Key;
 		}
+	}
+
+	if (!mRotationKeys.empty())
+	{
+		return mRotationKeys.back().Key;
 	}
 
 	return Quaternion::Identity;
@@ -101,11 +109,15 @@ Vector3 Animation::GetScale(float time) const
 			float t = GetLerpTime(mScaleKeys[i - 1].time, mScaleKeys[i].time, time, mScaleKeys[i].easeType);
 			return NMath::Lerp(mScaleKeys[i - 1].Key, mScaleKeys[i].Key, t);
 		}
-
-		if (!mScaleKeys.empty())
+		else
 		{
-			return mScaleKeys.back().Key;
+			return mScaleKeys.front().Key;
 		}
+	}
+
+	if (!mScaleKeys.empty())
+	{
+		return mScaleKeys.back().Key;
 	}
 
 	return Vector3::One;

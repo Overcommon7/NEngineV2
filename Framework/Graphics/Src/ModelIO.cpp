@@ -392,7 +392,6 @@ void NEngine::Graphics::AnimationIO::Write(FILE* file, const Animation& animatio
 	for (auto& key : animation.mRotationKeys)
 	{
 		fprintf_s(file, "%f %f %f %f %f\n", key.time, key.Key.x, key.Key.y, key.Key.z, key.Key.w);
-
 	}
 	count = animation.mScaleKeys.size();
 	fprintf_s(file, "Scale Key Count: %d\n", count);
@@ -407,7 +406,7 @@ void NEngine::Graphics::AnimationIO::Read(FILE* file, Animation& animation)
 	AnimationBuilder builder;
 	float time = 0.f;
 	uint32_t count = 0;
-	fprintf_s(file, "Position Key Count: %d\n", count);
+	fscanf_s(file, "Position Key Count: %d\n", &count);
 	for (uint32_t i = 0; i < count; ++i)
 	{
 		NMath::Vector3 position;
