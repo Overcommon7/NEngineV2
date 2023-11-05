@@ -16,7 +16,7 @@ using BoneIndexLookup = std::unordered_map<string, uint32_t>;
 
 struct Arguments
 {
-	std::filesystem::path inputDirectoryName;
+	std::filesystem::path inputFileName;
 	std::filesystem::path outputFileName;
 	float scale = 1.0f;
 	bool animOnly;
@@ -29,7 +29,7 @@ std::optional<Arguments> ParseArgs(int  argc,  char* argv[])
 		return std::nullopt;
 	}
 	Arguments arguments;
-	arguments.inputDirectoryName = argv[argc - 2];
+	arguments.inputFileName = argv[argc - 2];
 	arguments.outputFileName = argv[argc - 1];
 	for (int i = 1; i + 2 < argc; ++i)
 	{
@@ -40,7 +40,7 @@ std::optional<Arguments> ParseArgs(int  argc,  char* argv[])
 		}
 		else if (strcmp(argv[i], "-animOnly") == 0)
 		{
-			arguments.animOnly = argv[i + 1] == "1";
+			arguments.animOnly = atoi(argv[i + 1]) == 1;
 			++i;
 		}
 	}
