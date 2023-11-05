@@ -47,6 +47,13 @@ NEngine::Graphics::ModelId NEngine::Graphics::ModelManager::LoadModel(const std:
 	return modelId;
 }
 
+void NEngine::Graphics::ModelManager::AddAnimation(ModelId modelID, const std::filesystem::path& filepath)
+{
+	auto model = GetModel(modelID);
+	ASSERT(model != nullptr, "ModelManager: need to load the model first");
+	ModelIO::LoadAnimations(filepath, *(Model*)model);
+}
+
 const NEngine::Graphics::Model* NEngine::Graphics::ModelManager::GetModel(ModelId id)
 {
 	auto model = inventory.find(id);

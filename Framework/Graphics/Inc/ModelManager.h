@@ -19,6 +19,7 @@ namespace NEngine::Graphics
 
 		ModelId GetModelId(const std::filesystem::path& filepath);
 		ModelId LoadModel(const std::filesystem::path& filepath);
+		void AddAnimation(ModelId modelID, const std::filesystem::path& filepath);
 		const NEngine::Graphics::Model* GetModel(ModelId id);
 
 	private:
