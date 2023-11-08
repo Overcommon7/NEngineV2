@@ -8,6 +8,7 @@ using namespace NEngine;
 using namespace NEngine::Core;
 using namespace NEngine::Input;
 using namespace NEngine::Graphics;
+using namespace NEngine::Physics;
 
 void App::ChangeState(const std::string& stateName)
 {
@@ -41,14 +42,18 @@ void App::Run(const AppConfig& config)
 	TextureManager::StaticInitialize("../../Assets/Textures/");
 	ModelManager::StaticInitialize();
 
+	PhysicsWorld::Settings settings;
+	PhysicsWorld::StaticInitialize(settings);
+
+	auto physicsWorld = PhysicsWorld::Get();
+	auto inputSystem = InputSystem::Get();
+
 	ASSERT(mCurrentState != nullptr, "App -- need an app state");
 	mCurrentState->Initialize();
 	mRunning = true;
 	while (mRunning)
 	{
 		myWindow.ProcessMessage();
-
-		auto inputSystem = InputSystem::Get();
 		inputSystem->Update();
 
 
@@ -70,6 +75,7 @@ void App::Run(const AppConfig& config)
 
 		if (deltaTime < 0.5f)
 		{
+			physicsWorld->Update(deltaTime);
 			mCurrentState->Update(deltaTime);
 		}
 
@@ -83,6 +89,7 @@ void App::Run(const AppConfig& config)
 	}
 
 	//terminate static classes
+	PhysicsWorld::StaticTerminate();
 	TextureManager::StaticTerminate();
 	ModelManager::StaticTerminate();
 	SimpleDraw::StaticTerminate();
