@@ -155,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="Inc\Common.h" />
     <ClInclude Include="Inc\Physics.h" />
+    <ClInclude Include="Inc\PhysicsObject.h" />
     <ClInclude Include="Inc\Rigidbody.h" />
     <ClInclude Include="Inc\PhysicsWorld.h" />
     <ClInclude Include="Inc\PhysicsDebugDrawer.h" />
