@@ -73,11 +73,12 @@ void PhysicsWorld::DebugUI()
     if (ImGui::Checkbox("[DBG] drawWireFrame", &isEnabled))
     {
         debugMode = (isEnabled ? debugMode | btIDebugDraw::DBG_DrawWireframe : debugMode & ~btIDebugDraw::btIDebugDraw::DBG_DrawWireframe);
-        isEnabled = (debugMode & btIDebugDraw::DBG_DrawAabb) > 0;
-        if (ImGui::Checkbox("[DBG] drawAABB", &isEnabled))
-        {
-            debugMode = (isEnabled ? debugMode | btIDebugDraw::DBG_DrawAabb : debugMode & ~btIDebugDraw::btIDebugDraw::DBG_DrawAabb);
-        }
+    }
+
+    isEnabled = (debugMode & btIDebugDraw::DBG_DrawAabb) > 0;
+    if (ImGui::Checkbox("[DBG] drawAABB", &isEnabled))
+    {
+        debugMode = (isEnabled ? debugMode | btIDebugDraw::DBG_DrawAabb : debugMode & ~btIDebugDraw::btIDebugDraw::DBG_DrawAabb);
     }
 
     mDebugDrawer.setDebugMode(debugMode);
@@ -90,7 +91,7 @@ void PhysicsWorld::RegisterPhysicsObject(PhysicsObject* object)
     if (std::find(mPhysicsObjects.begin(), mPhysicsObjects.end(), object) != mPhysicsObjects.end()) return;
 
      mPhysicsObjects.push_back(object);
-     auto body = object->GetRigidBody();
+     auto body = object->GetRigidbody();
      if (body != nullptr)
          mDynamicWorld->addRigidBody(body);
 

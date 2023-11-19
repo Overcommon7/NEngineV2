@@ -161,4 +161,42 @@ namespace NEngine::NMath
 			0.0f, 0.0f, 0.0f, 1.0f
 		};
 	}
+
+	template<class T>
+	concept Integral = std::is_integral_v<T>;
+
+	template<Integral T>
+	inline T Random(T includedMax, T includedMin = 0, const std::pair<T, T>& ExcludeRange = { 0, 0 }, const vector<T>& exclude = {})
+	{
+		bool range = false;
+		bool isValid = true;
+		T value{};
+		if (ExcludeRange.first != ExcludeRange.second) range = true;
+		std::random_device r;
+
+		if (includedMax < includedMin)
+		{
+			T temp = includedMax;
+			includedMax = includedMin;
+			includedMin = temp;
+		}
+
+		do
+		{
+			isValid = true;
+			std::mt19937 gen(r());
+			std::uniform_int_distribution<T> dist(includedMin, includedMax);
+			value = dist(gen);
+			for (const auto& i : exclude)
+				if (i == value)
+				{
+					isValid = false;
+					break;
+				}
+			if (range && isValid)
+				if (value >= ExcludeRange.first && value <= ExcludeRange.second)
+					isValid = false;
+		} while (!isValid);
+		return value;
+	}
 }

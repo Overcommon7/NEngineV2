@@ -13,6 +13,6 @@ namespace NEngine::Physics
 		friend class PhysicsWorld;
 
 		virtual void Update() = 0;
-		virtual btRigidBody* GetRigidBody() const { return nullptr; }
+		virtual btRigidBody* GetRigidbody() const { return nullptr; }
 	};
 }

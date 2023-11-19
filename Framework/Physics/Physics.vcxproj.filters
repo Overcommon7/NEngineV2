@@ -8,11 +8,13 @@
     <ClInclude Include="Inc\PhysicsWorld.h" />
     <ClInclude Include="Inc\PhysicsDebugDrawer.h" />
     <ClInclude Include="Inc\PhysicsObject.h" />
+    <ClInclude Include="Inc\CollisionShape.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp" />
     <ClCompile Include="Src\Rigidbody.cpp" />
     <ClCompile Include="Src\PhysicsWorld.cpp" />
     <ClCompile Include="Src\PhysicsDebugDrawer.cpp" />
+    <ClCompile Include="Src\CollisionShape.cpp" />
   </ItemGroup>
 </Project>

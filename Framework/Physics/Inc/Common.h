@@ -17,3 +17,8 @@ inline void SafeDelete(T*& ptr)
 		ptr = nullptr;
 	}
 }
+
+inline btTransform ConvertTobtTransform(const NEngine::Graphics::Transform& trans)
+{
+	return btTransform(trans.rotation, trans.position);
+}
