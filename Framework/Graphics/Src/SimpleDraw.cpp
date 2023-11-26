@@ -84,7 +84,7 @@ namespace {
 		mVertexShader.Bind();
 		mPixelShader.Bind();
 
-		mBlendState.set();
+		mBlendState.Set();
 
 		mMeshBuffer.Update(mLineVertices.get(), mLineVertexCount);
 		mMeshBuffer.SetTopology(MeshBuffer::Topology::Lines);

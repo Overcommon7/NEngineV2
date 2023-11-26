@@ -20,7 +20,7 @@ namespace NEngine::Graphics {
 		void Initailize(Mode mode);
 		void Terminate();
 
-		void set();
+		void Set();
 	private:
 
 		ID3D11BlendState* mBlendState = nullptr;

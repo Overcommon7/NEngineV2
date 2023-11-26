@@ -5,7 +5,7 @@
 struct ParticleSystemInfo
 {
 	ParticleInfo particleInfo;
-	Vector3 spawnPsosition;
+	Vector3 spawnPosition;
 	Vector3 spawnDirection;
 
 	float spawnDelay;
@@ -16,8 +16,10 @@ struct ParticleSystemInfo
 	float minSpawnAngle = 0.f;
 	float maxSpawnAngle = 0.f;
 	float lifeTime = 0.f;
-	int maxParticles = 0.f;
+	int minParticles = 0;
 	int maxParticles = 100;
+	float minSpeed = 0;
+	float maxSpeed = 0;
 };
 
 class ParticleSystem
@@ -52,5 +54,3 @@ private:
 
 	ParticleSystemInfo mInfo;
 }; 
-
-

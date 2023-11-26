@@ -45,6 +45,11 @@ namespace NEngine::Physics
 
 		using PhysicsObjects = vector<PhysicsObject*>;
 		PhysicsObjects mPhysicsObjects;
+
+		btSoftRigidDynamicsWorld* mSoftbodyWorld = nullptr;
+		friend class SoftBody;
+
+		btSoftBody* CreateSoftbody(int nodeCount);
 	};
 }
 

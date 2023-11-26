@@ -3,8 +3,6 @@
 #include "Inc/AppState.h"
 #include "Inc/NEngine.h"
 
-#include "ParticleSystem.h"
-
 using namespace NEngine;
 using namespace NEngine::Graphics;
 using namespace NEngine::Physics;
@@ -28,12 +26,10 @@ protected:
 	RenderObject mGround;
 	CollisionShape mGroundShape;
 	Rigidbody mGroundRigidbody;
-	
-	//particle Stuff
 
-	NEngine::Graphics::ParticleEffect mParticleEffect;
-	ParticleSystem mParticleSystem;
-
+	RenderObject mCloth;
+	Mesh mClothMesh;
+	SoftBody mClothSoftBody;
 };
 
 

@@ -81,7 +81,7 @@ namespace
 	}
 	void CreatePlaneIndices(std::vector<uint32_t>& indices, int numRows, int numColumns)
 	{
-		for (int r = 0; r <= numRows; ++r)
+		for (int r = 0; r < numRows; ++r)
 		{
 			for (int c = 0; c < numColumns; ++c)
 			{

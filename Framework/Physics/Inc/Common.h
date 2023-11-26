@@ -8,6 +8,11 @@
 #include "Bullet/btBulletCollisionCommon.h"
 #include "Bullet/btBulletDynamicsCommon.h"
 
+#include "Bullet/BulletSoftBody/btSoftRigidDynamicsWorld.h"
+#include "Bullet/BulletSoftBody/btSoftBodyHelpers.h"
+#include "Bullet/BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"
+#include "Bullet/BulletSoftBody/btSoftBodySolvers.h"
+
 template<class T>
 inline void SafeDelete(T*& ptr)
 {

@@ -30,59 +30,42 @@ void GameState::Initialize()
     mGroundShape.InitializeHull({ 10.f, 0.5f, 10.0f }, { 0.f, -0.5f, 0.f });
     mGroundRigidbody.Initialize(mGround.transform, mGroundShape);
 
+    int rows = 10, cols = 10;
+    mClothMesh = MeshBuilder::CreateGroundPlane(rows, cols, 1.0f);
+    for (auto& v : mClothMesh.vertices)
+    {
+        v.position.y = 10;
+    }
+    int last = mClothMesh.vertices.size() - 1;
+    mClothSoftBody.Initialize(mClothMesh, 1.0f, { last, last - rows - 1 });
+    mCloth.meshBuffer.Initialize(nullptr, sizeof(Vertex), mClothMesh.vertices.size(), mClothMesh.indices.data(), mClothMesh.indices.size());
 
-
-    mParticleEffect.Initialize();
-    mParticleEffect.SetCamera(mCamera);
-
-    ParticleSystemInfo info;
-    info.lifeTime = std::numeric_limits<float>::max();
-    info.maxParticles = 100;
-    info.spawnPosition = { 0, 1, 0 };
-    info.spawnDirection = { 0, 1, 0 };
-    info.spawnDelay = 0;
-    info.minParticlesPerEmit = 1;
-    info.maxParticlesPerEmit = 3;
-    info.minTimeBetweenParticles = 0.1f;
-    info.maxTimeBetweenParticles = 0.3f;
-    info.minSpawnAngle = NMath::Constants::HalfPi * 0.25f;
-    info.maxSpawnAngle = -NMath::Constants::HalfPi * 0.25f;
-    info.maxParticles = 100;
-    info.minSpeed = 2.0f;
-    info.maxSpeed = 7.0f;
-
-    info.particleInfo.lifetime = 2.0f;
-
-    info.particleInfo.colorStart = Colors::OrangeRed;
-    (info.particleInfo.colorEnd = Colors::LightYellow).a = 0.1f;
-
-    info.particleInfo.scaleStart = Vector3::One;
-    info.particleInfo.scaleEnd = { 0.1f, 0.1f, 0.1f };
-
-    mParticleSystem.Initialize(info);
+    mCloth.diffuseMapId = TextureManager::Get()->LoadTexture("misc/basketball.jpg");
+    mCloth.material.ambient = { 0.3f, 0.3f, 0.3f, 1.0f };
+    mCloth.material.diffuse = { 0.8f, 0.8f, 0.8f, 1.0f };
+    mCloth.material.specular = { 0.9f, 0.9f, 0.9f, 1.0f };
+    mCloth.material.materialPower = 20;
+    mCloth.transform.position.y = 5;
 
 }
 
 void GameState::Terminate()
 {
     mGroundRigidbody.Terminate();
-
     mGroundShape.Terminate();
 
     mStandardEffect.Terminate();
     mGround.Terminate();
-    mParticleEffect.Terminate();
 }
 
 void GameState::Render()
 {
+    mCloth.meshBuffer.Update(mClothMesh.vertices.data(), mClothMesh.vertices.size());
+
     mStandardEffect.Begin();
+        mStandardEffect.Render(mCloth);
         mStandardEffect.Render(mGround);
     mStandardEffect.End();
-
-    mParticleEffect.Begin();
-        mParticleSystem.Render(mParticleEffect);
-    mParticleEffect.End();
 }
 
 void GameState::Update(float deltaTime)
@@ -116,7 +99,6 @@ void GameState::Update(float deltaTime)
         mCamera.Pitch(input->GetMouseMoveY() * turnSpeed);
     }
 
-    mParticleSystem.Update(deltaTime);
 }
 
 void GameState::DebugUI()
@@ -131,7 +113,7 @@ void GameState::DebugUI()
             ImGui::ColorEdit4("Diffuse##Light", &mDirectionalLight.diffuse.r);
             ImGui::ColorEdit4("Specular##Light", &mDirectionalLight.specular.r);
         }
-        mParticleSystem.DebugUI();
+ 
         mStandardEffect.DebugUI();
         PhysicsWorld::Get()->DebugUI();
     ImGui::End();

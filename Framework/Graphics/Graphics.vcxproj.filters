@@ -126,6 +126,7 @@
     <ClInclude Include="Inc\AnimationUtil.h" />
     <ClInclude Include="Inc\AnimationClip.h" />
     <ClInclude Include="Inc\Animator.h" />
+    <ClInclude Include="Inc\ParticleEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -209,5 +210,6 @@
     <ClCompile Include="Src\AnimationUtil.cpp" />
     <ClCompile Include="Src\AnimationClip.cpp" />
     <ClCompile Include="Src\Animator.cpp" />
+    <ClCompile Include="Src\ParticleEffect.cpp" />
   </ItemGroup>
 </Project>

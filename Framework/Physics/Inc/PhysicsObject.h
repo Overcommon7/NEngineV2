@@ -14,5 +14,6 @@ namespace NEngine::Physics
 
 		virtual void Update() = 0;
 		virtual btRigidBody* GetRigidbody() const { return nullptr; }
+		virtual btSoftBody* GetSoftBody() const { return nullptr; }
 	};
 }

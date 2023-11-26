@@ -43,13 +43,18 @@ void PhysicsWorld::Initialize(const Settings& settings)
     mSolver = new btSequentialImpulseConstraintSolver();
     mDynamicWorld = new btDiscreteDynamicsWorld(mDispatcher, mInterface, mSolver, mCollisionConfiguration);
     mDynamicWorld->setGravity(settings.gravity);
-
     mDynamicWorld->setDebugDrawer(&mDebugDrawer);
+
+
+    mSoftbodyWorld = new btSoftRigidDynamicsWorld(mDispatcher, mInterface, mSolver, mCollisionConfiguration);
+    mSoftbodyWorld->setGravity(settings.gravity);
+    mSoftbodyWorld->setDebugDrawer(&mDebugDrawer);
 }
 
 void PhysicsWorld::Terminate()
 {
     SafeDelete(mDynamicWorld);
+    SafeDelete(mSoftbodyWorld);
     SafeDelete(mSolver);
     SafeDelete(mInterface);
     SafeDelete(mDispatcher);
@@ -59,6 +64,7 @@ void PhysicsWorld::Terminate()
 void PhysicsWorld::Update(float deltaTime)
 {
     mDynamicWorld->stepSimulation(deltaTime, mSettings.simulationSteps, mSettings.fixedTimeStep);
+    mSoftbodyWorld->stepSimulation(deltaTime, mSettings.simulationSteps, mSettings.fixedTimeStep);
     for (auto object : mPhysicsObjects)
         object->Update();
 }
@@ -83,6 +89,7 @@ void PhysicsWorld::DebugUI()
 
     mDebugDrawer.setDebugMode(debugMode);
     mDynamicWorld->debugDrawWorld();
+    mSoftbodyWorld->debugDrawWorld();
     
 }
 
@@ -91,9 +98,14 @@ void PhysicsWorld::RegisterPhysicsObject(PhysicsObject* object)
     if (std::find(mPhysicsObjects.begin(), mPhysicsObjects.end(), object) != mPhysicsObjects.end()) return;
 
      mPhysicsObjects.push_back(object);
-     auto body = object->GetRigidbody();
-     if (body != nullptr)
-         mDynamicWorld->addRigidBody(body);
+     
+     auto rigidbody = object->GetRigidbody();
+     auto softbody = object->GetSoftBody();
+
+     if (rigidbody != nullptr)
+         mDynamicWorld->addRigidBody(rigidbody);
+     if (softbody != nullptr)
+         mSoftbodyWorld->addSoftBody(softbody);
 
 }
 
@@ -108,4 +120,10 @@ PhysicsWorld::~PhysicsWorld()
 {
     ASSERT(mDynamicWorld == nullptr, "PhysicsWorld: terminate must be called");
 
+}
+
+btSoftBody* PhysicsWorld::CreateSoftbody(int nodeCount)
+{
+    btSoftBody* softBody = new btSoftBody(&mSoftbodyWorld->getWorldInfo(), nodeCount, nullptr, nullptr);
+    return softBody;
 }

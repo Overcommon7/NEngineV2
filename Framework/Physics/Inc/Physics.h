@@ -2,6 +2,7 @@
 
 #include "Common.h"
 
+#include "Softbody.h"
 #include "Rigidbody.h"
 #include "PhysicsDebugDrawer.h"
 #include "PhysicsWorld.h"
