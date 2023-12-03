@@ -172,7 +172,7 @@ void NEngine::Graphics::ModelIO::LoadModel(std::filesystem::path filepath, Model
 	FILE* file = NULL;
 	fopen_s(&file, filepath.generic_string().c_str(), "r");
 
-	if (file == NULL) return;
+	ASSERT(file != NULL, "File not Found");
 
 	uint32_t meshCount = 0;
 	fscanf_s(file, "MeshCount: %d\n", &meshCount);

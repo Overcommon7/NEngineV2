@@ -74,6 +74,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "19_HelloParticleSystem", "V
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "20_HelloSoftbody", "VGP334\20_HelloSoftbody\20_HelloSoftbody.vcxproj", "{B032F3DD-A53E-4EF5-9863-10DAF9945D2D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "21_HelloBlendAnimation", "VGP334\21_HelloBlendAnimation\21_HelloBlendAnimation.vcxproj", "{2F1769F2-C78B-481D-B367-1B81B11DDDD3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -218,6 +220,14 @@ Global
 		{B032F3DD-A53E-4EF5-9863-10DAF9945D2D}.Release|x64.Build.0 = Release|x64
 		{B032F3DD-A53E-4EF5-9863-10DAF9945D2D}.Release|x86.ActiveCfg = Release|Win32
 		{B032F3DD-A53E-4EF5-9863-10DAF9945D2D}.Release|x86.Build.0 = Release|Win32
+		{2F1769F2-C78B-481D-B367-1B81B11DDDD3}.Debug|x64.ActiveCfg = Debug|x64
+		{2F1769F2-C78B-481D-B367-1B81B11DDDD3}.Debug|x64.Build.0 = Debug|x64
+		{2F1769F2-C78B-481D-B367-1B81B11DDDD3}.Debug|x86.ActiveCfg = Debug|Win32
+		{2F1769F2-C78B-481D-B367-1B81B11DDDD3}.Debug|x86.Build.0 = Debug|Win32
+		{2F1769F2-C78B-481D-B367-1B81B11DDDD3}.Release|x64.ActiveCfg = Release|x64
+		{2F1769F2-C78B-481D-B367-1B81B11DDDD3}.Release|x64.Build.0 = Release|x64
+		{2F1769F2-C78B-481D-B367-1B81B11DDDD3}.Release|x86.ActiveCfg = Release|Win32
+		{2F1769F2-C78B-481D-B367-1B81B11DDDD3}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -242,6 +252,7 @@ Global
 		{44768E33-11A4-43BF-82BC-DD70FD56CFA2} = {7BBF726C-6ECB-47EB-82D1-0C7D42D8F127}
 		{CB5CEB0B-BFF1-4B52-8D1D-D33FAC68C18A} = {7BBF726C-6ECB-47EB-82D1-0C7D42D8F127}
 		{B032F3DD-A53E-4EF5-9863-10DAF9945D2D} = {7BBF726C-6ECB-47EB-82D1-0C7D42D8F127}
+		{2F1769F2-C78B-481D-B367-1B81B11DDDD3} = {7BBF726C-6ECB-47EB-82D1-0C7D42D8F127}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {010E0B6F-B2FD-4AD9-A2B3-9FF364F73B7A}

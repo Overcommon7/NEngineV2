@@ -1,1 +1,8 @@
--scale 0.01 ../../Assets/Models/SillyDancing/SillyDancing.fbx  ../../Assets/Models/SillyDancing/SillyDancing.model
+-scale 0.01 ../../Assets/Models/Walking/MainModel.fbx  ../../Assets/Models/Walking/MainModel.model
+
+
+
+-scale 0.01 -animOnly 1 ../../Assets/Models/Walking/StrafeRight.fbx  ../../Assets/Models/Walking/StrafeRight.animset
+-scale 0.01 -animOnly 1 ../../Assets/Models/Walking/StrafeLeft.fbx  ../../Assets/Models/Walking/StrafeLeft.animset
+-scale 0.01 -animOnly 1 ../../Assets/Models/Walking/WalkingBackwards.fbx  ../../Assets/Models/Walking/WalkingBackwards.animset
+-scale 0.01 -animOnly 1 ../../Assets/Models/Walking/WalkingFowards.fbx  ../../Assets/Models/Walking/WalkingFowards.animset

@@ -19,10 +19,10 @@ struct Arguments
 	std::filesystem::path inputFileName;
 	std::filesystem::path outputFileName;
 	float scale = 1.0f;
-	bool animOnly;
+	bool animOnly = false;
 };
 
-std::optional<Arguments> ParseArgs(int  argc,  char* argv[])
+std::optional<Arguments> ParseArgs(int argc, char* argv[])
 {
 	if (argc < 3)
 	{
@@ -235,6 +235,7 @@ void SetBoneOffsetTransform(const aiBone* nodeBone, Skeleton& skeleton, const Bo
 
 int main(int argc, char* argv[])
 {
+	
 	const std::optional<Arguments> argOpt = ParseArgs(argc, argv);
 	if (!argOpt)
 	{
@@ -378,7 +379,8 @@ int main(int argc, char* argv[])
 			}
 		}
 	}
-	if (args.animOnly && scene->HasMaterials())
+
+	if (!args.animOnly && scene->HasMaterials())
 	{
 		std::cout << "Reading Material Data....\n" << std::endl;
 
