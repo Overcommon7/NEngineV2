@@ -30,9 +30,8 @@ void GameState::Initialize()
     mAnimator.Initialize(mId);
     mAnimator.SetBlending(true);
     auto& options = mAnimator.GetBlendOptions();
-    options.SetUpClip((int)AnimationClipName::StrafeLeft, true, 0);
-    options.SetUpClip((int)AnimationClipName::WalkingFowards, true, 1);
-    options.t = 0.5f;
+    options.AddClip((int)AnimationClipName::StrafeLeft, true, 0, 0.5f);
+    options.AddClip((int)AnimationClipName::WalkingFowards, true, 0, 0.5f);
     
 
     mCharacter = CreateRenderGroup(mId, &mAnimator);
@@ -120,12 +119,7 @@ void GameState::DebugUI()
             ImGui::ColorEdit4("Specular##Light", &mDirectionalLight.specular.r);
         }
         ImGui::Checkbox("DrawSkeleton", &mDrawSkeleton);
-        static int clip = -1;
-        if (ImGui::InputInt("Clip", &clip) && clip >= 0)
-        {
-            if (mAnimator.GetAnimationCount() > clip)
-                mAnimator.PlayAnimation(clip, true);
-        }
+        mAnimator.DebugUI();
         mStandardEffect.DebugUI();
     ImGui::End();
 }

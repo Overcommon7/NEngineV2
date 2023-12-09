@@ -12,22 +12,21 @@ namespace NEngine::Graphics
 		{
 			int index;
 			float currentTick = 0.f;
+			float weight;
 			bool isLooping = false;
+			int priority = 0;
 
-			void StartAnimation(bool isLooping)
+
+			void StartAnimation(bool isLooping = true)
 			{
 				currentTick = 0.f;
-				isLooping = true;
+				this->isLooping = isLooping;
 			}
 		};
 
 		struct BlendOptions
 		{
-			static const size_t CLIP_COUNT = 2;
-
-			std::array<ClipData, CLIP_COUNT> clips;
-			float t;
-			
+			std::vector<ClipData> clips;
 
 			inline void SetClipIndex(int clipIndex, int index)
 			{
@@ -39,12 +38,24 @@ namespace NEngine::Graphics
 				clips[index].isLooping = looping;
 			}
 
-			inline void SetUpClip(int clipIndex, bool looping, int index)
+			inline void SetWeight(float weight, int index)
 			{
-				clips[index].index = clipIndex;
-				clips[index].isLooping = looping;
+				clips[index].weight = std::clamp(weight, 0.f, 1.f);
 			}
 
+			inline void AddClip(int clipIndex, bool looping, int priority, float weight)
+			{
+				ClipData newClip;
+				newClip.index = clipIndex;
+				newClip.priority = priority;
+				newClip.weight = weight;
+				newClip.StartAnimation(looping);
+				clips.push_back(newClip);
+
+				std::sort(clips.begin(), clips.end(), [](const ClipData& a, const ClipData& b) {
+					return a.priority < b.priority;
+					});
+			}
 		};
 
 		void Initialize(ModelId id);
@@ -58,11 +69,14 @@ namespace NEngine::Graphics
 		NMath::Matrix4 GetToParentTransform(const Bone* bone) const;
 
 		inline BlendOptions& GetBlendOptions() { return mBlendOptions; }
+
+		void DebugUI();
 	private:
 		ModelId mId = 0;
 		ClipData mClipData;
 		bool mIsBlending = false;
 		BlendOptions mBlendOptions;
+		ClipData newClipData;
 
 		void UpdateNoBlend(float deltaTime, ClipData& clipData, const Model* model);
 		void UpdateWithBlend(float deltaTime, const Model* model);
