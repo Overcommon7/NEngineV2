@@ -51,7 +51,7 @@
     dcl_texcoord2 v2  // vin<7,8>
     dcl_texcoord3 v3  // vin<9,10,11,12>
 
-#line 54 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 54 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     dp4 r0.x, v0, c9  // ::pos_ws<0>
     dp4 r0.y, v0, c10  // ::pos_ws<1>
     dp4 r0.z, v0, c11  // ::pos_ws<2>
@@ -62,10 +62,10 @@
     add r0.xyz, r1, -c4
     nrm r1.xyz, r0  // ::halfVectors<0,1,2>
 
-#line 11 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Utilities.fxh"
+#line 11 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Utilities.fxh"
     mad r0.xyz, v1, c19.x, c19.y  // ::BiasX2<0,1,2>
 
-#line 56 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 56 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     dp3 r2.x, r0, c12
     dp3 r2.y, r0, c13
     dp3 r2.z, r0, c14
@@ -90,10 +90,10 @@
     mov r2.xyz, c1  // Parameters::DiffuseColor<0,1,2>
     mad r1.xyz, r1, r2, c2  // ::result<0,1,2>
 
-#line 363 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\BasicEffect.fx"
+#line 363 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\BasicEffect.fx"
     mul oT0.xyz, r1, v3  // ::VSBasicOneLightTxVcBn<0,1,2>
 
-#line 39 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 39 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     pow r1.x, r0.y, c3.w
     mul r0.x, r0.x, r1.x  // ::specular<0>
 
@@ -104,20 +104,20 @@
 #line 60
     dp4 oPos.z, v0, c17  // ::VSBasicOneLightTxVcBn<12>
 
-#line 11 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
+#line 11 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
     dp4 r0.x, v0, c8
     max r0.x, r0.x, c19.z
     min oT1.w, r0.x, c19.w  // ::VSBasicOneLightTxVcBn<7>
 
-#line 363 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\BasicEffect.fx"
+#line 363 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\BasicEffect.fx"
     mul oT0.w, v3.w, c1.w  // ::VSBasicOneLightTxVcBn<3>
 
-#line 60 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 60 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     dp4 r0.x, v0, c15  // ::vout<0>
     dp4 r0.y, v0, c16  // ::vout<1>
     dp4 r0.z, v0, c18  // ::vout<3>
 
-#line 353 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\BasicEffect.fx"
+#line 353 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\BasicEffect.fx"
     mad oPos.xy, r0.z, c0, r0  // ::VSBasicOneLightTxVcBn<10,11>
     mov oPos.w, r0.z  // ::VSBasicOneLightTxVcBn<13>
 
@@ -182,10 +182,10 @@ ret
 
 const BYTE BasicEffect_VSBasicOneLightTxVcBn[] =
 {
-     68,  88,  66,  67, 161,   8, 
-      5, 179, 139, 158, 213, 134, 
-    160, 205, 169, 184, 183, 200, 
-    103,  86,   1,   0,   0,   0, 
+     68,  88,  66,  67, 123,  53, 
+     85, 182, 177, 203, 137, 165, 
+     69,  59, 145,  46, 158,  54, 
+    162,  77,   1,   0,   0,   0, 
      68,  17,   0,   0,   4,   0, 
       0,   0,  48,   0,   0,   0, 
     212,  10,   0,   0,  36,  16, 
@@ -218,7 +218,7 @@ const BYTE BasicEffect_VSBasicOneLightTxVcBn[] =
       0,   0,  42,   0,   0,   0, 
     124,   1,   0,   0,  15,   0, 
       0,   0,  60,   6,   0,   0, 
-     36,   3,   0,   0,  72,  58, 
+     36,   3,   0,   0,  70,  58, 
      92,  76,  97,  83,  97, 108, 
     108, 101,  92,  67, 111, 117, 
     114, 115, 101, 115,  92,  81, 
@@ -232,7 +232,7 @@ const BYTE BasicEffect_VSBasicOneLightTxVcBn[] =
     100, 101, 114, 115,  92,  76, 
     105, 103, 104, 116, 105, 110, 
     103,  46, 102, 120, 104,   0, 
-     72,  58,  92,  76,  97,  83, 
+     70,  58,  92,  76,  97,  83, 
      97, 108, 108, 101,  92,  67, 
     111, 117, 114, 115, 101, 115, 
      92,  81, 117,  97, 114, 116, 
@@ -245,7 +245,7 @@ const BYTE BasicEffect_VSBasicOneLightTxVcBn[] =
     104,  97, 100, 101, 114, 115, 
      92,  85, 116, 105, 108, 105, 
     116, 105, 101, 115,  46, 102, 
-    120, 104,   0,  72,  58,  92, 
+    120, 104,   0,  70,  58,  92, 
      76,  97,  83,  97, 108, 108, 
     101,  92,  67, 111, 117, 114, 
     115, 101, 115,  92,  81, 117, 
@@ -259,7 +259,7 @@ const BYTE BasicEffect_VSBasicOneLightTxVcBn[] =
     101, 114, 115,  92,  66,  97, 
     115, 105,  99,  69, 102, 102, 
     101,  99, 116,  46, 102, 120, 
-      0,  72,  58,  92,  76,  97, 
+      0,  70,  58,  92,  76,  97, 
      83,  97, 108, 108, 101,  92, 
      67, 111, 117, 114, 115, 101, 
     115,  92,  81, 117,  97, 114, 

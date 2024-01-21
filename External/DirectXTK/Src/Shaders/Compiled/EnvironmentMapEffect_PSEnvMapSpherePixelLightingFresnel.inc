@@ -46,7 +46,7 @@
     dcl_2d s0
     dcl_2d s1
 
-#line 121 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\EnvironmentMapEffect.fx"
+#line 121 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\EnvironmentMapEffect.fx"
     add r0.xyz, -t1, c10
     nrm r1.xyz, r0  // ::eyeVector<0,1,2>
     nrm r0.xyz, t2  // ::worldNormal<0,1,2>
@@ -80,7 +80,7 @@
 #line 119
     texld r2, t0, s0
 
-#line 33 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 33 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     dp3 r3.x, -c4, r0  // ::dotL<0>
     dp3 r3.y, -c5, r0  // ::dotL<1>
     dp3 r3.z, -c6, r0  // ::dotL<2>
@@ -96,7 +96,7 @@
     mov r3.xyz, c2  // Parameters::DiffuseColor<0,1,2>
     mad r0.xyz, r0, r3, c3  // ::result<0,1,2>
 
-#line 119 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\EnvironmentMapEffect.fx"
+#line 119 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\EnvironmentMapEffect.fx"
     mul r2, r2, t3  // ::color<0,1,2,3>
 
 #line 126
@@ -112,7 +112,7 @@
     mad r0.xyz, r0.w, r1, r0  // ::color<0,1,2>
     mad r0.xyz, c0, r1.w, r0  // ::color<0,1,2>
 
-#line 17 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
+#line 17 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
     mad r1.xyz, c11, r2.w, -r0
     mad r2.xyz, t1.w, r1, r0  // ApplyFog::color<0,1,2>
     mov oC0, r2  // ::PSEnvMapSpherePixelLightingFresnel<0,1,2,3>
@@ -181,10 +181,10 @@ ret
 
 const BYTE EnvironmentMapEffect_PSEnvMapSpherePixelLightingFresnel[] =
 {
-     68,  88,  66,  67, 210, 234, 
-    179, 191, 255, 147, 124,   7, 
-     35, 146,  15,  72, 241, 124, 
-    207, 131,   1,   0,   0,   0, 
+     68,  88,  66,  67, 178, 233, 
+    138, 181, 168, 140, 178,  42, 
+    210,  74,  13, 122, 223,  76, 
+    168, 201,   1,   0,   0,   0, 
     196,  17,   0,   0,   4,   0, 
       0,   0,  48,   0,   0,   0, 
     212,  10,   0,   0,  16,  17, 
@@ -208,7 +208,7 @@ const BYTE EnvironmentMapEffect_PSEnvMapSpherePixelLightingFresnel[] =
      50,   0,   0,   0,  48,   1, 
       0,   0,  17,   0,   0,   0, 
     176,   5,   0,   0,  40,   3, 
-      0,   0,  72,  58,  92,  76, 
+      0,   0,  70,  58,  92,  76, 
      97,  83,  97, 108, 108, 101, 
      92,  67, 111, 117, 114, 115, 
     101, 115,  92,  81, 117,  97, 
@@ -223,7 +223,7 @@ const BYTE EnvironmentMapEffect_PSEnvMapSpherePixelLightingFresnel[] =
     105, 114, 111, 110, 109, 101, 
     110, 116,  77,  97, 112,  69, 
     102, 102, 101,  99, 116,  46, 
-    102, 120,   0,  72,  58,  92, 
+    102, 120,   0,  70,  58,  92, 
      76,  97,  83,  97, 108, 108, 
     101,  92,  67, 111, 117, 114, 
     115, 101, 115,  92,  81, 117, 
@@ -236,7 +236,7 @@ const BYTE EnvironmentMapEffect_PSEnvMapSpherePixelLightingFresnel[] =
      99,  92,  83, 104,  97, 100, 
     101, 114, 115,  92,  76, 105, 
     103, 104, 116, 105, 110, 103, 
-     46, 102, 120, 104,   0,  72, 
+     46, 102, 120, 104,   0,  70, 
      58,  92,  76,  97,  83,  97, 
     108, 108, 101,  92,  67, 111, 
     117, 114, 115, 101, 115,  92, 

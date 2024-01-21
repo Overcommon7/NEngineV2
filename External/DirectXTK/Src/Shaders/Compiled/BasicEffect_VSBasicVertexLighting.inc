@@ -43,7 +43,7 @@
     dcl_texcoord v0  // vin<0,1,2,3>
     dcl_texcoord1 v1  // vin<4,5,6>
 
-#line 56 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 56 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     dp3 r0.x, v1, c18
     dp3 r0.y, v1, c19
     dp3 r0.z, v1, c20
@@ -114,21 +114,21 @@
 #line 60
     dp4 oPos.z, v0, c23  // ::VSBasicVertexLighting<10>
 
-#line 11 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
+#line 11 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
     dp4 r0.x, v0, c14
     max r0.x, r0.x, c25.x
     min oT1.w, r0.x, c25.y  // ::VSBasicVertexLighting<7>
 
-#line 60 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 60 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     dp4 r0.x, v0, c21  // ::vout<0>
     dp4 r0.y, v0, c22  // ::vout<1>
     dp4 r0.z, v0, c24  // ::vout<3>
 
-#line 150 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\BasicEffect.fx"
+#line 150 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\BasicEffect.fx"
     mad oPos.xy, r0.z, c0, r0  // ::VSBasicVertexLighting<8,9>
     mov oPos.w, r0.z  // ::VSBasicVertexLighting<11>
 
-#line 43 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 43 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     mov oT0.w, c1.w  // ::VSBasicVertexLighting<3>
 
 // approximately 62 instruction slots used
@@ -199,10 +199,10 @@ ret
 
 const BYTE BasicEffect_VSBasicVertexLighting[] =
 {
-     68,  88,  66,  67, 138, 151, 
-    236, 183, 220,  84, 240, 134, 
-     95, 211, 158,  74,  91, 128, 
-     48, 236,   1,   0,   0,   0, 
+     68,  88,  66,  67, 103,  43, 
+     18, 255,  56, 204, 247,  35, 
+     21, 183,  15,  42,  49, 208, 
+    218,  54,   1,   0,   0,   0, 
     152,  18,   0,   0,   4,   0, 
       0,   0,  48,   0,   0,   0, 
     236,  10,   0,   0, 216,  17, 
@@ -229,7 +229,7 @@ const BYTE BasicEffect_VSBasicVertexLighting[] =
       0,   0,  55,   0,   0,   0, 
      36,   1,   0,   0,  13,   0, 
       0,   0, 220,   5,   0,   0, 
-     16,   3,   0,   0,  72,  58, 
+     16,   3,   0,   0,  70,  58, 
      92,  76,  97,  83,  97, 108, 
     108, 101,  92,  67, 111, 117, 
     114, 115, 101, 115,  92,  81, 
@@ -243,7 +243,7 @@ const BYTE BasicEffect_VSBasicVertexLighting[] =
     100, 101, 114, 115,  92,  76, 
     105, 103, 104, 116, 105, 110, 
     103,  46, 102, 120, 104,   0, 
-     72,  58,  92,  76,  97,  83, 
+     70,  58,  92,  76,  97,  83, 
      97, 108, 108, 101,  92,  67, 
     111, 117, 114, 115, 101, 115, 
      92,  81, 117,  97, 114, 116, 
@@ -256,7 +256,7 @@ const BYTE BasicEffect_VSBasicVertexLighting[] =
     104,  97, 100, 101, 114, 115, 
      92,  67, 111, 109, 109, 111, 
     110,  46, 102, 120, 104,   0, 
-     72,  58,  92,  76,  97,  83, 
+     70,  58,  92,  76,  97,  83, 
      97, 108, 108, 101,  92,  67, 
     111, 117, 114, 115, 101, 115, 
      92,  81, 117,  97, 114, 116, 

@@ -53,7 +53,7 @@
     dcl t4.xyz  // pixel<16,17,18>
     dcl_2d s0
 
-#line 176 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\DGSLPhong.hlsl"
+#line 176 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\DGSLPhong.hlsl"
     texld r0, t1, s0
 
 #line 100
@@ -195,10 +195,10 @@ ret
 
 const BYTE DGSLPhong_mainTx[] =
 {
-     68,  88,  66,  67, 229, 168, 
-     46,  74, 215, 147, 188, 226, 
-    156,   7,  25, 103,  62, 225, 
-    153,  84,   1,   0,   0,   0, 
+     68,  88,  66,  67,  35,  16, 
+     87,  69,  21,  57, 176,   1, 
+      0, 188, 119,  86,  94,  81, 
+    232, 255,   1,   0,   0,   0, 
     220,  17,   0,   0,   4,   0, 
       0,   0,  48,   0,   0,   0, 
      44,  10,   0,   0, 188,  16, 
@@ -231,7 +231,7 @@ const BYTE DGSLPhong_mainTx[] =
       0,   0,  48,   0,   0,   0, 
     128,   0,   0,   0,  15,   0, 
       0,   0,  44,   5,   0,   0, 
-    108,   3,   0,   0,  72,  58, 
+    108,   3,   0,   0,  70,  58, 
      92,  76,  97,  83,  97, 108, 
     108, 101,  92,  67, 111, 117, 
     114, 115, 101, 115,  92,  81, 

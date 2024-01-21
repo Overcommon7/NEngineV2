@@ -47,13 +47,13 @@
     dcl_texcoord1 v1  // vin<4,5,6>
     dcl_texcoord2 v2  // vin<7,8>
 
-#line 65 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\EnvironmentMapEffect.fx"
+#line 65 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\EnvironmentMapEffect.fx"
     dp3 r0.x, v1, c15
     dp3 r0.y, v1, c16
     dp3 r0.z, v1, c17
     nrm r1.xyz, r0  // ::worldNormal<0,1,2>
 
-#line 33 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 33 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     dp3 r0.x, -c4, r1  // ::dotL<0>
     dp3 r0.y, -c5, r1  // ::dotL<1>
     dp3 r0.z, -c6, r1  // ::dotL<2>
@@ -69,15 +69,15 @@
     mov r2.xyz, c2  // Parameters::DiffuseColor<0,1,2>
     mad oT0.xyz, r0, r2, c3  // ::VSEnvMap<0,1,2>
 
-#line 69 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\EnvironmentMapEffect.fx"
+#line 69 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\EnvironmentMapEffect.fx"
     dp4 oPos.z, v0, c20  // ::VSEnvMap<15>
 
-#line 11 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
+#line 11 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
     dp4 r0.x, v0, c11
     max r0.x, r0.x, c22.x
     min oT1.w, r0.x, c22.y  // ::VSEnvMap<7>
 
-#line 63 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\EnvironmentMapEffect.fx"
+#line 63 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\EnvironmentMapEffect.fx"
     dp4 r0.x, v0, c12  // ::pos_ws<0>
     dp4 r0.y, v0, c13  // ::pos_ws<1>
     dp4 r0.z, v0, c14  // ::pos_ws<2>
@@ -98,10 +98,10 @@
     mad oPos.xy, r0.z, c0, r0  // ::VSEnvMap<13,14>
     mov oPos.w, r0.z  // ::VSEnvMap<16>
 
-#line 43 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 43 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     mov oT0.w, c2.w  // ::VSEnvMap<3>
 
-#line 75 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\EnvironmentMapEffect.fx"
+#line 75 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\EnvironmentMapEffect.fx"
     mov oT1.xyz, c1.x  // ::VSEnvMap<4,5,6>
 
 #line 182
@@ -159,10 +159,10 @@ ret
 
 const BYTE EnvironmentMapEffect_VSEnvMap[] =
 {
-     68,  88,  66,  67,  94, 121, 
-    223, 112, 163,  86,   5, 232, 
-     78, 164, 135, 114, 144, 149, 
-    224,  84,   1,   0,   0,   0, 
+     68,  88,  66,  67,  23,  40, 
+     20,  14,  16, 252, 143, 199, 
+    202,  28, 211,  41, 174,  46, 
+    247, 235,   1,   0,   0,   0, 
     176,  14,   0,   0,   4,   0, 
       0,   0,  48,   0,   0,   0, 
     204,   8,   0,   0, 152,  13, 
@@ -189,7 +189,7 @@ const BYTE EnvironmentMapEffect_VSEnvMap[] =
       0,   0,  38,   0,   0,   0, 
      48,   1,   0,   0,  10,   0, 
       0,   0, 244,   4,   0,   0, 
-    148,   2,   0,   0,  72,  58, 
+    148,   2,   0,   0,  70,  58, 
      92,  76,  97,  83,  97, 108, 
     108, 101,  92,  67, 111, 117, 
     114, 115, 101, 115,  92,  81, 
@@ -204,7 +204,7 @@ const BYTE EnvironmentMapEffect_VSEnvMap[] =
     110, 118, 105, 114, 111, 110, 
     109, 101, 110, 116,  77,  97, 
     112,  69, 102, 102, 101,  99, 
-    116,  46, 102, 120,   0,  72, 
+    116,  46, 102, 120,   0,  70, 
      58,  92,  76,  97,  83,  97, 
     108, 108, 101,  92,  67, 111, 
     117, 114, 115, 101, 115,  92, 
@@ -218,7 +218,7 @@ const BYTE EnvironmentMapEffect_VSEnvMap[] =
      97, 100, 101, 114, 115,  92, 
      76, 105, 103, 104, 116, 105, 
     110, 103,  46, 102, 120, 104, 
-      0,  72,  58,  92,  76,  97, 
+      0,  70,  58,  92,  76,  97, 
      83,  97, 108, 108, 101,  92, 
      67, 111, 117, 114, 115, 101, 
     115,  92,  81, 117,  97, 114, 

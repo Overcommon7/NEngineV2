@@ -44,20 +44,20 @@
     dcl t3  // pin<9,10,11,12>
     dcl_2d s0
 
-#line 361 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\SkinnedEffect.fx"
+#line 361 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\SkinnedEffect.fx"
     texld r0, t0, s0
     add r1.xyz, -t1, c12
     dp3 r1.w, r1, r1
     rsq r1.w, r1.w
 
-#line 30 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 30 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     mad r2.xyz, r1, r1.w, -c3
     nrm r3.xyz, r2  // ::halfVectors<0,1,2>
 
-#line 364 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\SkinnedEffect.fx"
+#line 364 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\SkinnedEffect.fx"
     nrm r2.xyz, t2  // ::worldNormal<0,1,2>
 
-#line 34 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 34 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     dp3 r3.x, r3, r2  // ::dotH<0>
 
 #line 30
@@ -99,20 +99,20 @@
     mad r1.xyz, r1.z, c11, r3
     mul r1.xyz, r1, c2  // ::result<3,4,5>
 
-#line 361 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\SkinnedEffect.fx"
+#line 361 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\SkinnedEffect.fx"
     mul r0, r0, t3  // ::color<0,1,2,3>
 
-#line 23 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
+#line 23 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
     mul r1.xyz, r0.w, r1
 
-#line 43 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 43 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     mul r3.xyz, r2.y, c7
     mad r3.xyz, r2.x, c6, r3
     mad r2.xyz, r2.z, c8, r3
     mov r3.xyz, c0  // Parameters::DiffuseColor<0,1,2>
     mad r2.xyz, r2, r3, c1  // ::result<0,1,2>
 
-#line 23 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
+#line 23 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
     mad r1.xyz, r0, r2, r1  // AddSpecular::color<0,1,2>
 
 #line 17
@@ -185,10 +185,10 @@ ret
 
 const BYTE SkinnedEffect_PSSkinnedPixelLighting[] =
 {
-     68,  88,  66,  67, 125, 138, 
-     61, 253,  31,  12, 244,  35, 
-    151,  40, 105, 121, 236,  40, 
-    197, 227,   1,   0,   0,   0, 
+     68,  88,  66,  67, 254,  56, 
+    228, 171,  82, 191, 201, 160, 
+    145,  85,  67,  65, 223, 221, 
+     91, 126,   1,   0,   0,   0, 
      72,  17,   0,   0,   4,   0, 
       0,   0,  48,   0,   0,   0, 
      36,  10,   0,   0, 148,  16, 
@@ -211,7 +211,7 @@ const BYTE SkinnedEffect_PSSkinnedPixelLighting[] =
       0,   0,  50,   0,   0,   0, 
      40,   1,   0,   0,  14,   0, 
       0,   0,  84,   5,   0,   0, 
-    236,   2,   0,   0,  72,  58, 
+    236,   2,   0,   0,  70,  58, 
      92,  76,  97,  83,  97, 108, 
     108, 101,  92,  67, 111, 117, 
     114, 115, 101, 115,  92,  81, 
@@ -225,7 +225,7 @@ const BYTE SkinnedEffect_PSSkinnedPixelLighting[] =
     100, 101, 114, 115,  92,  83, 
     107, 105, 110, 110, 101, 100, 
      69, 102, 102, 101,  99, 116, 
-     46, 102, 120,   0,  72,  58, 
+     46, 102, 120,   0,  70,  58, 
      92,  76,  97,  83,  97, 108, 
     108, 101,  92,  67, 111, 117, 
     114, 115, 101, 115,  92,  81, 
@@ -239,7 +239,7 @@ const BYTE SkinnedEffect_PSSkinnedPixelLighting[] =
     100, 101, 114, 115,  92,  76, 
     105, 103, 104, 116, 105, 110, 
     103,  46, 102, 120, 104,   0, 
-     72,  58,  92,  76,  97,  83, 
+     70,  58,  92,  76,  97,  83, 
      97, 108, 108, 101,  92,  67, 
     111, 117, 114, 115, 101, 115, 
      92,  81, 117,  97, 114, 116, 

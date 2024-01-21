@@ -46,7 +46,7 @@
     dcl_2d s0
     dcl_2d s1
 
-#line 121 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\EnvironmentMapEffect.fx"
+#line 121 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\EnvironmentMapEffect.fx"
     add r0.xyz, -t1, c10
     nrm r1.xyz, r0  // ::eyeVector<0,1,2>
     nrm r0.xyz, t2  // ::worldNormal<0,1,2>
@@ -80,7 +80,7 @@
 #line 119
     texld r2, t0, s0
 
-#line 33 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 33 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     dp3 r3.x, -c4, r0  // ::dotL<0>
     dp3 r3.y, -c5, r0  // ::dotL<1>
     dp3 r3.z, -c6, r0  // ::dotL<2>
@@ -96,7 +96,7 @@
     mov r3.xyz, c2  // Parameters::DiffuseColor<0,1,2>
     mad r0.xyz, r0, r3, c3  // ::result<0,1,2>
 
-#line 119 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\EnvironmentMapEffect.fx"
+#line 119 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\EnvironmentMapEffect.fx"
     mul r2, r2, t3  // ::color<0,1,2,3>
 
 #line 126
@@ -175,10 +175,10 @@ ret
 
 const BYTE EnvironmentMapEffect_PSEnvMapSpherePixelLightingFresnelNoFog[] =
 {
-     68,  88,  66,  67,  71, 165, 
-     39,  86, 213, 149, 221,  53, 
-    222, 246, 122, 211, 232,  41, 
-    136,  50,   1,   0,   0,   0, 
+     68,  88,  66,  67, 122, 140, 
+    128,  19,  92,  56, 126, 219, 
+    215, 111, 204,  21, 148,  40, 
+    135,  43,   1,   0,   0,   0, 
     196,  16,   0,   0,   4,   0, 
       0,   0,  48,   0,   0,   0, 
      36,  10,   0,   0,  16,  16, 
@@ -202,7 +202,7 @@ const BYTE EnvironmentMapEffect_PSEnvMapSpherePixelLightingFresnelNoFog[] =
      48,   0,   0,   0, 220,   0, 
       0,   0,  16,   0,   0,   0, 
      60,   5,   0,   0, 196,   2, 
-      0,   0,  72,  58,  92,  76, 
+      0,   0,  70,  58,  92,  76, 
      97,  83,  97, 108, 108, 101, 
      92,  67, 111, 117, 114, 115, 
     101, 115,  92,  81, 117,  97, 
@@ -217,7 +217,7 @@ const BYTE EnvironmentMapEffect_PSEnvMapSpherePixelLightingFresnelNoFog[] =
     105, 114, 111, 110, 109, 101, 
     110, 116,  77,  97, 112,  69, 
     102, 102, 101,  99, 116,  46, 
-    102, 120,   0,  72,  58,  92, 
+    102, 120,   0,  70,  58,  92, 
      76,  97,  83,  97, 108, 108, 
     101,  92,  67, 111, 117, 114, 
     115, 101, 115,  92,  81, 117, 

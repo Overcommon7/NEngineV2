@@ -24,6 +24,11 @@
     <ClInclude Include="Inc\AppState.h">
       <Filter>Inc</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\GameObject.h" />
+    <ClInclude Include="Inc\Component.h" />
+    <ClInclude Include="Inc\Transform.h" />
+    <ClInclude Include="Inc\TypeIds.h" />
+    <ClInclude Include="Inc\GameObjectFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -35,5 +40,8 @@
     <ClCompile Include="Src\NEngine.cpp">
       <Filter>Src</Filter>
     </ClCompile>
+    <ClCompile Include="Src\GameObject.cpp" />
+    <ClCompile Include="Src\Transform.cpp" />
+    <ClCompile Include="Src\GameObjectFactory.cpp" />
   </ItemGroup>
 </Project>

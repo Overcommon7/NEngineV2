@@ -34,19 +34,19 @@
     dcl t1.xyz  // pin<4,5,6>
     dcl t2  // pin<7,8,9,10>
 
-#line 576 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\BasicEffect.fx"
+#line 576 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\BasicEffect.fx"
     add r0.xyz, -t0, c12
     dp3 r0.w, r0, r0
     rsq r0.w, r0.w
 
-#line 30 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 30 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     mad r1.xyz, r0, r0.w, -c3
     nrm r2.xyz, r1  // ::halfVectors<0,1,2>
 
-#line 577 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\BasicEffect.fx"
+#line 577 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\BasicEffect.fx"
     nrm r1.xyz, t1  // ::worldNormal<0,1,2>
 
-#line 34 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 34 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     dp3 r2.x, r2, r1  // ::dotH<0>
 
 #line 30
@@ -88,17 +88,17 @@
     mad r0.xyz, r0.z, c11, r2
     mul r0.xyz, r0, c2  // ::result<3,4,5>
 
-#line 23 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
+#line 23 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
     mul r0.xyz, r0, t2.w
 
-#line 43 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 43 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     mul r2.xyz, r1.y, c7
     mad r2.xyz, r1.x, c6, r2
     mad r1.xyz, r1.z, c8, r2
     mov r2.xyz, c0  // Parameters::DiffuseColor<0,1,2>
     mad r1.xyz, r1, r2, c1  // ::result<0,1,2>
 
-#line 23 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
+#line 23 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
     mad r0.xyz, t2, r1, r0  // AddSpecular::color<0,1,2>
 
 #line 17
@@ -167,10 +167,10 @@ ret
 
 const BYTE BasicEffect_PSBasicPixelLighting[] =
 {
-     68,  88,  66,  67, 136, 170, 
-     95,  61, 165,  83, 212,  50, 
-    125,  70,  10,  74,  69,  27, 
-     47, 189,   1,   0,   0,   0, 
+     68,  88,  66,  67,  69,  19, 
+    202, 255, 194, 196, 139, 140, 
+    252, 111, 223,  30, 188, 109, 
+    147, 176,   1,   0,   0,   0, 
      44,  16,   0,   0,   4,   0, 
       0,   0,  48,   0,   0,   0, 
     136,   9,   0,   0, 144,  15, 
@@ -193,7 +193,7 @@ const BYTE BasicEffect_PSBasicPixelLighting[] =
       0,   0,  36,   1,   0,   0, 
      13,   0,   0,   0, 252,   4, 
       0,   0, 208,   2,   0,   0, 
-     72,  58,  92,  76,  97,  83, 
+     70,  58,  92,  76,  97,  83, 
      97, 108, 108, 101,  92,  67, 
     111, 117, 114, 115, 101, 115, 
      92,  81, 117,  97, 114, 116, 
@@ -206,7 +206,7 @@ const BYTE BasicEffect_PSBasicPixelLighting[] =
     104,  97, 100, 101, 114, 115, 
      92,  66,  97, 115, 105,  99, 
      69, 102, 102, 101,  99, 116, 
-     46, 102, 120,   0,  72,  58, 
+     46, 102, 120,   0,  70,  58, 
      92,  76,  97,  83,  97, 108, 
     108, 101,  92,  67, 111, 117, 
     114, 115, 101, 115,  92,  81, 
@@ -220,7 +220,7 @@ const BYTE BasicEffect_PSBasicPixelLighting[] =
     100, 101, 114, 115,  92,  76, 
     105, 103, 104, 116, 105, 110, 
     103,  46, 102, 120, 104,   0, 
-     72,  58,  92,  76,  97,  83, 
+     70,  58,  92,  76,  97,  83, 
      97, 108, 108, 101,  92,  67, 
     111, 117, 114, 115, 101, 115, 
      92,  81, 117,  97, 114, 116, 

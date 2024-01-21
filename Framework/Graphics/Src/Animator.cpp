@@ -227,6 +227,7 @@ NMath::Matrix4 NEngine::Graphics::Animator::GetToParentTransformWithBlend(const 
 	for (int i = 1; i < size; ++i)
 	{
 		result.position = NMath::Lerp(result.position, transforms[i].position, mBlendOptions.clips[i].weight / totalWeight);
+		result.scale = NMath::Lerp(result.scale, transforms[i].scale, mBlendOptions.clips[i].weight / totalWeight);
 		result.rotation = NMath::Quaternion::Slerp(result.rotation, transforms[i].rotation, mBlendOptions.clips[i].weight / totalWeight);
 	}
 

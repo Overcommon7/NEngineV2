@@ -49,7 +49,7 @@
     dcl_texcoord3 v3  // vin<9,10,11,12>
     dcl_texcoord4 v4  // vin<13,14,15,16>
 
-#line 15 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Skinning.fxh"
+#line 15 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Skinning.fxh"
     mul r0.x, v3.x, c243.x
     mova a0.x, r0.x
     mul r0, v4.x, c26[a0.x]  // ::skinning<0,3,6,9>
@@ -68,7 +68,7 @@
     dp4 r1.z, v0, r3  // Skin::vin<2>
     dp3 r0.z, v1, r3  // ::Skin<2>
 
-#line 82 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 82 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     mov r1.w, v0.w
     dp4 oPos.z, r1, c24  // ::VSSkinnedPixelLightingOneBone<15>
     dp4 oT1.x, r1, c15  // ::VSSkinnedPixelLightingOneBone<2>
@@ -81,17 +81,17 @@
     rsq r0.x, r0.x
     mul oT2.xyz, r0.x, r2  // ::VSSkinnedPixelLightingOneBone<6,7,8>
 
-#line 11 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
+#line 11 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
     dp4 r0.x, r1, c14
     max r0.x, r0.x, c243.y
     min oT1.w, r0.x, c243.z  // ::VSSkinnedPixelLightingOneBone<5>
 
-#line 82 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 82 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     dp4 r0.x, r1, c22  // ::vout<0>
     dp4 r0.y, r1, c23  // ::vout<1>
     dp4 r0.z, r1, c25  // ::vout<3>
 
-#line 234 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\SkinnedEffect.fx"
+#line 234 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\SkinnedEffect.fx"
     mad oPos.xy, r0.z, c242, r0  // ::VSSkinnedPixelLightingOneBone<13,14>
     mov oPos.w, r0.z  // ::VSSkinnedPixelLightingOneBone<16>
 
@@ -150,10 +150,10 @@ ret
 
 const BYTE SkinnedEffect_VSSkinnedPixelLightingOneBone[] =
 {
-     68,  88,  66,  67, 107,  96, 
-    122, 224,  40, 243,  61,  29, 
-    115,  80, 200,  63,  67,  85, 
-     52,   7,   1,   0,   0,   0, 
+     68,  88,  66,  67, 100, 137, 
+    242, 186,  23,  75, 199,  39, 
+     24, 179, 180, 163, 194, 143, 
+    120,  96,   1,   0,   0,   0, 
     144,  14,   0,   0,   4,   0, 
       0,   0,  48,   0,   0,   0, 
      56,   9,   0,   0,  44,  13, 
@@ -176,7 +176,7 @@ const BYTE SkinnedEffect_VSSkinnedPixelLightingOneBone[] =
       0,   0,  39,   0,   0,   0, 
     124,   1,   0,   0,   6,   0, 
       0,   0, 188,   5,   0,   0, 
-    240,   2,   0,   0,  72,  58, 
+    240,   2,   0,   0,  70,  58, 
      92,  76,  97,  83,  97, 108, 
     108, 101,  92,  67, 111, 117, 
     114, 115, 101, 115,  92,  81, 
@@ -190,7 +190,7 @@ const BYTE SkinnedEffect_VSSkinnedPixelLightingOneBone[] =
     100, 101, 114, 115,  92,  83, 
     107, 105, 110, 110, 105, 110, 
     103,  46, 102, 120, 104,   0, 
-     72,  58,  92,  76,  97,  83, 
+     70,  58,  92,  76,  97,  83, 
      97, 108, 108, 101,  92,  67, 
     111, 117, 114, 115, 101, 115, 
      92,  81, 117,  97, 114, 116, 
@@ -203,7 +203,7 @@ const BYTE SkinnedEffect_VSSkinnedPixelLightingOneBone[] =
     104,  97, 100, 101, 114, 115, 
      92,  76, 105, 103, 104, 116, 
     105, 110, 103,  46, 102, 120, 
-    104,   0,  72,  58,  92,  76, 
+    104,   0,  70,  58,  92,  76, 
      97,  83,  97, 108, 108, 101, 
      92,  67, 111, 117, 114, 115, 
     101, 115,  92,  81, 117,  97, 
@@ -216,7 +216,7 @@ const BYTE SkinnedEffect_VSSkinnedPixelLightingOneBone[] =
      92,  83, 104,  97, 100, 101, 
     114, 115,  92,  67, 111, 109, 
     109, 111, 110,  46, 102, 120, 
-    104,   0,  72,  58,  92,  76, 
+    104,   0,  70,  58,  92,  76, 
      97,  83,  97, 108, 108, 101, 
      92,  67, 111, 117, 114, 115, 
     101, 115,  92,  81, 117,  97, 

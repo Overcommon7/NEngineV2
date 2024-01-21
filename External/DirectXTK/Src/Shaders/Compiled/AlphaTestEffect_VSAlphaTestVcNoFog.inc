@@ -43,18 +43,18 @@
     dcl_texcoord1 v1  // vin<4,5>
     dcl_texcoord2 v2  // vin<6,7,8,9>
 
-#line 40 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
+#line 40 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
     dp4 oPos.z, v0, c4  // ::VSAlphaTestVcNoFog<8>
 
-#line 77 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\AlphaTestEffect.fx"
+#line 77 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\AlphaTestEffect.fx"
     mul oT0, v2, c1  // ::VSAlphaTestVcNoFog<0,1,2,3>
 
-#line 40 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
+#line 40 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
     dp4 r0.x, v0, c2  // ::vout<0>
     dp4 r0.y, v0, c3  // ::vout<1>
     dp4 r0.z, v0, c5  // ::vout<3>
 
-#line 69 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\AlphaTestEffect.fx"
+#line 69 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\AlphaTestEffect.fx"
     mad oPos.xy, r0.z, c0, r0  // ::VSAlphaTestVcNoFog<6,7>
     mov oPos.w, r0.z  // ::VSAlphaTestVcNoFog<9>
 
@@ -82,10 +82,10 @@ ret
 
 const BYTE AlphaTestEffect_VSAlphaTestVcNoFog[] =
 {
-     68,  88,  66,  67,  70, 143, 
-    255,  43,   4,  14, 254, 247, 
-    113, 251, 175, 161, 171, 189, 
-     11,  72,   1,   0,   0,   0, 
+     68,  88,  66,  67, 166, 235, 
+    242, 165,  47, 215, 169, 185, 
+    209, 250, 139,  97, 124, 131, 
+    192, 206,   1,   0,   0,   0, 
     116,   6,   0,   0,   4,   0, 
       0,   0,  48,   0,   0,   0, 
     104,   4,   0,   0, 140,   5, 
@@ -110,7 +110,7 @@ const BYTE AlphaTestEffect_VSAlphaTestVcNoFog[] =
       0,   0,  11,   0,   0,   0, 
     212,   0,   0,   0,   3,   0, 
       0,   0, 220,   2,   0,   0, 
-     44,   1,   0,   0,  72,  58, 
+     44,   1,   0,   0,  70,  58, 
      92,  76,  97,  83,  97, 108, 
     108, 101,  92,  67, 111, 117, 
     114, 115, 101, 115,  92,  81, 
@@ -123,7 +123,7 @@ const BYTE AlphaTestEffect_VSAlphaTestVcNoFog[] =
     114,  99,  92,  83, 104,  97, 
     100, 101, 114, 115,  92,  67, 
     111, 109, 109, 111, 110,  46, 
-    102, 120, 104,   0,  72,  58, 
+    102, 120, 104,   0,  70,  58, 
      92,  76,  97,  83,  97, 108, 
     108, 101,  92,  67, 111, 117, 
     114, 115, 101, 115,  92,  81, 

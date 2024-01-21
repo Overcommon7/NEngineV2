@@ -49,16 +49,16 @@
     dcl_texcoord2 v2  // vin<7,8>
     dcl_texcoord3 v3  // vin<9,10,11,12>
 
-#line 82 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 82 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     dp4 oPos.z, v0, c11  // ::VSBasicPixelLightingTxVcBn<15>
     dp4 oT1.x, v0, c3  // ::VSBasicPixelLightingTxVcBn<2>
     dp4 oT1.y, v0, c4  // ::VSBasicPixelLightingTxVcBn<3>
     dp4 oT1.z, v0, c5  // ::VSBasicPixelLightingTxVcBn<4>
 
-#line 11 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Utilities.fxh"
+#line 11 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Utilities.fxh"
     mad r0.xyz, v1, c13.x, c13.y  // ::BiasX2<0,1,2>
 
-#line 84 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 84 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     dp3 r1.x, r0, c6
     dp3 r1.y, r0, c7
     dp3 r1.z, r0, c8
@@ -66,20 +66,20 @@
     rsq r0.x, r0.x
     mul oT2.xyz, r0.x, r1  // ::VSBasicPixelLightingTxVcBn<6,7,8>
 
-#line 11 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
+#line 11 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Common.fxh"
     dp4 r0.x, v0, c2
     max r0.x, r0.x, c13.z
     min oT1.w, r0.x, c13.w  // ::VSBasicPixelLightingTxVcBn<5>
 
-#line 482 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\BasicEffect.fx"
+#line 482 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\BasicEffect.fx"
     mul oT3.w, v3.w, c1.w  // ::VSBasicPixelLightingTxVcBn<12>
 
-#line 82 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
+#line 82 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\Lighting.fxh"
     dp4 r0.x, v0, c9  // ::vout<0>
     dp4 r0.y, v0, c10  // ::vout<1>
     dp4 r0.z, v0, c12  // ::vout<3>
 
-#line 472 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\BasicEffect.fx"
+#line 472 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\BasicEffect.fx"
     mad oPos.xy, r0.z, c0, r0  // ::VSBasicPixelLightingTxVcBn<13,14>
     mov oPos.w, r0.z  // ::VSBasicPixelLightingTxVcBn<16>
 
@@ -124,10 +124,10 @@ ret
 
 const BYTE BasicEffect_VSBasicPixelLightingTxVcBn[] =
 {
-     68,  88,  66,  67, 109, 179, 
-     62,  43, 234,  66, 203,  83, 
-    217,  47,  32,   4, 253,  25, 
-     30,  27,   1,   0,   0,   0, 
+     68,  88,  66,  67, 245, 188, 
+    115, 155,  50, 251, 209, 145, 
+    159,  96, 118,  45, 238,  90, 
+    158, 194,   1,   0,   0,   0, 
     108,  11,   0,   0,   4,   0, 
       0,   0,  48,   0,   0,   0, 
     104,   7,   0,   0,  52,  10, 
@@ -154,7 +154,7 @@ const BYTE BasicEffect_VSBasicPixelLightingTxVcBn[] =
       0,   0,  27,   0,   0,   0, 
     124,   1,   0,   0,   4,   0, 
       0,   0, 188,   4,   0,   0, 
-    120,   2,   0,   0,  72,  58, 
+    120,   2,   0,   0,  70,  58, 
      92,  76,  97,  83,  97, 108, 
     108, 101,  92,  67, 111, 117, 
     114, 115, 101, 115,  92,  81, 
@@ -168,7 +168,7 @@ const BYTE BasicEffect_VSBasicPixelLightingTxVcBn[] =
     100, 101, 114, 115,  92,  76, 
     105, 103, 104, 116, 105, 110, 
     103,  46, 102, 120, 104,   0, 
-     72,  58,  92,  76,  97,  83, 
+     70,  58,  92,  76,  97,  83, 
      97, 108, 108, 101,  92,  67, 
     111, 117, 114, 115, 101, 115, 
      92,  81, 117,  97, 114, 116, 
@@ -181,7 +181,7 @@ const BYTE BasicEffect_VSBasicPixelLightingTxVcBn[] =
     104,  97, 100, 101, 114, 115, 
      92,  85, 116, 105, 108, 105, 
     116, 105, 101, 115,  46, 102, 
-    120, 104,   0,  72,  58,  92, 
+    120, 104,   0,  70,  58,  92, 
      76,  97,  83,  97, 108, 108, 
     101,  92,  67, 111, 117, 114, 
     115, 101, 115,  92,  81, 117, 
@@ -194,7 +194,7 @@ const BYTE BasicEffect_VSBasicPixelLightingTxVcBn[] =
      99,  92,  83, 104,  97, 100, 
     101, 114, 115,  92,  67, 111, 
     109, 109, 111, 110,  46, 102, 
-    120, 104,   0,  72,  58,  92, 
+    120, 104,   0,  70,  58,  92, 
      76,  97,  83,  97, 108, 108, 
     101,  92,  67, 111, 117, 114, 
     115, 101, 115,  92,  81, 117, 

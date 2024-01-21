@@ -38,7 +38,7 @@
     dcl_2d s0
     dcl_cube s1
 
-#line 293 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\EnvironmentMapEffect.fx"
+#line 293 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\EnvironmentMapEffect.fx"
     texld r0, t3, s1
     texld r1, t2, s0
     mul r1, r1, t0  // ::color<0,1,2,3>
@@ -72,10 +72,10 @@ ret
 
 const BYTE EnvironmentMapEffect_PSEnvMapNoFog[] =
 {
-     68,  88,  66,  67,  32,  41, 
-    238, 162, 236,  49, 206,  98, 
-     25, 155, 207, 244, 190, 163, 
-     15,  31,   1,   0,   0,   0, 
+     68,  88,  66,  67,   3, 139, 
+     12, 216, 232, 101, 213, 132, 
+    229,  48, 158,  40, 103, 179, 
+    106, 117,   1,   0,   0,   0, 
     124,   5,   0,   0,   4,   0, 
       0,   0,  48,   0,   0,   0, 
     116,   3,   0,   0, 200,   4, 
@@ -97,7 +97,7 @@ const BYTE EnvironmentMapEffect_PSEnvMapNoFog[] =
      12,   0,   0,   0, 136,   0, 
       0,   0,   3,   0,   0,   0, 
     240,   1,   0,   0, 232,   0, 
-      0,   0,  72,  58,  92,  76, 
+      0,   0,  70,  58,  92,  76, 
      97,  83,  97, 108, 108, 101, 
      92,  67, 111, 117, 114, 115, 
     101, 115,  92,  81, 117,  97, 

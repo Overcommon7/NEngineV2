@@ -30,7 +30,7 @@
     def c0, -1, -0, 0, 0
     dcl t0  // pixel<4,5,6,7>
 
-#line 89 "H:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\DGSLUnlit.hlsl"
+#line 89 "F:\LaSalle\Courses\Quarter8\NEngine\External\DirectXTK\src\Shaders\DGSLUnlit.hlsl"
     mul r0.w, t0.w, t0.w
     cmp r0, -r0.w, c0.x, c0.y
     texkill r0
@@ -51,10 +51,10 @@ ret
 
 const BYTE DGSLUnlit_mainTk[] =
 {
-     68,  88,  66,  67, 178, 105, 
-    154,   0, 201,  29, 199, 255, 
-    228, 119,  21, 225, 170, 218, 
-     96, 169,   1,   0,   0,   0, 
+     68,  88,  66,  67,  51,  88, 
+      7, 194, 171, 144,  77, 172, 
+    210,   1, 167,  94, 110, 219, 
+    183,  18,   1,   0,   0,   0, 
     124,   4,   0,   0,   4,   0, 
       0,   0,  48,   0,   0,   0, 
     236,   2,   0,   0,  92,   3, 
@@ -75,7 +75,7 @@ const BYTE DGSLUnlit_mainTk[] =
       0,   0, 128,   0,   0,   0, 
       2,   0,   0,   0, 200,   1, 
       0,   0, 184,   0,   0,   0, 
-     72,  58,  92,  76,  97,  83, 
+     70,  58,  92,  76,  97,  83, 
      97, 108, 108, 101,  92,  67, 
     111, 117, 114, 115, 101, 115, 
      92,  81, 117,  97, 114, 116, 
