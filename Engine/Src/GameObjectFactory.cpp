@@ -2,7 +2,7 @@
 #include "GameObjectFactory.h"
 
 #include "GameObject.h"
-#include "Transform.h"
+#include "Components/Transform.h"
 
 using namespace NEngine;
 namespace rj = rapidjson;

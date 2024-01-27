@@ -26,9 +26,14 @@
     </ClInclude>
     <ClInclude Include="Inc\GameObject.h" />
     <ClInclude Include="Inc\Component.h" />
-    <ClInclude Include="Inc\Transform.h" />
+    <ClInclude Include="Inc\Components\Transform.h" />
     <ClInclude Include="Inc\TypeIds.h" />
     <ClInclude Include="Inc\GameObjectFactory.h" />
+    <ClInclude Include="Inc\Services\Service.h" />
+    <ClInclude Include="Inc\Services\CameraService.h" />
+    <ClInclude Include="Inc\Components\CameraComponent.h" />
+    <ClInclude Include="Inc\GameWorld.h" />
+    <ClInclude Include="Inc\GameEngineHandle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -41,7 +46,10 @@
       <Filter>Src</Filter>
     </ClCompile>
     <ClCompile Include="Src\GameObject.cpp" />
-    <ClCompile Include="Src\Transform.cpp" />
+    <ClCompile Include="Src\Components\Transform.cpp" />
     <ClCompile Include="Src\GameObjectFactory.cpp" />
+    <ClCompile Include="Src\Services\CameraService.cpp" />
+    <ClCompile Include="Src\Components\CameraComponent.cpp" />
+    <ClCompile Include="Src\GameWorld.cpp" />
   </ItemGroup>
 </Project>

@@ -1,13 +1,16 @@
 #pragma once
 #include "Component.h"
+#include "GameEngineHandle.h"
 
 namespace NEngine
 {			
 	template<class T> 
 	concept ComponentType = std::is_base_of_v<Component, T>;
 
+	
 	class GameObject final
 	{
+		friend class GameWorld;
 	public:
 		GameObject() = default;
 
@@ -20,7 +23,11 @@ namespace NEngine
 		std::string_view GetName() const { return mName; }
 		uint32_t GetUniqueId() const { return mUniqueId; }
 
+		GameWorld& GetWorld() { return *mWorld; }
+
 	private:
+		GameWorld* mWorld = nullptr;
+		GameObjectHandle mHandle;
 		string mName = "EMPTY";
 		bool mInitialized = false;
 		uint32_t mUniqueId;
@@ -41,7 +48,7 @@ namespace NEngine
 		}
 
 		template<ComponentType T>
-		bool HasComponent()
+		bool HasComponent() const
 		{
 			for (auto& component : mComponents)
 			{
@@ -52,8 +59,33 @@ namespace NEngine
 			}
 		}
 
+		template<ComponentType T>
+		T* GetComponent()
+		{
+			for (auto& component : mComponents)
+			{
+				if (component->GetTypeId() == T::StaticGetTypeId())
+				{
+					return static_cast<T*>(component);
+				}
+			}
 
+			return nullptr;
+		}
 
+		template<ComponentType T>
+		const T* GetComponent()	const
+		{
+			for (auto& component : mComponents)
+			{
+				if (component->GetTypeId() == T::StaticGetTypeId())
+				{
+					return static_cast<T*>(component);
+				}
+			}
+
+			return nullptr;
+		}
 
 	};
 }

@@ -6,7 +6,13 @@
 
 #include "GameObject.h"
 #include "Component.h"
-#include "Transform.h"
+#include "GameWorld.h"
+
+#include "Components/Transform.h"
+#include "Components/CameraComponent.h"
+
+#include "Services/Service.h"
+#include "Services/CameraService.h"
 #include "GameObjectFactory.h"
 
 namespace NEngine

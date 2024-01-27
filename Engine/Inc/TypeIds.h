@@ -8,10 +8,21 @@ namespace NEngine
 	{
 		Invalid = 0,
 		Transform,
+		Camera,
+
+		Count
+	};
+
+	enum class ServiceId
+	{
+		Invalid = 0,
+		Camera,
 
 		Count
 	};
 }
+
+
 
 #define SET_TYPE_ID(id)\
 	static uint32_t StaticGetTypeId() { return static_cast<uint32_t>(id); }\

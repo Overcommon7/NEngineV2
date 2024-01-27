@@ -1,5 +1,5 @@
 #include "Precompiled.h"
-#include "Transform.h"
+#include "Components/Transform.h"
 
 void NEngine::Transform::DebugUI()
 {

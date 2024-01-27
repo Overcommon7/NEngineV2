@@ -1,7 +1,7 @@
 #include "Precompiled.h"
 #include "GameObject.h"
 
-#include "Transform.h"
+#include "Components/Transform.h"
 
 void NEngine::GameObject::Initialize()
 {
