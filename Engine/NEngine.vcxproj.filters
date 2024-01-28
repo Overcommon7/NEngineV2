@@ -34,6 +34,8 @@
     <ClInclude Include="Inc\Components\CameraComponent.h" />
     <ClInclude Include="Inc\GameWorld.h" />
     <ClInclude Include="Inc\GameEngineHandle.h" />
+    <ClInclude Include="Inc\Services\UpdateService.h" />
+    <ClInclude Include="Inc\Components\FPSCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -51,5 +53,7 @@
     <ClCompile Include="Src\Services\CameraService.cpp" />
     <ClCompile Include="Src\Components\CameraComponent.cpp" />
     <ClCompile Include="Src\GameWorld.cpp" />
+    <ClCompile Include="Src\Services\UpdateService.cpp" />
+    <ClCompile Include="Src\Components\FPSCamera.cpp" />
   </ItemGroup>
 </Project>

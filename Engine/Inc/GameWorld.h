@@ -18,7 +18,7 @@ namespace NEngine
 		void Render();
 		void DebugUI();
 
-		GameObject* CreateGameObject(const std::filesystem::path& templateFile);
+		GameObject* CreateGameObject(const std::filesystem::path& templateFile = "");
 		GameObject* GetGameObject(const GameObjectHandle& handle);
 		void DestroyGameObject(const GameObjectHandle& handle);
 
@@ -27,6 +27,7 @@ namespace NEngine
 		{
 			ASSERT(!mInitialized, "Cannot Add Serice To Initialized World");
 			auto& service = mServices.emplace_back(std::make_unique<T>());
+			service->gameWorld = this;
 			return static_cast<T*>(service.get());
 		}
 

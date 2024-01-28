@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{A00DCE
 		Assets\Shaders\DoSomething.fx = Assets\Shaders\DoSomething.fx
 		Assets\Shaders\DoTexturing.fx = Assets\Shaders\DoTexturing.fx
 		Assets\Shaders\DoTransform.fx = Assets\Shaders\DoTransform.fx
+		Engine\FPSCamera.h = Engine\FPSCamera.h
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{D83FB1B6-3035-4BAA-B368-60680853F330}"
@@ -68,6 +69,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "23_HelloGameObject", "VGP33
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{87B339A2-D362-440D-A917-FA782247EAB3}"
 	ProjectSection(SolutionItems) = preProject
+		Assets\Templates\test_camera.json = Assets\Templates\test_camera.json
+		Assets\Templates\test_fps_camera.json = Assets\Templates\test_fps_camera.json
 		Assets\Templates\test_object.json = Assets\Templates\test_object.json
 	EndProjectSection
 EndProject

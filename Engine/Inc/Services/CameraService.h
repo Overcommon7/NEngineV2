@@ -3,8 +3,6 @@
 
 namespace NEngine
 {   
-    class CameraComponent;
-
     class CameraService final : public Service    
     {
     public:
@@ -15,17 +13,18 @@ namespace NEngine
 
         void SetMainCamera(uint32_t index);
 
-        void Register(CameraComponent* cameraComponent);
-        void Unregister(CameraComponent* cameraComponent);
+        void DebugUI() override;
 
         
     private:
+        friend class CameraComponent;
         using CameraEntries = vector<CameraComponent*>;
         CameraEntries mCameraEntries;
 
         CameraComponent* mMainCamera;
 
-
+        void Register(CameraComponent* cameraComponent);
+        void Unregister(CameraComponent* cameraComponent);
 
         
     };

@@ -20,11 +20,7 @@ protected:
 
 	DirectionalLight mDirectionalLight;
 
-	GameObject mGameObject;
-
-	GameObject mCamera_1;
-	GameObject mCamera_2;
-	CameraService cameraService;
+	GameWorld mWorld;
 };
 
 

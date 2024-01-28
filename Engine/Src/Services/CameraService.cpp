@@ -41,8 +41,10 @@ void NEngine::CameraService::Unregister(CameraComponent* cameraComponent)
 		else mMainCamera = mCameraEntries.front();
 	}
 			
-	mCameraEntries.erase(it);
-		
+	mCameraEntries.erase(it);			
+}
 
-		
+void NEngine::CameraService::DebugUI()
+{
+	Graphics::SimpleDraw::Render(GetMain());
 }

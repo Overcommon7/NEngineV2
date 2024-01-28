@@ -10,7 +10,7 @@ namespace NEngine
 	public:
 		virtual void Initialize() {}
 		virtual void Terminate() {}
-		virtual void Update() {}
+		virtual void Update(float deltaTime) {}
 		virtual void DebugUI() {}
 
 		virtual uint32_t GetTypeId() const = 0;

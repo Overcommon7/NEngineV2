@@ -10,10 +10,12 @@ namespace NEngine
         void Initialize() override;
         void Terminate() override;
 
+        void Deserialize(rapidjson::Value& value) override;
+
         Graphics::Camera& GetCamera() { return mCamera; }
         const Graphics::Camera& GetCamera() const { return mCamera; }
 
-    private:
+    protected:
         Graphics::Camera mCamera;
     };
 }

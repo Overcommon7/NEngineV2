@@ -6,6 +6,7 @@ namespace NEngine
 {
 	class Service
 	{
+		friend class GameWorld;
 	public:
 
 		static uint32_t StaticGetTypeId() { return (uint32_t)ServiceId::Invalid; }
@@ -18,9 +19,14 @@ namespace NEngine
 		virtual void Render() {}
 		virtual void DebugUI() {}
 
+		GameWorld& GetGameWorld() { return *gameWorld; }
+		const GameWorld& GetGameWorld() const { return *gameWorld; }
+
 		Service() = default;
 		virtual ~Service() = default;
 	private:
+		
+		GameWorld* gameWorld;
 	public:
 		
 		Service(const Service& s) = delete;

@@ -17,6 +17,7 @@ namespace NEngine
 	{
 		Invalid = 0,
 		Camera,
+		Update,
 
 		Count
 	};

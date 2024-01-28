@@ -3,6 +3,8 @@
 
 #include "GameObject.h"
 #include "Components/Transform.h"
+#include "Components/CameraComponent.h"
+#include "Components/FPSCamera.h"
 
 using namespace NEngine;
 namespace rj = rapidjson;
@@ -13,20 +15,35 @@ void NEngine::GameObjectFactory::Make(const std::filesystem::path& templatePath,
 	auto err = fopen_s(&file, templatePath.string().c_str(), "r");
 	ASSERT(!err, "File Not Found");
 
-	char readBuffer[USHRT_MAX];
+	char readBuffer[12000];
 	rj::FileReadStream readStream(file, readBuffer, sizeof(readBuffer));
 	fclose(file);
 
+	bool hasTransform = false;
 	rj::Document doc;
 	doc.ParseStream(readStream);
 	auto components = doc["Components"].GetObj();
 	for (auto& component : components)
 	{
-		const char* componentName = component.name.GetString();
-		if (strcmp(componentName, "Transform") == 0)
+		string componentName(component.name.GetString());
+		if (componentName == "Transform")
 		{
 			auto transform = gameObject.AddComponent<Transform>();
 			transform->Deserialize(component.value);
+			hasTransform = true;
+		}
+		else if (componentName == "CameraComponent")
+		{
+			auto camera = gameObject.AddComponent<CameraComponent>();
+			camera->Deserialize(component.value);
+		}
+		else if (componentName == "FPSCamera")
+		{
+			auto camera = gameObject.AddComponent<FPSCamera>();
+			camera->Deserialize(component.value);
 		}
 	}
+
+	if (!hasTransform)
+		gameObject.AddComponent<Transform>();
 }
