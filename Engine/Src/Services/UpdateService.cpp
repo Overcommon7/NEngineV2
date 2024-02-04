@@ -26,3 +26,7 @@ void NEngine::UpdateService::Unregister(Component* component)
 	if (it != mUpdateComponents.end())
 		mUpdateComponents.erase(it);
 }
+
+void NEngine::UpdateService::Deserialize(rapidjson::Value& value)
+{
+}

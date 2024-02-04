@@ -31,7 +31,7 @@ namespace NEngine
 		Component(const Component&& c) = delete;
 		Component& operator=(const Component& c) = delete;
 		Component& operator=(const Component&& c) = delete;
-	private:
+	protected:
 		friend class GameObject;
 		GameObject* mOwner = nullptr;
 

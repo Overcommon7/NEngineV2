@@ -71,6 +71,7 @@ void RenderTarget::Terminate()
 {
 	SafeRelease(mRenderTargetView);
 	SafeRelease(mDepthStencilView);
+	Texture::Terminate();
 }
 
 void RenderTarget::BeginRender(Color clearColor)

@@ -36,6 +36,9 @@
     <ClInclude Include="Inc\GameEngineHandle.h" />
     <ClInclude Include="Inc\Services\UpdateService.h" />
     <ClInclude Include="Inc\Components\FPSCamera.h" />
+    <ClInclude Include="Inc\Services\RenderService.h" />
+    <ClInclude Include="Inc\Components\ModelComponent.h" />
+    <ClInclude Include="Inc\Components\MeshComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -55,5 +58,8 @@
     <ClCompile Include="Src\GameWorld.cpp" />
     <ClCompile Include="Src\Services\UpdateService.cpp" />
     <ClCompile Include="Src\Components\FPSCamera.cpp" />
+    <ClCompile Include="Src\Services\RenderService.cpp" />
+    <ClCompile Include="Src\Components\ModelComponent.cpp" />
+    <ClCompile Include="Src\Components\MeshComponent.cpp" />
   </ItemGroup>
 </Project>

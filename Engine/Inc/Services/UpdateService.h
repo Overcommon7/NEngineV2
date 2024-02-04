@@ -14,6 +14,7 @@ namespace NEngine
 		void Update(float deltaTime) override;
 		void Register(Component* component);
 		void Unregister(Component* component);
+		void Deserialize(rapidjson::Value& value) override;
 	private:
 		using UpdateComponents = std::vector<Component*>;
 		UpdateComponents mUpdateComponents;

@@ -88,6 +88,8 @@ void App::Run(const AppConfig& config)
 		graphicSystem->EndRender();
 	}
 
+	mCurrentState->Terminate();
+
 	//terminate static classes
 	PhysicsWorld::StaticTerminate();
 	TextureManager::StaticTerminate();

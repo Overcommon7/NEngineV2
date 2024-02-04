@@ -17,9 +17,6 @@ public:
 	void DebugUI();
 
 protected:
-
-	DirectionalLight mDirectionalLight;
-
 	GameWorld mWorld;
 };
 

@@ -66,7 +66,7 @@ namespace NEngine
 			{
 				if (component->GetTypeId() == T::StaticGetTypeId())
 				{
-					return static_cast<T*>(component);
+					return static_cast<T*>(component.get());
 				}
 			}
 
@@ -80,7 +80,7 @@ namespace NEngine
 			{
 				if (component->GetTypeId() == T::StaticGetTypeId())
 				{
-					return static_cast<T*>(component);
+					return static_cast<T*>(component.get());
 				}
 			}
 

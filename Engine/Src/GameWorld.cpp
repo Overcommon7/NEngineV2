@@ -4,7 +4,11 @@
 #include "GameObjectFactory.h"
 #include "Components/Transform.h"
 
-void NEngine::GameWorld::Intialize(uint32_t capacity)
+#include "Services/UpdateService.h"
+#include "Services/CameraService.h"
+#include "Services/RenderService.h"
+
+void NEngine::GameWorld::Initialize(uint32_t capacity)
 {
 	ASSERT(!mInitialized, "World Already Initialized");
 
@@ -109,6 +113,69 @@ void NEngine::GameWorld::DestroyGameObject(const GameObjectHandle& handle)
 	++slot.generation;
 
 	mToBeDestroyed.push_back(handle.mIndex);
+}
+
+void NEngine::GameWorld::LoadLevel(const std::filesystem::path& levelFile)
+{
+	FILE* file = nullptr;
+
+	
+
+	auto err = fopen_s(&file, levelFile.string().c_str(), "r");
+	ASSERT(err == 0 && file != nullptr, "GameWorld: failed to load level %s", levelFile.string().c_str());
+	
+	string readBuffer;
+	readBuffer.resize(USHRT_MAX);
+
+	rapidjson::FileReadStream readStream(file, readBuffer.data(), readBuffer.size());
+	fclose(file);
+
+	rapidjson::Document doc;
+	doc.ParseStream(readStream);
+
+	auto services = doc["Services"].GetObj();
+	for (auto& service : services)
+	{
+		string serviceName(service.name.GetString());
+		if (serviceName == "Camera")
+		{
+			CameraService* cameraService = AddService<CameraService>();
+			cameraService->Deserialize(service.value);
+		}
+		else if (serviceName == "Update")
+		{
+			UpdateService* updateService = AddService<UpdateService>();
+			updateService->Deserialize(service.value);
+		}
+		else if (serviceName == "Render")
+		{
+			RenderService* renderService = AddService<RenderService>();
+			renderService->Deserialize(service.value);
+		}
+	}
+
+	uint32_t capacity = static_cast<uint32_t>(doc["Capacity"].GetInt());
+	Initialize(capacity);
+
+	auto gameObjects = doc["GameObjects"].GetObj();
+	for (auto& gameObject : gameObjects)
+	{
+		string templateFile(gameObject.value["Template"].GetString());
+		GameObject* obj = CreateGameObject(templateFile);
+
+		if (!obj) continue;
+		obj->SetName(gameObject.name.GetString());
+		
+		if (gameObject.value.HasMember("Position"))
+		{
+			auto transform = obj->GetComponent<Transform>();
+			const auto& position = gameObject.value["Position"].GetArray();
+			for (int i = 0; i < 3; ++i)
+			{
+				transform->position.v[i] = position[i].GetFloat();
+			}
+		}
+	}
 }
 
 bool NEngine::GameWorld::IsValid(const GameObjectHandle& handle)

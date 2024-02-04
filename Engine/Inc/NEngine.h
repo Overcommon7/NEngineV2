@@ -11,6 +11,8 @@
 #include "Components/Transform.h"
 #include "Components/CameraComponent.h"
 #include "Components/FPSCamera.h"
+#include "Components/ModelComponent.h"
+#include "Components/MeshComponent.h"
 
 #include "Services/Service.h"
 #include "Services/CameraService.h"

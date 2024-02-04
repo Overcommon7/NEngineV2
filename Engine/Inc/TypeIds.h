@@ -9,6 +9,8 @@ namespace NEngine
 		Invalid = 0,
 		Transform,
 		Camera,
+		Model,
+		Mesh,
 
 		Count
 	};
@@ -18,6 +20,7 @@ namespace NEngine
 		Invalid = 0,
 		Camera,
 		Update,
+		Render,
 
 		Count
 	};

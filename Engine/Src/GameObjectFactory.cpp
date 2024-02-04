@@ -5,6 +5,8 @@
 #include "Components/Transform.h"
 #include "Components/CameraComponent.h"
 #include "Components/FPSCamera.h"
+#include "Components/ModelComponent.h"
+#include "Components/MeshComponent.h"
 
 using namespace NEngine;
 namespace rj = rapidjson;
@@ -41,6 +43,16 @@ void NEngine::GameObjectFactory::Make(const std::filesystem::path& templatePath,
 		{
 			auto camera = gameObject.AddComponent<FPSCamera>();
 			camera->Deserialize(component.value);
+		}
+		else if (componentName == "Model")
+		{
+			auto model = gameObject.AddComponent<ModelComponent>();
+			model->Deserialize(component.value);
+		}
+		else if (componentName == "Mesh")
+		{
+			auto mesh = gameObject.AddComponent<MeshComponent>();
+			mesh->Deserialize(component.value);
 		}
 	}
 

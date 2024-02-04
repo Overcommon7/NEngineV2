@@ -11,6 +11,7 @@ namespace NEngine
         const Graphics::Camera& GetMain() const;
         Graphics::Camera& GetMain();
 
+        void Deserialize(rapidjson::Value& value) override;
         void SetMainCamera(uint32_t index);
 
         void DebugUI() override;
@@ -18,6 +19,7 @@ namespace NEngine
         
     private:
         friend class CameraComponent;
+
         using CameraEntries = vector<CameraComponent*>;
         CameraEntries mCameraEntries;
 

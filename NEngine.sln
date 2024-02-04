@@ -71,10 +71,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 	ProjectSection(SolutionItems) = preProject
 		Assets\Templates\test_camera.json = Assets\Templates\test_camera.json
 		Assets\Templates\test_fps_camera.json = Assets\Templates\test_fps_camera.json
+		Assets\Templates\test_ground.json = Assets\Templates\test_ground.json
 		Assets\Templates\test_object.json = Assets\Templates\test_object.json
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "24_HelloGameWorld", "VGP336\24_HelloGameWorld\24_HelloGameWorld.vcxproj", "{5D78438A-CB7C-47BA-BFB4-F544D6699D9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Levels", "Levels", "{6031100A-380B-4BEF-AADA-F0B72ED9644A}"
+	ProjectSection(SolutionItems) = preProject
+		Assets\Templates\test_level.json = Assets\Templates\test_level.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -209,6 +215,7 @@ Global
 		{11A37297-249B-402C-A9AD-830ABC3E6C6D} = {ABF996C7-0D49-495A-9D5E-B5D767C6D4EA}
 		{87B339A2-D362-440D-A917-FA782247EAB3} = {A00DCE90-84B7-4F9C-8431-850600A737FD}
 		{5D78438A-CB7C-47BA-BFB4-F544D6699D9C} = {ABF996C7-0D49-495A-9D5E-B5D767C6D4EA}
+		{6031100A-380B-4BEF-AADA-F0B72ED9644A} = {87B339A2-D362-440D-A917-FA782247EAB3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {010E0B6F-B2FD-4AD9-A2B3-9FF364F73B7A}

@@ -85,7 +85,7 @@ namespace
 		{
 			for (int c = 0; c < numColumns; ++c)
 			{
-				int i = (r * numColumns + 1) + c;
+				int i = (r * (numColumns + 1)) + c;
 
 				//triangle 1
 				indices.push_back(i);

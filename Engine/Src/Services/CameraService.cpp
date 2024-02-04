@@ -13,6 +13,10 @@ NEngine::Graphics::Camera& NEngine::CameraService::GetMain()
 	return mMainCamera->GetCamera();
 }
 
+void NEngine::CameraService::Deserialize(rapidjson::Value& value)
+{
+}
+
 void NEngine::CameraService::SetMainCamera(uint32_t index)
 {
 	if (index >= 0 && index < mCameraEntries.size())

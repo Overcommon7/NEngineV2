@@ -4,6 +4,7 @@
 #include "GameWorld.h"
 #include "GameObject.h"
 #include "Services/UpdateService.h"
+#include "Components/Transform.h"
 
 using namespace NEngine::Input;
 
@@ -38,6 +39,8 @@ void NEngine::FPSCamera::Update(float deltaTime)
         mCamera.Yaw(input->GetMouseMoveX() * turnSpeed);
         mCamera.Pitch(input->GetMouseMoveY() * turnSpeed);
     }
+
+    mOwner->GetComponent<NEngine::Transform>()->position = mCamera.GetPosition();
 }
 
 void NEngine::FPSCamera::Initialize()

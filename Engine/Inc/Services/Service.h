@@ -19,6 +19,8 @@ namespace NEngine
 		virtual void Render() {}
 		virtual void DebugUI() {}
 
+		virtual void Deserialize(rapidjson::Value& value) {}
+
 		GameWorld& GetGameWorld() { return *gameWorld; }
 		const GameWorld& GetGameWorld() const { return *gameWorld; }
 

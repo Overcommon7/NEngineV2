@@ -11,7 +11,7 @@ namespace NEngine
 	class GameWorld final
 	{
 	public:
-		void Intialize(uint32_t capacity);
+		void Initialize(uint32_t capacity);
 		void Terminate();
 
 		void Update(float deltaTime);
@@ -21,6 +21,8 @@ namespace NEngine
 		GameObject* CreateGameObject(const std::filesystem::path& templateFile = "");
 		GameObject* GetGameObject(const GameObjectHandle& handle);
 		void DestroyGameObject(const GameObjectHandle& handle);
+
+		void LoadLevel(const std::filesystem::path& levelFile);
 
 		template<IsService T>
 		T* AddService()
