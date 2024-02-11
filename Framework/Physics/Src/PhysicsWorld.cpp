@@ -45,16 +45,22 @@ void PhysicsWorld::Initialize(const Settings& settings)
     mDynamicWorld->setGravity(settings.gravity);
     mDynamicWorld->setDebugDrawer(&mDebugDrawer);
 
-
-    mSoftbodyWorld = new btSoftRigidDynamicsWorld(mDispatcher, mInterface, mSolver, mCollisionConfiguration);
-    mSoftbodyWorld->setGravity(settings.gravity);
-    mSoftbodyWorld->setDebugDrawer(&mDebugDrawer);
+    if constexpr (mUseSoftBody)
+    {
+        mSoftbodyWorld = new btSoftRigidDynamicsWorld(mDispatcher, mInterface, mSolver, mCollisionConfiguration);
+        mSoftbodyWorld->setGravity(settings.gravity);
+        mSoftbodyWorld->setDebugDrawer(&mDebugDrawer);
+    }
 }
 
 void PhysicsWorld::Terminate()
 {
     SafeDelete(mDynamicWorld);
-    SafeDelete(mSoftbodyWorld);
+    if constexpr (mUseSoftBody)
+    {
+        SafeDelete(mSoftbodyWorld);
+    }
+        
     SafeDelete(mSolver);
     SafeDelete(mInterface);
     SafeDelete(mDispatcher);
@@ -64,7 +70,11 @@ void PhysicsWorld::Terminate()
 void PhysicsWorld::Update(float deltaTime)
 {
     mDynamicWorld->stepSimulation(deltaTime, mSettings.simulationSteps, mSettings.fixedTimeStep);
-    mSoftbodyWorld->stepSimulation(deltaTime, mSettings.simulationSteps, mSettings.fixedTimeStep);
+    if constexpr (mUseSoftBody)
+    {
+        mSoftbodyWorld->stepSimulation(deltaTime, mSettings.simulationSteps, mSettings.fixedTimeStep);
+    }
+   
     for (auto object : mPhysicsObjects)
         object->Update();
 }
@@ -89,7 +99,11 @@ void PhysicsWorld::DebugUI()
 
     mDebugDrawer.setDebugMode(debugMode);
     mDynamicWorld->debugDrawWorld();
-    mSoftbodyWorld->debugDrawWorld();
+    if constexpr (mUseSoftBody)
+    {
+        mSoftbodyWorld->debugDrawWorld();
+    }
+   
     
 }
 
@@ -104,9 +118,12 @@ void PhysicsWorld::RegisterPhysicsObject(PhysicsObject* object)
 
      if (rigidbody != nullptr)
          mDynamicWorld->addRigidBody(rigidbody);
-     if (softbody != nullptr)
-         mSoftbodyWorld->addSoftBody(softbody);
 
+     if constexpr (mUseSoftBody)
+     {
+         if (softbody != nullptr)
+             mSoftbodyWorld->addSoftBody(softbody);
+     }
 }
 
 void PhysicsWorld::UnRegisterPhysicsObject(PhysicsObject* object)
@@ -126,4 +143,23 @@ btSoftBody* PhysicsWorld::CreateSoftbody(int nodeCount)
 {
     btSoftBody* softBody = new btSoftBody(&mSoftbodyWorld->getWorldInfo(), nodeCount, nullptr, nullptr);
     return softBody;
+}
+
+void NEngine::Physics::PhysicsWorld::SetGravity(NMath::Vector3 gravity)
+{
+    mSettings.gravity = gravity;
+    if (mDynamicWorld) mDynamicWorld->setGravity(gravity);
+    if constexpr (mUseSoftBody)
+    {
+        if (mSoftbodyWorld) mSoftbodyWorld->setGravity(gravity);
+    }    
+}
+
+void NEngine::Physics::PhysicsWorld::SetSimulationSteps(int steps)
+{
+    mSettings.simulationSteps = steps;
+}
+void NEngine::Physics::PhysicsWorld::SetFiexedTimeStep(float timeStep)
+{
+    mSettings.fixedTimeStep = timeStep;
 }

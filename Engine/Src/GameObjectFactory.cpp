@@ -7,9 +7,21 @@
 #include "Components/FPSCamera.h"
 #include "Components/ModelComponent.h"
 #include "Components/MeshComponent.h"
+#include "Components/RigidbodyComponent.h"
+#include "Components/ColliderComponent.h"
 
 using namespace NEngine;
 namespace rj = rapidjson;
+
+namespace
+{
+	CustomMake TryMake;
+}
+
+void NEngine::GameObjectFactory::SetCustomMake(CustomMake customMake)
+{
+	TryMake = customMake;
+}
 
 void NEngine::GameObjectFactory::Make(const std::filesystem::path& templatePath, GameObject& gameObject)
 {
@@ -28,7 +40,11 @@ void NEngine::GameObjectFactory::Make(const std::filesystem::path& templatePath,
 	for (auto& component : components)
 	{
 		string componentName(component.name.GetString());
-		if (componentName == "Transform")
+		if (TryMake(componentName, component.value, gameObject))
+		{
+
+		}
+		else if (componentName == "Transform")
 		{
 			auto transform = gameObject.AddComponent<Transform>();
 			transform->Deserialize(component.value);
@@ -53,6 +69,16 @@ void NEngine::GameObjectFactory::Make(const std::filesystem::path& templatePath,
 		{
 			auto mesh = gameObject.AddComponent<MeshComponent>();
 			mesh->Deserialize(component.value);
+		}
+		else if (componentName == "Collider")
+		{
+			auto collider = gameObject.AddComponent<ColliderComponent>();
+			collider->Deserialize(component.value);
+		}
+		else if (componentName == "Rigidbody")
+		{
+			auto rigidbody = gameObject.AddComponent<RigidbodyComponent>();
+			rigidbody->Deserialize(component.value);
 		}
 	}
 

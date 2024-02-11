@@ -45,7 +45,6 @@ void App::Run(const AppConfig& config)
 	PhysicsWorld::Settings settings;
 	PhysicsWorld::StaticInitialize(settings);
 
-	auto physicsWorld = PhysicsWorld::Get();
 	auto inputSystem = InputSystem::Get();
 
 	ASSERT(mCurrentState != nullptr, "App -- need an app state");
@@ -75,7 +74,6 @@ void App::Run(const AppConfig& config)
 
 		if (deltaTime < 0.5f)
 		{
-			physicsWorld->Update(deltaTime);
 			mCurrentState->Update(deltaTime);
 		}
 

@@ -8,6 +8,9 @@ namespace NEngine
 	template<class T>
 	concept IsService = std::is_base_of_v<Service, T>;
 
+	class GameWorld;
+	using CustomService = function<bool(const string&, const rapidjson::Value&, GameWorld&)>;
+
 	class GameWorld final
 	{
 	public:
@@ -23,6 +26,7 @@ namespace NEngine
 		void DestroyGameObject(const GameObjectHandle& handle);
 
 		void LoadLevel(const std::filesystem::path& levelFile);
+		void SetCustomService(CustomService customService);
 
 		template<IsService T>
 		T* AddService()
@@ -68,4 +72,8 @@ namespace NEngine
 		Services mServices;
 
 	};
+
+
 }
+
+

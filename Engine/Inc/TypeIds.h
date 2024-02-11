@@ -11,6 +11,8 @@ namespace NEngine
 		Camera,
 		Model,
 		Mesh,
+		Rigidbody,
+		Collider,
 
 		Count
 	};
@@ -21,6 +23,7 @@ namespace NEngine
 		Camera,
 		Update,
 		Render,
+		Physics,
 
 		Count
 	};

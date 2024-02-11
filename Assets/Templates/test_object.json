@@ -7,6 +7,16 @@
     },
     "Model": {
       "FileName": "../../Assets/Models/Walking/MainModel.model"
+    },
+    "Collider": {
+      "Shape": {
+        "Type": "Hull",
+        "HalfExtents": [ 0.5, 1.0, 0.5 ],
+        "Origin": [ 0.0, 1.0, 0.5 ]
+      }
+    },
+    "Rigidbody": {
+      "Mass": 1.0
     }
   }
 }

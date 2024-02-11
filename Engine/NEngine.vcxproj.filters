@@ -39,6 +39,9 @@
     <ClInclude Include="Inc\Services\RenderService.h" />
     <ClInclude Include="Inc\Components\ModelComponent.h" />
     <ClInclude Include="Inc\Components\MeshComponent.h" />
+    <ClInclude Include="Inc\Components\RigidbodyComponent.h" />
+    <ClInclude Include="Inc\Components\ColliderComponent.h" />
+    <ClInclude Include="Inc\Services\PhysicsService.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -61,5 +64,8 @@
     <ClCompile Include="Src\Services\RenderService.cpp" />
     <ClCompile Include="Src\Components\ModelComponent.cpp" />
     <ClCompile Include="Src\Components\MeshComponent.cpp" />
+    <ClCompile Include="Src\Components\RigidbodyComponent.cpp" />
+    <ClCompile Include="Src\Components\ColliderComponent.cpp" />
+    <ClCompile Include="Src\Services\PhysicsService.cpp" />
   </ItemGroup>
 </Project>

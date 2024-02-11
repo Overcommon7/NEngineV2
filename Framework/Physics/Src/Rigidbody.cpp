@@ -2,7 +2,6 @@
 #include "Rigidbody.h"
 
 #include "CollisionShape.h"
-#include "PhysicsWorld.h"
 #include <Graphics/Inc/Transform.h>
 
 using namespace NEngine;
@@ -22,12 +21,10 @@ void Rigidbody::Initialize(NEngine::Graphics::Transform& graphicsTransform, cons
     mMotionState = new btDefaultMotionState(ConvertTobtTransform(graphicsTransform));
     mRigidbody = new btRigidBody(mass, mMotionState, shape.mCollisionShape);
     mRigidbody->setRestitution(0.85f);
-    PhysicsWorld::Get()->RegisterPhysicsObject(this);
 }
 
 void Rigidbody::Terminate()
 {
-    PhysicsWorld::Get()->UnRegisterPhysicsObject(this);
     SafeDelete(mMotionState);
     SafeDelete(mRigidbody);
     mRigidbody = nullptr;

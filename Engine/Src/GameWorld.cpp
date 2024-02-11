@@ -3,10 +3,17 @@
 
 #include "GameObjectFactory.h"
 #include "Components/Transform.h"
+#include "Components/RigidbodyComponent.h"
 
 #include "Services/UpdateService.h"
 #include "Services/CameraService.h"
 #include "Services/RenderService.h"
+#include "Services/PhysicsService.h"
+
+namespace
+{
+	NEngine::CustomService TryMakeService;
+}
 
 void NEngine::GameWorld::Initialize(uint32_t capacity)
 {
@@ -137,7 +144,11 @@ void NEngine::GameWorld::LoadLevel(const std::filesystem::path& levelFile)
 	for (auto& service : services)
 	{
 		string serviceName(service.name.GetString());
-		if (serviceName == "Camera")
+		if (TryMakeService(serviceName, service.value, *this))
+		{
+
+		}
+		else if (serviceName == "Camera")
 		{
 			CameraService* cameraService = AddService<CameraService>();
 			cameraService->Deserialize(service.value);
@@ -151,6 +162,11 @@ void NEngine::GameWorld::LoadLevel(const std::filesystem::path& levelFile)
 		{
 			RenderService* renderService = AddService<RenderService>();
 			renderService->Deserialize(service.value);
+		}
+		else if (serviceName == "Physics")
+		{
+			PhysicsService* physicsService = AddService<PhysicsService>();
+			physicsService->Deserialize(service.value);
 		}
 	}
 
@@ -169,13 +185,21 @@ void NEngine::GameWorld::LoadLevel(const std::filesystem::path& levelFile)
 		if (gameObject.value.HasMember("Position"))
 		{
 			auto transform = obj->GetComponent<Transform>();
+			auto rigidbody = obj->GetComponent<RigidbodyComponent>();
 			const auto& position = gameObject.value["Position"].GetArray();
 			for (int i = 0; i < 3; ++i)
 			{
-				transform->position.v[i] = position[i].GetFloat();
+				transform->position.v[i] = position[i].GetFloat();	
 			}
+			if (rigidbody)
+				rigidbody->SetPosition(transform->position);
 		}
 	}
+}
+
+void NEngine::GameWorld::SetCustomService(CustomService customService)
+{
+	TryMakeService = customService;
 }
 
 bool NEngine::GameWorld::IsValid(const GameObjectHandle& handle)

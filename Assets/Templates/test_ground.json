@@ -5,12 +5,12 @@
       "Rotation": [ 0.0, 0.0, 0.0, 1.0 ],
       "Scale": [ 1.0, 1.0, 1.0 ]
     },
-    "Mesh":{
-      "Shape":{
+    "Mesh": {
+      "Shape": {
         "Type": "Plane",
         "Rows": 10,
         "Columns": 10,
-        "Spacing": 1.0 
+        "Spacing": 1.0
       },
       "Material": {
         "ColorAmbient": [ 0.5, 0.5, 0.5, 1.0 ],
@@ -22,6 +22,16 @@
       "Textures": {
         "DiffuseMap": "../../Assets/Textures/terrain/grass_2048.jpg"
       }
+    },
+    "Collider": {
+      "Shape": {
+        "Type": "Hull",
+        "HalfExtents": [ 5.0, 0.1, 5.0 ],
+        "Origin": [ 0.0, 0.1, 0.0 ]
+      }
+    },
+    "Rigidbody": {
+       "Mass": 0.0
     }
   }
 }

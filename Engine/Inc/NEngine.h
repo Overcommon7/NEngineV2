@@ -13,6 +13,8 @@
 #include "Components/FPSCamera.h"
 #include "Components/ModelComponent.h"
 #include "Components/MeshComponent.h"
+#include "Components/ColliderComponent.h"
+#include "Components/RigidbodyComponent.h"
 
 #include "Services/Service.h"
 #include "Services/CameraService.h"
