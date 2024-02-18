@@ -21,6 +21,8 @@ namespace NEngine
 		Graphics::ModelId mModelId;
 		std::filesystem::path mFileName;
 
+		using Animations = std::vector<string>;
+		Animations mAnimations;
 	};
 }
 

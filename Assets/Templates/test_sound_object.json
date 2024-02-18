@@ -1,0 +1,22 @@
+{
+  "Components": {
+    "Transform": {
+      "Position": [ 0.0, 0.0, 0.0 ],
+      "Rotation": [ 0.0, 0.0, 0.0, 1.0 ],
+      "Scale": [ 1.0, 1.0, 1.0 ]
+    },
+    "SoundBank": {
+      "SoundEffects": {
+        "Title": {
+          "Filename": "megamanx_title.wav"
+        },
+        "Shoot": {
+          "Filename": "megamanx_shot.wav"
+        },
+        "Blast": {
+          "Filename": "megamanx_blast.wav"
+        }
+      }
+    } 
+  }
+}

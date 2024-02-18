@@ -6,7 +6,16 @@
       "Scale": [ 1.0, 1.0, 1.0 ]
     },
     "Model": {
-      "FileName": "../../Assets/Models/Walking/MainModel.model"
+      "FileName": "../../Assets/Models/Walking/MainModel.model",
+      "Animations": [
+        "../../Assets/Models/Walking/StrafeLeft.aniset",
+        "../../Assets/Models/Walking/StrafeRight.aniset",
+        "../../Assets/Models/Walking/WalkingBackwards.aniset",
+        "../../Assets/Models/Walking/WalkingFowards.aniset"
+      ]
+    },
+    "Animator":{
+
     },
     "Collider": {
       "Shape": {

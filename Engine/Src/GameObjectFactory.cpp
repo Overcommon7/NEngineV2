@@ -9,6 +9,9 @@
 #include "Components/MeshComponent.h"
 #include "Components/RigidbodyComponent.h"
 #include "Components/ColliderComponent.h"
+#include "Components/SoundEffectComponent.h"
+#include "Components/SoundBankComponent.h"
+#include "Components/AnimatorComponent.h"
 
 using namespace NEngine;
 namespace rj = rapidjson;
@@ -79,6 +82,20 @@ void NEngine::GameObjectFactory::Make(const std::filesystem::path& templatePath,
 		{
 			auto rigidbody = gameObject.AddComponent<RigidbodyComponent>();
 			rigidbody->Deserialize(component.value);
+		}
+		else if (componentName == "SoundEffect")
+		{
+			auto soundFX = gameObject.AddComponent<SoundEffectComponent>();
+			soundFX->Deserialize(component.value);
+		}
+		else if (componentName == "SoundBank")
+		{
+			auto soundBank = gameObject.AddComponent<SoundBankComponent>();
+			soundBank->Deserialize(component.value);
+		}
+		else if (componentName == "Animator")
+		{
+			gameObject.AddComponent<AnimatorComponent>();
 		}
 	}
 

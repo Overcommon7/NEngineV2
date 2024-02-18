@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Inc\Components\AnimatorComponent.h" />
     <ClInclude Include="Inc\Components\ColliderComponent.h" />
     <ClInclude Include="Inc\Components\FPSCamera.h" />
     <ClInclude Include="Inc\Components\CameraComponent.h" />
@@ -40,10 +41,15 @@
     <ClInclude Include="Inc\Components\MeshComponent.h" />
     <ClInclude Include="Inc\Components\RigidbodyComponent.h" />
     <ClInclude Include="Inc\Services\PhysicsService.h" />
+    <ClInclude Include="Inc\Components\SoundEffectComponent.h" />
+    <ClInclude Include="Inc\Components\SoundBankComponent.h" />
     <ClInclude Include="Src\Precompiled.h" />
     <ClInclude Include="Inc\Components\Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Components\AnimatorComponent.cpp" />
+    <ClCompile Include="Src\Components\SoundBankComponent.cpp" />
+    <ClCompile Include="Src\Components\SoundEffectComponent.cpp" />
     <ClCompile Include="Src\Services\PhysicsService.cpp" />
     <ClCompile Include="Src\Components\ColliderComponent.cpp" />
     <ClCompile Include="Src\Components\RigidbodyComponent.cpp" />
@@ -65,6 +71,9 @@
     <ClCompile Include="Src\Services\UpdateService.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Audio\Audio.vcxproj">
+      <Project>{10d5ff19-1ef6-45d6-a597-2f979869f8ff}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Framework\Core\Core.vcxproj">
       <Project>{d24ddc53-9a5d-41b6-bde0-3657e0762058}</Project>
     </ProjectReference>

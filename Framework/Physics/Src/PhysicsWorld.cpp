@@ -114,13 +114,13 @@ void PhysicsWorld::RegisterPhysicsObject(PhysicsObject* object)
      mPhysicsObjects.push_back(object);
      
      auto rigidbody = object->GetRigidbody();
-     auto softbody = object->GetSoftBody();
 
      if (rigidbody != nullptr)
          mDynamicWorld->addRigidBody(rigidbody);
 
      if constexpr (mUseSoftBody)
      {
+         auto softbody = object->GetSoftBody();
          if (softbody != nullptr)
              mSoftbodyWorld->addSoftBody(softbody);
      }
@@ -131,6 +131,18 @@ void PhysicsWorld::UnRegisterPhysicsObject(PhysicsObject* object)
     auto it = std::find(mPhysicsObjects.begin(), mPhysicsObjects.end(), object);
     if (it != mPhysicsObjects.end())
         mPhysicsObjects.erase(it);
+
+    auto rigidbody = object->GetRigidbody();
+
+    if (rigidbody != nullptr)
+        mDynamicWorld->removeRigidBody(rigidbody);
+
+    if constexpr (mUseSoftBody)
+    {
+        auto softbody = object->GetSoftBody();
+        if (softbody != nullptr)
+            mSoftbodyWorld->removeSoftBody(softbody);
+    } 
 }
 
 PhysicsWorld::~PhysicsWorld()

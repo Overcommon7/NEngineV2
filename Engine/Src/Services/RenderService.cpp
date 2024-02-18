@@ -7,6 +7,7 @@
 #include "Components/ModelComponent.h"
 #include "Components/MeshComponent.h"
 #include "Components/Transform.h"
+#include "Components/AnimatorComponent.h"
 
 void NEngine::RenderService::Initialize()
 {
@@ -126,7 +127,16 @@ void NEngine::RenderService::Register(const ModelComponent* modelComponent)
 	const GameObject& gameObject = modelComponent->GetOwner();
 	entry.modelComponent = modelComponent;
 	entry.transform = gameObject.GetComponent<Transform>();
-	entry.renderGroup = Graphics::CreateRenderGroup(modelComponent->GetModelId());
+
+	const auto animatorComp = gameObject.GetComponent<AnimatorComponent>();
+	const Graphics::Animator* animator = nullptr;
+
+	if (animatorComp != nullptr)
+	{
+		animator = &animatorComp->GetAnimator();	
+	}
+
+	entry.renderGroup = Graphics::CreateRenderGroup(modelComponent->GetModelId(), animator);
 }
 
 void NEngine::RenderService::Unregister(const ModelComponent* modelComponent)

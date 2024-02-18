@@ -7,6 +7,7 @@
 #include <Graphics/Inc/Colors.h>
 #include <Graphics/Inc/Graphics.h>
 #include <Physics/Inc/Physics.h>
+#include <../Audio/Inc/Audio.h>
 
 //rapid json
 #include <rapidjson/document.h>

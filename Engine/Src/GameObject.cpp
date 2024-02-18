@@ -30,6 +30,10 @@ void NEngine::GameObject::Terminate()
 
 void NEngine::GameObject::DebugUI()
 {
-	for (auto& component : mComponents)
-		component->DebugUI();
+	if (ImGui::CollapsingHeader(mName.c_str()))
+	{
+		for (auto& component : mComponents)
+			component->DebugUI();
+	}
+	
 }

@@ -15,6 +15,9 @@
 #include "Components/MeshComponent.h"
 #include "Components/ColliderComponent.h"
 #include "Components/RigidbodyComponent.h"
+#include "Components/SoundEffectComponent.h"
+#include "Components/SoundBankComponent.h"
+#include "Components/AnimatorComponent.h"
 
 #include "Services/Service.h"
 #include "Services/CameraService.h"

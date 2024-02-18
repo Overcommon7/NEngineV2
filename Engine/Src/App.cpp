@@ -9,6 +9,7 @@ using namespace NEngine::Core;
 using namespace NEngine::Input;
 using namespace NEngine::Graphics;
 using namespace NEngine::Physics;
+using namespace NEngine::Audio;
 
 void App::ChangeState(const std::string& stateName)
 {
@@ -41,11 +42,15 @@ void App::Run(const AppConfig& config)
 	SimpleDraw::StaticInitialize(config.debugDrawLimit);
 	TextureManager::StaticInitialize("../../Assets/Textures/");
 	ModelManager::StaticInitialize();
+	AudioSystem::StaticInitialize();
+	SoundEffectManager::StaticInitialize("../../Assets/Sounds/");
+
 
 	PhysicsWorld::Settings settings;
 	PhysicsWorld::StaticInitialize(settings);
 
 	auto inputSystem = InputSystem::Get();
+	auto audioSystem = AudioSystem::Get();
 
 	ASSERT(mCurrentState != nullptr, "App -- need an app state");
 	mCurrentState->Initialize();
@@ -69,6 +74,7 @@ void App::Run(const AppConfig& config)
 			mCurrentState->Initialize();
 		}
 		
+		audioSystem->Update();
 		//run the game
 		auto deltaTime = TimeUtil::GetDeltaTime();
 
@@ -76,6 +82,7 @@ void App::Run(const AppConfig& config)
 		{
 			mCurrentState->Update(deltaTime);
 		}
+		
 
 		auto graphicSystem = GraphicsSystem::Get();
 		graphicSystem->BeginRender();
@@ -96,6 +103,8 @@ void App::Run(const AppConfig& config)
 	DebugUI::StaticTerminate();
 	InputSystem::StaticTerminate();
 	GraphicsSystem::StaticTerminate();
+	SoundEffectManager::StaticTerminate();
+	AudioSystem::StaticTerminate();
 	myWindow.Terminate();
 }
 
