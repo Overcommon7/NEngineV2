@@ -50,7 +50,8 @@ void NEngine::RenderService::Render()
 	mShadowEffect.Begin();
 	for (const auto& entry : mRenderEntries)
 	{
-		Graphics::DrawRenderGroup(mShadowEffect, entry.renderGroup);
+		if (entry.castShadows)
+			Graphics::DrawRenderGroup(mShadowEffect, entry.renderGroup);
 	}
 	mShadowEffect.End();
 
@@ -127,6 +128,7 @@ void NEngine::RenderService::Register(const ModelComponent* modelComponent)
 	const GameObject& gameObject = modelComponent->GetOwner();
 	entry.modelComponent = modelComponent;
 	entry.transform = gameObject.GetComponent<Transform>();
+	entry.castShadows = modelComponent->CastShadow();
 
 	const auto animatorComp = gameObject.GetComponent<AnimatorComponent>();
 	const Graphics::Animator* animator = nullptr;
@@ -156,6 +158,7 @@ void NEngine::RenderService::Register(const MeshComponent* meshComponent)
 	const GameObject& gameObject = meshComponent->GetOwner();
 	entry.meshComponent = meshComponent;
 	entry.transform = gameObject.GetComponent<Transform>();
+	entry.castShadows = meshComponent->CastShadow();
 	entry.renderGroup = Graphics::CreateRenderGroup(meshComponent->GetModel());
 }
 

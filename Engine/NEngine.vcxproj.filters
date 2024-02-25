@@ -45,6 +45,7 @@
     <ClInclude Include="Inc\Components\SoundEffectComponent.h" />
     <ClInclude Include="Inc\Components\SoundBankComponent.h" />
     <ClInclude Include="Inc\Components\AnimatorComponent.h" />
+    <ClInclude Include="Inc\SaveUtil.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -73,5 +74,6 @@
     <ClCompile Include="Src\Components\SoundEffectComponent.cpp" />
     <ClCompile Include="Src\Components\SoundBankComponent.cpp" />
     <ClCompile Include="Src\Components\AnimatorComponent.cpp" />
+    <ClCompile Include="Src\SaveUtil.cpp" />
   </ItemGroup>
 </Project>

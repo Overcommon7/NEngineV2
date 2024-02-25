@@ -26,77 +26,17 @@
       "Position": [ 1.0, 1.0, -4.0 ]
     },
     "Ground": {
-      "Template":  "../../Assets/Templates/test_ground.json"
+      "Template": "../../Assets/Templates/test_ground.json"
     },
     "TestObject0": {
       "Template": "../../Assets/Templates/test_object.json",
       "Position": [ 0.0, 0.0, 0.0 ]
     },
-    "TestObject1": {
-      "Template": "../../Assets/Templates/test_object.json",
-      "Position": [ 1.0, 1.0, 0.0 ]
+    "SaveObject": {
+      "Template": "../../Assets/Templates/test_object_save.json",
+      "Position": [ 0.0, 0.0, 0.0 ]
     },
-    "TestObject2": {
-      "Template": "../../Assets/Templates/test_object.json",
-      "Position": [ 2.0, 2.0, 0.0 ]
-    },
-    "TestObject3": {
-      "Template": "../../Assets/Templates/test_object.json",
-      "Position": [ 3.0, 3.0, 0.0 ]
-    },
-    "TestObject4": {
-      "Template": "../../Assets/Templates/test_object.json",
-      "Position": [ 3.0, 3.0, 0.0 ]
-    },
-    "TestObject5": {
-      "Template": "../../Assets/Templates/test_object.json",
-      "Position": [ 3.0, 3.0, 0.0 ]
-    },
-    "TestObject6": {
-      "Template": "../../Assets/Templates/test_object.json",
-      "Position": [ 4.0, 4.0, 0.0 ]
-    },
-    "TestObject7": {
-      "Template": "../../Assets/Templates/test_object.json",
-      "Position": [ -1.0, 1.0, 0.0 ]
-    },
-    "TestObject8": {
-      "Template": "../../Assets/Templates/test_object.json",
-      "Position": [ -2.0, 2.0, 0.0 ]
-    },
-    "TestObject9": {
-      "Template": "../../Assets/Templates/test_object.json",
-      "Position": [ -3.0, 3.0, 0.0 ]
-    },
-    "TestObject10": {
-      "Template": "../../Assets/Templates/test_object.json",
-      "Position": [ -4.0, 4.0, 0.0 ]
-    },
-    "TestObject11": {
-      "Template": "../../Assets/Templates/test_object.json",
-      "Position": [ -5.0, 5.0, 0.0 ]
-    },
-    "TestObject12": {
-      "Template": "../../Assets/Templates/test_object.json",
-      "Position": [ 5.0, 5.0, 0.0 ]
-    },
-    "TestObject13": {
-      "Template": "../../Assets/Templates/test_object.json",
-      "Position": [ -6.0, 6.0, 0.0 ]
-    },
-    "TestObject14": {
-      "Template": "../../Assets/Templates/test_object.json",
-      "Position": [ 6.0, 6.0, 0.0 ]
-    },
-    "TestObject15": {
-      "Template": "../../Assets/Templates/test_object.json",
-      "Position": [ -7.0, 7.0, 0.0 ]
-    },
-    "TestObject16": {
-      "Template": "../../Assets/Templates/test_object.json",
-      "Position": [ 7.0, 7.0, 0.0 ]
-    },
-    "SoundObject":{
+    "SoundObject": {
       "Template": "../../Assets/Templates/test_sound_object.json"
     }
   }

@@ -10,6 +10,8 @@
 #include "Services/RenderService.h"
 #include "Services/PhysicsService.h"
 
+#include "NEngine.h"
+
 namespace
 {
 	NEngine::CustomService TryMakeService;
@@ -73,6 +75,29 @@ void NEngine::GameWorld::DebugUI()
 
 	for (auto& service : mServices)
 		service->DebugUI();
+
+	if (ImGui::Button("Edit##EditorState"))
+	{
+		MainApp().ChangeState("EditState");
+	}
+}
+
+void NEngine::GameWorld::EditorUI()
+{
+	for (auto& slot : mSlots)
+	{
+		if (slot.gameObject)
+			slot.gameObject->EditorUI();
+	}
+
+	if (ImGui::Button("SaveWorld##895"))
+	{
+		SaveLevel(mLevelPath);
+	}
+	if (ImGui::Button("SaveWorld##895"))
+	{
+		MainApp().ChangeState("GameState");
+	}
 }
 
 NEngine::GameObject* NEngine::GameWorld::CreateGameObject(const std::filesystem::path& templateFile)
@@ -122,6 +147,37 @@ void NEngine::GameWorld::DestroyGameObject(const GameObjectHandle& handle)
 	mToBeDestroyed.push_back(handle.mIndex);
 }
 
+void NEngine::GameWorld::SaveTemplate(const std::filesystem::path& templateFile, const GameObjectHandle& handle)
+{
+	auto gameObject = GetGameObject(handle);
+	if (gameObject == nullptr)
+		return;
+
+	rapidjson::Document doc;
+	rapidjson::Value component;
+
+	gameObject->Serialize(doc);
+	FILE* file = nullptr;
+	auto err = fopen_s(&file, templateFile.string().c_str(), "w");
+	ASSERT(err == 0 && file != nullptr, "GameWorld: SaveTemplate failed to open");
+
+	string writeBuffer;
+	writeBuffer.resize(65535);
+
+	rapidjson::FileWriteStream writeStream(file, writeBuffer.data(), writeBuffer.size());
+	rapidjson::PrettyWriter<rapidjson::FileWriteStream> writer(writeStream);
+	doc.Accept(writer);
+	fclose(file);
+
+
+	
+}
+
+void NEngine::GameWorld::SaveLevel(const std::filesystem::path& levelFile)
+{
+
+}
+
 void NEngine::GameWorld::LoadLevel(const std::filesystem::path& levelFile)
 {
 	FILE* file = nullptr;
@@ -131,6 +187,7 @@ void NEngine::GameWorld::LoadLevel(const std::filesystem::path& levelFile)
 	auto err = fopen_s(&file, levelFile.string().c_str(), "r");
 	ASSERT(err == 0 && file != nullptr, "GameWorld: failed to load level %s", levelFile.string().c_str());
 	
+	mLevelPath = levelFile;
 	string readBuffer;
 	readBuffer.resize(USHRT_MAX);
 

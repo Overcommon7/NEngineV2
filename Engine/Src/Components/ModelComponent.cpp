@@ -5,6 +5,8 @@
 #include "GameObject.h"
 #include "GameWorld.h"
 
+#include "SaveUtil.h"
+
 void NEngine::ModelComponent::Initialize()
 {
 	auto* mm = Graphics::ModelManager::Get();
@@ -45,4 +47,18 @@ void NEngine::ModelComponent::Deserialize(rapidjson::Value& value)
 			mAnimations.emplace_back(animation.GetString());
 		}
 	}
+	if (value.HasMember("CastShadow"))
+	{
+		mCastShadow = value["CastShadow"].GetBool();
+	}
+}
+
+void NEngine::ModelComponent::Serialize(rapidjson::Document& doc, rapidjson::Value& value)
+{
+	CMP_VALUE;
+	
+	SaveUtil::SaveString("FileName", mFileName.c_str(), doc, componentValue);
+	SaveUtil::SaveStringArray("Animations", mAnimations, doc, componentValue);
+	SaveUtil::SaveBool("CastShadow", mCastShadow, doc, componentValue);
+	value.AddMember("ModelComponent", componentValue, doc.GetAllocator());
 }

@@ -1,0 +1,32 @@
+{
+    "Components": {
+        "Transform": {
+            "Position": [
+                -0.5400006175041199,
+                0.27999991178512573,
+                -0.00031302348361350596
+            ],
+            "Rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        "ModelComponent": {
+            "FileName": "../../Assets/Models/Walking/MainModel.model",
+            "Animations": [
+                "../../Assets/Models/Walking/StrafeLeft.aniset",
+                "../../Assets/Models/Walking/StrafeRight.aniset",
+                "../../Assets/Models/Walking/WalkingBackwards.aniset",
+                "../../Assets/Models/Walking/WalkingFowards.aniset"
+            ],
+            "CastShadow": true
+        }
+    }
+}

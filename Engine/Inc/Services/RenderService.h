@@ -36,6 +36,7 @@ namespace NEngine
 
 		struct Entry
 		{
+			bool castShadows = true;
 			const ModelComponent* modelComponent = nullptr;
 			const MeshComponent* meshComponent = nullptr;
 			const Transform* transform = nullptr;

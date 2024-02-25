@@ -50,6 +50,30 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Audio", "Audio\Audio.vcxproj", "{10D5FF19-1EF6-45D6-A597-2F979869F8FF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{1BDD9226-0C60-472F-B65F-8D82F34C1E96}"
+	ProjectSection(SolutionItems) = preProject
+		Assets\Templates\test_camera.json = Assets\Templates\test_camera.json
+		Assets\Templates\test_fps_camera.json = Assets\Templates\test_fps_camera.json
+		Assets\Templates\test_ground.json = Assets\Templates\test_ground.json
+		Assets\Templates\test_level.json = Assets\Templates\test_level.json
+		Assets\Templates\test_object.json = Assets\Templates\test_object.json
+		Assets\Templates\test_sound_object.json = Assets\Templates\test_sound_object.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{3FF8AEDE-914D-49EC-8CAB-D722604ACD20}"
+	ProjectSection(SolutionItems) = preProject
+		Assets\Shaders\DoNothing.fx = Assets\Shaders\DoNothing.fx
+		Assets\Shaders\DoParticle.fx = Assets\Shaders\DoParticle.fx
+		Assets\Shaders\DoSomething.fx = Assets\Shaders\DoSomething.fx
+		Assets\Shaders\DoTexturing.fx = Assets\Shaders\DoTexturing.fx
+		Assets\Shaders\DoTransform.fx = Assets\Shaders\DoTransform.fx
+		Assets\Shaders\GaussianBlur.fx = Assets\Shaders\GaussianBlur.fx
+		Assets\Shaders\PostProcess.fx = Assets\Shaders\PostProcess.fx
+		Assets\Shaders\Shadows.fx = Assets\Shaders\Shadows.fx
+		Assets\Shaders\Standard.fx = Assets\Shaders\Standard.fx
+		Assets\Shaders\Terrain.fx = Assets\Shaders\Terrain.fx
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "25_HelloEditor", "VGP336\25_HelloEditor\25_HelloEditor.vcxproj", "{2C5C6B8E-21D2-4243-AB7D-C61A640B7731}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -179,6 +203,14 @@ Global
 		{10D5FF19-1EF6-45D6-A597-2F979869F8FF}.Release|x64.Build.0 = Release|x64
 		{10D5FF19-1EF6-45D6-A597-2F979869F8FF}.Release|x86.ActiveCfg = Release|Win32
 		{10D5FF19-1EF6-45D6-A597-2F979869F8FF}.Release|x86.Build.0 = Release|Win32
+		{2C5C6B8E-21D2-4243-AB7D-C61A640B7731}.Debug|x64.ActiveCfg = Debug|x64
+		{2C5C6B8E-21D2-4243-AB7D-C61A640B7731}.Debug|x64.Build.0 = Debug|x64
+		{2C5C6B8E-21D2-4243-AB7D-C61A640B7731}.Debug|x86.ActiveCfg = Debug|Win32
+		{2C5C6B8E-21D2-4243-AB7D-C61A640B7731}.Debug|x86.Build.0 = Debug|Win32
+		{2C5C6B8E-21D2-4243-AB7D-C61A640B7731}.Release|x64.ActiveCfg = Release|x64
+		{2C5C6B8E-21D2-4243-AB7D-C61A640B7731}.Release|x64.Build.0 = Release|x64
+		{2C5C6B8E-21D2-4243-AB7D-C61A640B7731}.Release|x86.ActiveCfg = Release|Win32
+		{2C5C6B8E-21D2-4243-AB7D-C61A640B7731}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -199,6 +231,8 @@ Global
 		{5D78438A-CB7C-47BA-BFB4-F544D6699D9C} = {ABF996C7-0D49-495A-9D5E-B5D767C6D4EA}
 		{4F150A30-CECB-49D1-8283-6A3F57438CF5} = {F277303F-62A6-4EC3-A9EA-273E589B6DBF}
 		{10D5FF19-1EF6-45D6-A597-2F979869F8FF} = {61948FAA-D072-475A-84DF-2829D3273F60}
+		{3FF8AEDE-914D-49EC-8CAB-D722604ACD20} = {1BDD9226-0C60-472F-B65F-8D82F34C1E96}
+		{2C5C6B8E-21D2-4243-AB7D-C61A640B7731} = {ABF996C7-0D49-495A-9D5E-B5D767C6D4EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {010E0B6F-B2FD-4AD9-A2B3-9FF364F73B7A}

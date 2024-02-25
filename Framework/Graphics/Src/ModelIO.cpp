@@ -264,8 +264,9 @@ void NEngine::Graphics::ModelIO::SaveMaterial(std::filesystem::path filepath, co
 void NEngine::Graphics::ModelIO::LoadMaterial(std::filesystem::path filepath, Model& model)
 {
 	FILE* file = NULL;
+	filepath = filepath.replace_extension("material").string();
 
-	fopen_s(&file, filepath.generic_string().c_str(), "r");
+	fopen_s(&file, filepath.string().c_str(), "r");
 	if (file == NULL)
 	{
 		return;
@@ -278,7 +279,7 @@ void NEngine::Graphics::ModelIO::LoadMaterial(std::filesystem::path filepath, Mo
 
 		if (strcmp(buffer, "<none>") != 0)
 		{
-			filename = filepath.replace_extension("material").generic_string();
+			filename = filepath.replace_filename(buffer).string();
 		}
 	};
 

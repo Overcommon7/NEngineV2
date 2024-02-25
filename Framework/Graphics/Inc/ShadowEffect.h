@@ -37,7 +37,10 @@ namespace NEngine::Graphics
 		};
 
 		using TransformBuffer = TypedConstantBuffer<TransformData>;
+		using BoneTransformBuffer = ConstantBuffer;
+
 		TransformBuffer mTrasformBuffer;
+		BoneTransformBuffer mBoneTransformBuffer;
 
 		VertexShader mVertexShader;
 		PixelShader mPixelShader;

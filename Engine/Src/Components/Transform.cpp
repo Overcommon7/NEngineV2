@@ -1,6 +1,8 @@
 #include "Precompiled.h"
 #include "Components/Transform.h"
 
+#include "SaveUtil.h"
+
 void NEngine::Transform::DebugUI()
 {
 	Graphics::SimpleDraw::AddTransform(GetMatrix4());
@@ -36,4 +38,11 @@ void NEngine::Transform::Deserialize(rapidjson::Value& value)
 
 void NEngine::Transform::Serialize(rapidjson::Document& doc, rapidjson::Value& value)
 {
+	rapidjson::Value componentValue(rapidjson::kObjectType);
+	SaveUtil::SaveVector3("Position", position, doc, componentValue);
+	SaveUtil::SaveQuaternion("Rotation", rotation, doc, componentValue);
+	SaveUtil::SaveVector3("Scale", scale, doc, componentValue);
+	value.AddMember("Transform", componentValue, doc.GetAllocator());
+	
+
 }

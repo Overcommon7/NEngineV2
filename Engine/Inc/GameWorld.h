@@ -20,11 +20,14 @@ namespace NEngine
 		void Update(float deltaTime);
 		void Render();
 		void DebugUI();
+		void EditorUI();
 
 		GameObject* CreateGameObject(const std::filesystem::path& templateFile = "");
 		GameObject* GetGameObject(const GameObjectHandle& handle);
 		void DestroyGameObject(const GameObjectHandle& handle);
 
+		void SaveTemplate(const std::filesystem::path& templateFile, const GameObjectHandle& handle);
+		void SaveLevel(const std::filesystem::path& levelFile);
 		void LoadLevel(const std::filesystem::path& levelFile);
 		void SetCustomService(CustomService customService);
 
@@ -64,7 +67,7 @@ namespace NEngine
 		using Services = std::vector<std::unique_ptr<Service>>;
 		using GameObjectSlots = std::vector<Slot>;
 
-		
+		std::filesystem::path mLevelPath;
 		GameObjectSlots mSlots;
 		std::vector<uint32_t> mFreeSlots;
 		std::vector<uint32_t> mToBeDestroyed;

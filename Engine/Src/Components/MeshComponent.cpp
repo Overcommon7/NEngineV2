@@ -111,5 +111,10 @@ void NEngine::MeshComponent::Deserialize(rapidjson::Value& value)
 					material.specularMapName = textureData["SpecularMap"].GetString();
 			}
 		}
+
+		if (value.HasMember("CastShadow"))
+		{
+			mCastShadow = value["CastShadow"].GetBool();
+		}
 	}
 }

@@ -12,6 +12,7 @@ namespace NEngine
 		virtual void Terminate() {}
 		virtual void Update(float deltaTime) {}
 		virtual void DebugUI() {}
+		virtual void EditorUI() {}
 
 		virtual uint32_t GetTypeId() const = 0;
 		static uint32_t StaticGetTypeId() { return (uint32_t)ComponentId::Invalid; }

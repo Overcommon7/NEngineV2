@@ -12,7 +12,8 @@
         "../../Assets/Models/Walking/StrafeRight.aniset",
         "../../Assets/Models/Walking/WalkingBackwards.aniset",
         "../../Assets/Models/Walking/WalkingFowards.aniset"
-      ]
+      ],
+      "CastShadow":  true
     },
     "Animator":{
 

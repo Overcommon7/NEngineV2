@@ -39,6 +39,7 @@ void NEngine::GameObjectFactory::Make(const std::filesystem::path& templatePath,
 	bool hasTransform = false;
 	rj::Document doc;
 	doc.ParseStream(readStream);
+	gameObject.SetTemplateFilePath(templatePath);
 	auto components = doc["Components"].GetObj();
 	for (auto& component : components)
 	{
@@ -101,4 +102,6 @@ void NEngine::GameObjectFactory::Make(const std::filesystem::path& templatePath,
 
 	if (!hasTransform)
 		gameObject.AddComponent<Transform>();
+
+	
 }

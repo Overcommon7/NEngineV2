@@ -21,7 +21,8 @@
       },
       "Textures": {
         "DiffuseMap": "../../Assets/Textures/terrain/grass_2048.jpg"
-      }
+      },
+      "CastShadow": false
     },
     "Collider": {
       "Shape": {

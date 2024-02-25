@@ -2,6 +2,8 @@
 #include "GameObject.h"
 
 #include "Components/Transform.h"
+#include "GameWorld.h"
+#include "NEngine.h"
 
 void NEngine::GameObject::Initialize()
 {
@@ -32,8 +34,37 @@ void NEngine::GameObject::DebugUI()
 {
 	if (ImGui::CollapsingHeader(mName.c_str()))
 	{
-		for (auto& component : mComponents)
+		for (const auto& component : mComponents)
 			component->DebugUI();
 	}
 	
+}
+
+void NEngine::GameObject::EditorUI()
+{
+	if (ImGui::CollapsingHeader(mName.c_str()))
+	{
+		for (const auto& component : mComponents)
+		{
+			component->EditorUI();
+		}
+
+		if (ImGui::Button(("Edit##" + mName).c_str()))
+		{
+			MainApp().ChangeState("EditTemplateState");
+		}
+	}
+
+		
+}
+
+void NEngine::GameObject::Serialize(rapidjson::Document& doc)
+{
+	rapidjson::Value components(rapidjson::kObjectType);
+	for (auto& component : mComponents)
+	{
+		component->Serialize(doc, components);
+	}
+	doc.SetObject();
+	doc.AddMember("Components", components, doc.GetAllocator());
 }

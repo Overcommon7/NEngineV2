@@ -4,16 +4,16 @@ materialCount: 2
 0.500000 0.500000 0.500000 1.000000
 0.500000 0.500000 0.500000 1.000000
 Power: 20.000000
-SillyDancing_diffuse_0.png
-SillyDancing_specular_0.png
+MainModel_diffuse_0.png
+MainModel_specular_0.png
 <none>
-SillyDancing_normal_0.png
+MainModel_normal_0.png
 0.000000 0.000000 0.000000 1.000000
 0.800000 0.800000 0.800000 1.000000
 0.500000 0.500000 0.500000 1.000000
 0.500000 0.500000 0.500000 1.000000
 Power: 20.000000
-SillyDancing_diffuse_1.png
-SillyDancing_specular_1.png
+MainModel_diffuse_1.png
+MainModel_specular_1.png
 <none>
-SillyDancing_normal_1.png
+MainModel_normal_1.png

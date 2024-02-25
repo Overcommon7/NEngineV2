@@ -12,10 +12,12 @@ namespace NEngine
 		void Terminate() override;
 		void Deserialize(rapidjson::Value& value) override;
 
+		bool CastShadow() const { return mCastShadow; }
 		const Graphics::Model& GetModel() const { return mModel; }
 
 	private:
 		Graphics::Model mModel;
+		bool mCastShadow = false;
 	};
 }
 
