@@ -44,7 +44,12 @@ void NEngine::GameWorld::Terminate()
 	}
 
 	for (auto& service : mServices)
+	{
 		service->Terminate();
+		service.reset();
+	}
+	
+	mServices.clear();
 
 	mInitialized = false;
 }
@@ -94,7 +99,7 @@ void NEngine::GameWorld::EditorUI()
 	{
 		SaveLevel(mLevelPath);
 	}
-	if (ImGui::Button("SaveWorld##895"))
+	if (ImGui::Button("Exit##895"))
 	{
 		MainApp().ChangeState("GameState");
 	}
