@@ -17,6 +17,8 @@ namespace NEngine
 
 		void Register(RigidbodyComponent& rb);
 		void Unregister(RigidbodyComponent& rb);
+
+		void SetEnabled(bool enabled);
 	};
 }
 

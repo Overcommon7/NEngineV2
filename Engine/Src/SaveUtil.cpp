@@ -1,8 +1,6 @@
 #include "Precompiled.h"
 #include "SaveUtil.h"
 
-#define GetStringRef(key) rapidjson::GenericStringRef<char>(key)
-
 void NEngine::SaveUtil::SaveVector3(const char* key, const NMath::Vector3& vector, rapidjson::Document& doc, rapidjson::Value& jValue)
 {
 	rapidjson::Value vecArray(rapidjson::kArrayType);
@@ -11,6 +9,17 @@ void NEngine::SaveUtil::SaveVector3(const char* key, const NMath::Vector3& vecto
 	vecArray.PushBack(vector.y, doc.GetAllocator());
 	vecArray.PushBack(vector.z, doc.GetAllocator());
 	jValue.AddMember(GetStringRef(key), vecArray, doc.GetAllocator());
+}
+
+void NEngine::SaveUtil::SaveColor(const char* key, const Color& color, rapidjson::Document& doc, rapidjson::Value& jValue)
+{
+	rapidjson::Value colorArray(rapidjson::kArrayType);
+
+	colorArray.PushBack(color.r, doc.GetAllocator());
+	colorArray.PushBack(color.g, doc.GetAllocator());
+	colorArray.PushBack(color.b, doc.GetAllocator());
+	colorArray.PushBack(color.a, doc.GetAllocator());
+	jValue.AddMember(GetStringRef(key), colorArray, doc.GetAllocator());
 }
 
 void NEngine::SaveUtil::SaveQuaternion(const char* key, const NMath::Quaternion& quaternion, rapidjson::Document& doc, rapidjson::Value& jValue)

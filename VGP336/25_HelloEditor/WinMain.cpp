@@ -2,6 +2,7 @@
 #include "GameState.h"
 #include "EditorState.h"
 #include "EditTemplateState.h"
+#include "StateNames.h"
 
 using namespace NEngine;
 
@@ -12,9 +13,9 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE, LPSTR, int)
 	config.appName = L"Hello Game World";
 
 	App& myApp = MainApp();
-	myApp.AddState<GameState>("GameState");
-	myApp.AddState<EditorState>("EditState");
-	myApp.AddState<EditTemplateState>("EditTemplateState");
+	myApp.AddState<GameState>(State::GAME);
+	myApp.AddState<EditorState>(State::EDITOR);
+	myApp.AddState<EditTemplateState>(State::TEMPLATE);
 	myApp.Run(config);
 
 	return 0;

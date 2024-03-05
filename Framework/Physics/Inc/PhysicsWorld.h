@@ -24,6 +24,7 @@ namespace NEngine::Physics
 		void Update(float deltaTime);
 		void DebugUI();
 
+		void SetEnabled(bool enabled);
 		void SetGravity(NMath::Vector3 gravity);
 		void SetSimulationSteps(int steps);
 		void SetFiexedTimeStep(float timeStep);
@@ -37,6 +38,7 @@ namespace NEngine::Physics
 
 		Settings mSettings;
 		bool mRenderDebugUI = false;
+		bool mEnabled = true;
 		static constexpr bool mUseSoftBody = false;
 
 		PhysicsDebugDrawer mDebugDrawer;

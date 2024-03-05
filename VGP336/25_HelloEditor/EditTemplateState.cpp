@@ -1,35 +1,19 @@
 #include "EditTemplateState.h"
+#include "StateNames.h"
+#include "CustomFactory.h"
 
 using namespace NEngine;
 using namespace NEngine::Graphics;
 using namespace NEngine::Input;
 
-namespace
-{
-    bool CustomComponentMake(const string& componentName, const rapidjson::Value& value, GameObject& gameObject)
-    {
-        if (componentName == "NewComponent")
-        {
-            return true;
-        }
-        return false;
-    }
-
-    bool CustomServiceMake(const string& componentName, const rapidjson::Value& value, GameWorld& gameObject)
-    {
-        if (componentName == "NewService")
-        {
-            return true;
-        }
-        return false;
-    }
-}
-
 void EditTemplateState::Initialize()
 {
-    GameObjectFactory::SetCustomMake(CustomComponentMake);
-    mWorld.SetCustomService(CustomServiceMake);
+    GameObjectFactory::SetCustomMake(CustomFactory::CustomComponentMake);
+    mWorld.SetCustomService(CustomFactory::CustomServiceMake);
     mWorld.LoadLevel("../../Assets/Templates/test_level.json");
+
+    auto ps = mWorld.GetService<PhysicsService>();
+    if (ps) ps->SetEnabled(false);        
 }
 
 void EditTemplateState::Terminate()
@@ -49,11 +33,27 @@ void EditTemplateState::Update(float deltaTime)
 
 void EditTemplateState::DebugUI()
 {
+    ImGui::Begin("Edit Template State", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
     mWorld.EditorUI();
+
+    if (ImGui::Button("Save##EditTempalte"))
+    {
+        GameObject* object = mWorld.GetGameObject(GameWorld::GetEditObject());
+        mWorld.SaveTemplate(object->GetTemplatePath(), object->GetHandle());
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Reload##EditTempalte"))
+    {
+        MainApp().ChangeState(State::TEMPLATE);
+    }
+    ImGui::SameLine();
     if (ImGui::Button("Exit##Template"))
     {
-        MainApp().ChangeState("EditState");
+        GameWorld::SetEditObject("");
+        MainApp().ChangeState(State::EDITOR);
     }
+
+    ImGui::End();
 }
 
 

@@ -1,35 +1,20 @@
 #include "EditorState.h"
+#include "StateNames.h"
+#include "CustomFactory.h"
 
 using namespace NEngine;
 using namespace NEngine::Graphics;
 using namespace NEngine::Input;
 
-namespace
-{
-    bool CustomComponentMake(const string& componentName, const rapidjson::Value& value, GameObject& gameObject)
-    {
-        if (componentName == "NewComponent")
-        {
-            return true;
-        }
-        return false;
-    }
-
-    bool CustomServiceMake(const string& componentName, const rapidjson::Value& value, GameWorld& gameObject)
-    {
-        if (componentName == "NewService")
-        {
-            return true;
-        }
-        return false;
-    }
-}
 
 void EditorState::Initialize()
 {
-    GameObjectFactory::SetCustomMake(CustomComponentMake);
-    mWorld.SetCustomService(CustomServiceMake);
+    GameObjectFactory::SetCustomMake(CustomFactory::CustomComponentMake);
+    mWorld.SetCustomService(CustomFactory::CustomServiceMake);
     mWorld.LoadLevel("../../Assets/Templates/test_level.json");
+
+    auto ps = mWorld.GetService<PhysicsService>();
+    if (ps) ps->SetEnabled(false); 
 }
 
 void EditorState::Terminate()
@@ -49,7 +34,20 @@ void EditorState::Update(float deltaTime)
 
 void EditorState::DebugUI()
 {
+    ImGui::Begin("EditorState", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
     mWorld.EditorUI();
+
+    if (ImGui::Button("Save##EditorState"))
+    {
+        mWorld.SaveLevel(mWorld.GetLevelPath());
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Exit##EditorState"))
+    {
+        MainApp().ChangeState(State::GAME);
+    }
+
+    ImGui::End();
 }
 
 

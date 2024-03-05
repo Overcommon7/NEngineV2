@@ -23,8 +23,9 @@ namespace NEngine
 		void SetName(const string& name) { mName = name; }
 		std::string_view GetName() const { return mName; }
 		uint32_t GetUniqueId() const { return mUniqueId; }
-		const std::filesystem::path GetPath() const { return templateFile; }
+		const std::filesystem::path GetTemplatePath() const { return templateFile; }
 		void SetTemplateFilePath(const std::filesystem::path& file) { templateFile = file; }
+		const GameObjectHandle& GetHandle() const { return mHandle; }
 
 		GameWorld& GetWorld() { return *mWorld; }
 		void Serialize(rapidjson::Document& doc);

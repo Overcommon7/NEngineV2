@@ -9,6 +9,7 @@ namespace NEngine
 
 		void Initialize() override;
 		void Terminate() override;
+		void Serialize(rapidjson::Document& doc, rapidjson::Value& value) override;
 		void Deserialize(rapidjson::Value& value) override;
 
 		void SetPosition(const NMath::Vector3& position);

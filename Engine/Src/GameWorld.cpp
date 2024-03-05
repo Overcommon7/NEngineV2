@@ -10,8 +10,6 @@
 #include "Services/RenderService.h"
 #include "Services/PhysicsService.h"
 
-#include "NEngine.h"
-
 namespace
 {
 	NEngine::CustomService TryMakeService;
@@ -80,11 +78,6 @@ void NEngine::GameWorld::DebugUI()
 
 	for (auto& service : mServices)
 		service->DebugUI();
-
-	if (ImGui::Button("Edit##EditorState"))
-	{
-		MainApp().ChangeState("EditState");
-	}
 }
 
 void NEngine::GameWorld::EditorUI()
@@ -95,14 +88,8 @@ void NEngine::GameWorld::EditorUI()
 			slot.gameObject->EditorUI();
 	}
 
-	if (ImGui::Button("SaveWorld##895"))
-	{
-		SaveLevel(mLevelPath);
-	}
-	if (ImGui::Button("Exit##895"))
-	{
-		MainApp().ChangeState("GameState");
-	}
+	//for (auto& service : mServices)
+	//	service->DebugUI();
 }
 
 NEngine::GameObject* NEngine::GameWorld::CreateGameObject(const std::filesystem::path& templateFile)
@@ -139,6 +126,19 @@ NEngine::GameObject* NEngine::GameWorld::GetGameObject(const GameObjectHandle& h
 		return nullptr;
 
 	return mSlots[handle.mIndex].gameObject.get();
+}
+
+NEngine::GameObject* NEngine::GameWorld::GetGameObject(const string& name)
+{
+	auto it = std::ranges::find_if(mSlots, [&name](const Slot& slot)
+		{
+			return slot.gameObject != nullptr && slot.gameObject->GetName() == name;
+		});
+
+	if (it != mSlots.end())
+		return it->gameObject.get();
+
+	return nullptr;
 }
 
 void NEngine::GameWorld::DestroyGameObject(const GameObjectHandle& handle)
@@ -238,13 +238,17 @@ void NEngine::GameWorld::LoadLevel(const std::filesystem::path& levelFile)
 	auto gameObjects = doc["GameObjects"].GetObj();
 	for (auto& gameObject : gameObjects)
 	{
+		const string name(gameObject.name.GetString());
+		if (!sEditTemplateName.empty() && sEditTemplateName != name && name.find("MainCamera") == string::npos)
+			continue;
+
 		string templateFile(gameObject.value["Template"].GetString());
 		GameObject* obj = CreateGameObject(templateFile);
 
 		if (!obj) continue;
 		obj->SetName(gameObject.name.GetString());
 		
-		if (gameObject.value.HasMember("Position"))
+		if (sEditTemplateName.empty() && gameObject.value.HasMember("Position"))
 		{
 			auto transform = obj->GetComponent<Transform>();
 			auto rigidbody = obj->GetComponent<RigidbodyComponent>();
@@ -262,6 +266,16 @@ void NEngine::GameWorld::LoadLevel(const std::filesystem::path& levelFile)
 void NEngine::GameWorld::SetCustomService(CustomService customService)
 {
 	TryMakeService = customService;
+}
+
+void NEngine::GameWorld::SetEditObject(const string& objectName)
+{
+	sEditTemplateName = objectName;
+}
+
+const string& NEngine::GameWorld::GetEditObject()
+{
+	return sEditTemplateName;
 }
 
 bool NEngine::GameWorld::IsValid(const GameObjectHandle& handle)

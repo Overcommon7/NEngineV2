@@ -11,6 +11,7 @@ namespace NEngine
 		void Initialize() override;
 		void Terminate() override;
 		void Deserialize(rapidjson::Value& value) override;
+		void Serialize(rapidjson::Document& doc, rapidjson::Value& value) override;
 
 		void Play(const string& key);
 		void Stop(const string& key);

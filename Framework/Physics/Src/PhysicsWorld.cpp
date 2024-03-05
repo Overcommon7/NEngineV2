@@ -42,7 +42,7 @@ void PhysicsWorld::Initialize(const Settings& settings)
     mInterface = new btDbvtBroadphase();
     mSolver = new btSequentialImpulseConstraintSolver();
     mDynamicWorld = new btDiscreteDynamicsWorld(mDispatcher, mInterface, mSolver, mCollisionConfiguration);
-    mDynamicWorld->setGravity(settings.gravity);
+    mDynamicWorld->setGravity(settings.gravity);                                                             
     mDynamicWorld->setDebugDrawer(&mDebugDrawer);
 
     if constexpr (mUseSoftBody)
@@ -69,10 +69,13 @@ void PhysicsWorld::Terminate()
 
 void PhysicsWorld::Update(float deltaTime)
 {
-    mDynamicWorld->stepSimulation(deltaTime, mSettings.simulationSteps, mSettings.fixedTimeStep);
-    if constexpr (mUseSoftBody)
+    if (mEnabled)
     {
-        mSoftbodyWorld->stepSimulation(deltaTime, mSettings.simulationSteps, mSettings.fixedTimeStep);
+        mDynamicWorld->stepSimulation(deltaTime, mSettings.simulationSteps, mSettings.fixedTimeStep);
+        if constexpr (mUseSoftBody)
+        {
+            mSoftbodyWorld->stepSimulation(deltaTime, mSettings.simulationSteps, mSettings.fixedTimeStep);
+        }
     }
    
     for (auto object : mPhysicsObjects)
@@ -81,6 +84,8 @@ void PhysicsWorld::Update(float deltaTime)
 
 void PhysicsWorld::DebugUI()
 {
+    if (!mEnabled) return;
+
     ImGui::Checkbox("RenderPhysics", &mRenderDebugUI);
     if (!mRenderDebugUI) return;
 
@@ -155,6 +160,11 @@ btSoftBody* PhysicsWorld::CreateSoftbody(int nodeCount)
 {
     btSoftBody* softBody = new btSoftBody(&mSoftbodyWorld->getWorldInfo(), nodeCount, nullptr, nullptr);
     return softBody;
+}
+
+void NEngine::Physics::PhysicsWorld::SetEnabled(bool enabled)
+{
+    mEnabled = true;
 }
 
 void NEngine::Physics::PhysicsWorld::SetGravity(NMath::Vector3 gravity)

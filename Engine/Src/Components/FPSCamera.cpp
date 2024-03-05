@@ -6,6 +6,8 @@
 #include "Services/UpdateService.h"
 #include "Components/Transform.h"
 
+#include "SaveUtil.h"
+
 using namespace NEngine::Input;
 
 void NEngine::FPSCamera::Update(float deltaTime)
@@ -57,6 +59,15 @@ void NEngine::FPSCamera::Terminate()
 	auto* updateService = GetOwner().GetWorld().GetService<UpdateService>();
 
 	updateService->Unregister(this);
+}
+
+void NEngine::FPSCamera::Serialize(rapidjson::Document& doc, rapidjson::Value& value)
+{
+    rapidjson::Value componentValue(rapidjson::kObjectType);
+    SaveUtil::SaveFloat("MoveSpeed", mMoveSpeed, doc, componentValue);
+    SaveUtil::SaveFloat("FastMoveSpeed", mFastMoveSpeed, doc, componentValue);
+    SaveUtil::SaveFloat("TurnSpeed", mTurnSpeed, doc, componentValue);
+    value.AddMember("FPSCamera", componentValue, doc.GetAllocator());
 }
 
 void NEngine::FPSCamera::Deserialize(rapidjson::Value& value)

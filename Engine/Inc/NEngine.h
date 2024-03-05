@@ -22,6 +22,7 @@
 #include "Services/Service.h"
 #include "Services/CameraService.h"
 #include "Services/UpdateService.h"
+#include "Services/PhysicsService.h"
 
 
 #include "GameObjectFactory.h"

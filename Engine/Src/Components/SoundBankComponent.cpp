@@ -1,7 +1,7 @@
 #include "Precompiled.h"
 #include "Components/SoundBankComponent.h"
 
-
+#include "SaveUtil.h"
 
 namespace NEngine
 {
@@ -34,6 +34,18 @@ namespace NEngine
 				}
 			}
 		}
+	}
+	void SoundBankComponent::Serialize(rapidjson::Document& doc, rapidjson::Value& value)
+	{
+		rapidjson::Value componentValue(rapidjson::kObjectType);
+		for (auto& [name, data] : mSoundEffects)
+		{
+			rapidjson::Value effectValue(rapidjson::kObjectType);
+			SaveUtil::SaveString("Filename", data.fileName.c_str(), doc, effectValue);
+			SaveUtil::SaveBool("Looping", data.isLooping, doc, effectValue);
+			componentValue.AddMember(GetStringRef(name.c_str()), effectValue, doc.GetAllocator());
+		}
+		value.AddMember("SoundBank", componentValue, doc.GetAllocator());
 	}
 	void SoundBankComponent::Play(const string& key)
 	{

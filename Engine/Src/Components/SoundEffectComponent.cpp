@@ -2,6 +2,7 @@
 #include "Components/SoundEffectComponent.h"
 
 #include "GameObject.h"
+#include "SaveUtil.h"
 
 using namespace NEngine::Audio;
 
@@ -14,6 +15,13 @@ namespace NEngine
 	}
 	void SoundEffectComponent::Terminate()
 	{
+	}
+	void SoundEffectComponent::Serialize(rapidjson::Document& doc, rapidjson::Value& value)
+	{
+		rapidjson::Value componentValue(rapidjson::kObjectType);
+		SaveUtil::SaveString("Filename", mFilename.c_str(), doc, componentValue);
+		SaveUtil::SaveBool("Looping", mLooping, doc, componentValue);
+		value.AddMember("SoundEffect", componentValue, doc.GetAllocator());
 	}
 	void SoundEffectComponent::Deserialize(rapidjson::Value& value)
 	{  

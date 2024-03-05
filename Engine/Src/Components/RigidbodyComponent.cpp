@@ -8,6 +8,8 @@
 #include "GameObject.h"
 #include "GameWorld.h"
 
+#include "SaveUtil.h"
+
 
 namespace NEngine
 {
@@ -25,6 +27,14 @@ namespace NEngine
 	{
 		mOwner->GetWorld().GetService<PhysicsService>()->Unregister(*this);
 		mRigidbody.Terminate();
+	}
+
+	void RigidbodyComponent::Serialize(rapidjson::Document& doc, rapidjson::Value& value)
+	{
+		rapidjson::Value componentValue(rapidjson::kObjectType);	
+		SaveUtil::SaveFloat("Mass", mMass, doc, componentValue);
+		value.AddMember("Rigidbody", componentValue, doc.GetAllocator());
+		
 	}
 
 	void RigidbodyComponent::Deserialize(rapidjson::Value& value)

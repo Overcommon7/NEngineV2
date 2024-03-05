@@ -55,7 +55,6 @@ namespace NEngine::Graphics
 
 		NMath::Vector3 mPosition = NMath::Vector3::Zero;
 		NMath::Vector3 mDirection = NMath::Vector3::ZAxis;
-
 		// 0 aspect ratio = use back buffer dimension
 		float mFov = 60.0f * NMath::Constants::DegToRad;
 		float mAspectRatio = 0.0f;

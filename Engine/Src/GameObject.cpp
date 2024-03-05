@@ -51,7 +51,8 @@ void NEngine::GameObject::EditorUI()
 
 		if (ImGui::Button(("Edit##" + mName).c_str()))
 		{
-			MainApp().ChangeState("EditTemplateState");
+			GameWorld::SetEditObject(mName);
+			MainApp().ChangeState("TemplateState");
 		}
 	}
 

@@ -5,6 +5,8 @@
 #include "GameWorld.h"
 #include "GameObject.h"
 
+#include "SaveUtil.h"
+
 void NEngine::CameraComponent::Initialize()
 {
 	CameraService* cameraService = GetOwner().GetWorld().GetService<CameraService>();
@@ -17,6 +19,14 @@ void NEngine::CameraComponent::Terminate()
 	cameraService->Unregister(this);
 }
 
+void NEngine::CameraComponent::Serialize(rapidjson::Document& doc, rapidjson::Value& value)
+{
+	rapidjson::Value componentValue(rapidjson::kObjectType);
+	SaveUtil::SaveVector3("Position", mStartingPosition, doc, componentValue);
+	SaveUtil::SaveVector3("LookAt", mStartingLookAt, doc, componentValue);
+	value.AddMember("CameraComponent", componentValue, doc.GetAllocator());
+}
+
 void NEngine::CameraComponent::Deserialize(rapidjson::Value& value)
 {
 	if (value.HasMember("Position"))
@@ -24,10 +34,10 @@ void NEngine::CameraComponent::Deserialize(rapidjson::Value& value)
 		const auto& position = value["Position"].GetArray();
 		if (position.Size() >= 3)
 		{
-			float x = position[0].GetFloat();
-			float y = position[1].GetFloat();
-			float z = position[2].GetFloat();
-			mCamera.SetPosition({x, y, z});
+			mStartingPosition.x = position[0].GetFloat();
+			mStartingPosition.y = position[1].GetFloat();
+			mStartingPosition.z = position[2].GetFloat();
+			mCamera.SetPosition(mStartingPosition);
 		}
 			
 	}
@@ -36,6 +46,12 @@ void NEngine::CameraComponent::Deserialize(rapidjson::Value& value)
 	{
 		auto lookAt = value["LookAt"].GetArray();
 		if (lookAt.Size() >= 3)
-			mCamera.SetLookAt({ lookAt[0].GetFloat(), lookAt[1].GetFloat(), lookAt[2].GetFloat() });
+		{
+			mStartingLookAt.x = lookAt[0].GetFloat();
+			mStartingLookAt.y = lookAt[1].GetFloat();
+			mStartingLookAt.z = lookAt[2].GetFloat();
+			mCamera.SetLookAt(mStartingLookAt);
+		}
+			
 	}
 }

@@ -5,6 +5,8 @@
 
 #include "GameObject.h"
 
+#include "SaveUtil.h"
+
 void NEngine::MeshComponent::Initialize()
 {
 	auto renderService = mOwner->GetWorld().GetService<RenderService>();
@@ -17,6 +19,57 @@ void NEngine::MeshComponent::Terminate()
 	renderService->Unregister(this);
 }
 
+void NEngine::MeshComponent::Serialize(rapidjson::Document& doc, rapidjson::Value& value)
+{
+	rapidjson::Value componentValue(rapidjson::kObjectType);
+	rapidjson::Value shapeValue(rapidjson::kObjectType);
+	rapidjson::Value materialValue(rapidjson::kObjectType);
+	rapidjson::Value texturesValue(rapidjson::kObjectType);
+
+	SaveUtil::SaveString("Type", mLoadingData.shapeType.c_str(), doc, shapeValue);
+	if (mLoadingData.shapeType == "Cube")
+	{
+		SaveUtil::SaveFloat("Size", mLoadingData.fParam, doc, shapeValue);
+	}
+	else if (mLoadingData.shapeType == "Sphere")
+	{
+		SaveUtil::SaveInt("Slices", mLoadingData.iParam0, doc, shapeValue);
+		SaveUtil::SaveInt("Rings", mLoadingData.iParam0, doc, shapeValue);
+		SaveUtil::SaveFloat("Radius", mLoadingData.fParam, doc, shapeValue);
+	}
+	else if (mLoadingData.shapeType == "Plane")
+	{
+		SaveUtil::SaveInt("Rows", mLoadingData.iParam0, doc, shapeValue);
+		SaveUtil::SaveInt("Columns", mLoadingData.iParam0, doc, shapeValue);
+		SaveUtil::SaveFloat("Spacing", mLoadingData.fParam, doc, shapeValue);
+	}
+
+	auto& material = mModel.materialData.front().material;
+	SaveUtil::SaveColor("ColorAmbient", material.ambient, doc, materialValue);
+	SaveUtil::SaveColor("ColorDiffuse", material.diffuse, doc, materialValue);
+	SaveUtil::SaveColor("ColorSpecular", material.specular, doc, materialValue);
+	SaveUtil::SaveColor("ColorEmissive", material.emissive, doc, materialValue);
+	SaveUtil::SaveFloat("SpecularPower", material.materialPower, doc, materialValue);
+
+	auto& data = mModel.materialData.front();
+	if (!data.diffuseMapName.empty())
+		SaveUtil::SaveString("DiffuseMap", data.diffuseMapName.c_str(), doc, texturesValue);
+	if (!data.bumpMapName.empty())
+		SaveUtil::SaveString("BumpMap", data.bumpMapName.c_str(), doc, texturesValue);
+	if (!data.bumpMapName.empty())
+		SaveUtil::SaveString("NormalMap", data.normalMapName.c_str(), doc, texturesValue);
+	if (!data.specularMapName.empty())
+		SaveUtil::SaveString("SpecularMap", data.specularMapName.c_str(), doc, texturesValue);
+
+	componentValue.AddMember("Shape", shapeValue, doc.GetAllocator());
+	componentValue.AddMember("Material", materialValue, doc.GetAllocator());
+	componentValue.AddMember("Textures", texturesValue, doc.GetAllocator());
+
+	SaveUtil::SaveBool("CastShadow", mCastShadow, doc, componentValue);
+
+	value.AddMember("Mesh", componentValue, doc.GetAllocator());
+}
+
 void NEngine::MeshComponent::Deserialize(rapidjson::Value& value)
 {
 	Graphics::Model::MeshData& meshData = mModel.meshData.emplace_back();
@@ -26,32 +79,32 @@ void NEngine::MeshComponent::Deserialize(rapidjson::Value& value)
 		const auto& shapeData = value["Shape"].GetObj();
 		if (shapeData.HasMember("Type"))
 		{
-			const string shapeType(shapeData["Type"].GetString());
-			if (shapeType == "Cube")
+			mLoadingData.shapeType = shapeData["Type"].GetString();
+			if (mLoadingData.shapeType == "Cube")
 			{
-				const float size = shapeData["Size"].GetFloat();
+				mLoadingData.fParam = shapeData["Size"].GetFloat();
 				//meshData.mesh = Graphics::MeshBuilder::CreateCubePX(size)
 			
 			}
-			else if (shapeType == "Sphere")
+			else if (mLoadingData.shapeType == "Sphere")
 			{
-				const int slices = shapeData["Slices"].GetInt();
-				const int rings = shapeData["Rings"].GetInt();
-				const float radius = shapeData["Radius"].GetFloat();
+				mLoadingData.iParam0 = shapeData["Slices"].GetInt();
+				mLoadingData.iParam1 = shapeData["Rings"].GetInt();
+				mLoadingData.fParam = shapeData["Radius"].GetFloat();
 
-				meshData.mesh = Graphics::MeshBuilder::CreateSphere(slices, rings, radius);
+				meshData.mesh = Graphics::MeshBuilder::CreateSphere(mLoadingData.iParam0, mLoadingData.iParam1, mLoadingData.fParam);
 			}
-			else if (shapeType == "Plane")
+			else if (mLoadingData.shapeType == "Plane")
 			{
-				const int rows = shapeData["Rows"].GetInt();
-				const int columns = shapeData["Columns"].GetInt();
-				const float spacing = shapeData["Spacing"].GetFloat();
+				mLoadingData.iParam0 = shapeData["Rows"].GetInt();
+				mLoadingData.iParam1 = shapeData["Columns"].GetInt();
+				mLoadingData.fParam  = shapeData["Spacing"].GetFloat();
 
-				meshData.mesh = Graphics::MeshBuilder::CreateGroundPlane(rows, columns, spacing);
+				meshData.mesh = Graphics::MeshBuilder::CreateGroundPlane(mLoadingData.iParam0, mLoadingData.iParam1, mLoadingData.fParam);
 			}
 			else
 			{
-				ASSERT(false, "ShapeType %s is invalid", shapeType.c_str());
+				ASSERT(false, "ShapeType %s is invalid", mLoadingData.shapeType.c_str());
 			}
 		}
 
@@ -116,5 +169,30 @@ void NEngine::MeshComponent::Deserialize(rapidjson::Value& value)
 		{
 			mCastShadow = value["CastShadow"].GetBool();
 		}
+	}
+}
+
+void NEngine::MeshComponent::EditorUI()
+{
+	if (ImGui::CollapsingHeader((string("MeshComponent##") + mOwner->GetName().data()).c_str()))
+	{
+		bool update = false;
+		auto& material = mModel.materialData.front().material;
+		update |= ImGui::ColorEdit4("Ambient", &material.ambient.r);
+		update |= ImGui::ColorEdit4("Diffuse", &material.diffuse.r);
+		update |= ImGui::ColorEdit4("Specular", &material.specular.r);
+		update |= ImGui::ColorEdit4("Emissive", &material.emissive.r);
+		update |= ImGui::DragFloat("Power", &material.materialPower);
+		update |= ImGui::Checkbox("CastShadow", &mCastShadow);
+
+		if (update)
+		{
+			RenderService* rs = mOwner->GetWorld().GetService<RenderService>();
+			rs->Unregister(this);
+			rs->Register(this);
+		}
+
+
+		
 	}
 }

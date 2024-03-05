@@ -10,6 +10,7 @@ namespace NEngine
 		void Initialize() override;
 		void Terminate() override;
 
+		void Serialize(rapidjson::Document& doc, rapidjson::Value& value) override;
 		void Deserialize(rapidjson::Value& value) override;
 	private:
 		float mMoveSpeed = 5.f;

@@ -140,15 +140,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CustomFactory.cpp" />
     <ClCompile Include="EditorState.cpp" />
     <ClCompile Include="EditTemplateState.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CustomFactory.h" />
     <ClInclude Include="EditorState.h" />
     <ClInclude Include="EditTemplateState.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="StateNames.h" />
+    <ClInclude Include="TypeIds.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

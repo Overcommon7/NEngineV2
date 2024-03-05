@@ -1,35 +1,19 @@
 #include "GameState.h"
+#include "StateNames.h"
+#include "CustomFactory.h"
 
 using namespace NEngine;
 using namespace NEngine::Graphics;
 using namespace NEngine::Input;
 
-namespace
-{
-    bool CustomComponentMake(const string& componentName, const rapidjson::Value& value, GameObject& gameObject)
-    {
-        if (componentName == "NewComponent")
-        {
-            return true;
-        }
-        return false;
-    }
-
-    bool CustomServiceMake(const string& componentName, const rapidjson::Value& value, GameWorld& gameObject)
-    {
-        if (componentName == "NewService")
-        {
-            return true;
-        }
-        return false;
-    }
-}
-
 void GameState::Initialize()
 {
-    GameObjectFactory::SetCustomMake(CustomComponentMake);
-    mWorld.SetCustomService(CustomServiceMake);
+    GameObjectFactory::SetCustomMake(CustomFactory::CustomComponentMake);
+    mWorld.SetCustomService(CustomFactory::CustomServiceMake);
     mWorld.LoadLevel("../../Assets/Templates/test_level.json");
+
+    auto ps = mWorld.GetService<PhysicsService>();
+    if (ps) ps->SetEnabled(true); 
 }
 
 void GameState::Terminate()
@@ -49,7 +33,18 @@ void GameState::Update(float deltaTime)
 
 void GameState::DebugUI()
 {
+    ImGui::Begin("GameState", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
     mWorld.DebugUI();
+
+
+    if (ImGui::Button("Edit##GameWrodl"))
+    {
+        MainApp().ChangeState(State::EDITOR);
+    }
+
+    ImGui::End();
+
+    
 }
 
 

@@ -5,6 +5,7 @@ namespace NEngine
 	{
     public:
         static void SaveVector3(const char* key, const NMath::Vector3& vector, rapidjson::Document& doc, rapidjson::Value& jValue);
+        static void SaveColor(const char* key, const Color& color, rapidjson::Document& doc, rapidjson::Value& jValue);
         static void SaveQuaternion(const char* key, const NMath::Quaternion& quaternion, rapidjson::Document& doc, rapidjson::Value& jValue);
         static void SaveFloat(const char* key, float value, rapidjson::Document& doc, rapidjson::Value& jValue);
         static void SaveInt(const char* key, int value, rapidjson::Document& doc, rapidjson::Value& jValue);
@@ -21,6 +22,9 @@ namespace NEngine
         SaveUtil& operator=(const SaveUtil&& s) = delete;
 
 	};
+
 }
+
+#define GetStringRef(key) rapidjson::GenericStringRef<char>(key)
 
 

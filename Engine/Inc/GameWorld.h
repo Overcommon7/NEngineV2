@@ -14,6 +14,10 @@ namespace NEngine
 	class GameWorld final
 	{
 	public:
+		static void SetCustomService(CustomService customService);
+		static void SetEditObject(const string& objectName);
+		static const string& GetEditObject();
+
 		void Initialize(uint32_t capacity);
 		void Terminate();
 
@@ -24,12 +28,14 @@ namespace NEngine
 
 		GameObject* CreateGameObject(const std::filesystem::path& templateFile = "");
 		GameObject* GetGameObject(const GameObjectHandle& handle);
+		GameObject* GetGameObject(const string& name);
 		void DestroyGameObject(const GameObjectHandle& handle);
 
 		void SaveTemplate(const std::filesystem::path& templateFile, const GameObjectHandle& handle);
 		void SaveLevel(const std::filesystem::path& levelFile);
 		void LoadLevel(const std::filesystem::path& levelFile);
-		void SetCustomService(CustomService customService);
+		const std::filesystem::path& GetLevelPath() const { return mLevelPath; }
+		
 
 		template<IsService T>
 		T* AddService()
@@ -74,6 +80,8 @@ namespace NEngine
 
 		Services mServices;
 
+
+		inline static string sEditTemplateName = "";
 	};
 
 

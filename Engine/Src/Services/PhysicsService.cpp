@@ -62,4 +62,9 @@ namespace NEngine
 		PhysicsWorld::Get()-> UnRegisterPhysicsObject(&rb.mRigidbody);
 	}
 
+	void PhysicsService::SetEnabled(bool enabled)
+	{
+		PhysicsWorld::Get()->SetEnabled(enabled);
+	}
+
 }
