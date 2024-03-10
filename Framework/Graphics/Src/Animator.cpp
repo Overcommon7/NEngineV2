@@ -117,7 +117,7 @@ NMath::Matrix4 Animator::GetToParentTransform(const Bone* bone) const
 
 void NEngine::Graphics::Animator::DebugUI()
 {
-	if (ImGui::CollapsingHeader("Animator##", ImGuiTreeNodeFlags_DefaultOpen))
+	if (ImGui::TreeNode("Animator##"))
 	{
 		
 		ImGui::Checkbox("Use Blending", &mIsBlending);
@@ -183,6 +183,7 @@ void NEngine::Graphics::Animator::DebugUI()
 			}
 		}
 		
+		ImGui::TreePop();
 	}
 
 	

@@ -1,0 +1,79 @@
+{
+    "Components": {
+        "Transform": {
+            "Position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        "Mesh": {
+            "Shape": {
+                "Type": "Plane",
+                "Rows": 50,
+                "Columns": 50,
+                "Spacing": 1.0
+            },
+            "Material": {
+                "ColorAmbient": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "ColorDiffuse": [
+                    0.9117646813392639,
+                    0.08938869088888168,
+                    0.08938869088888168,
+                    1.0
+                ],
+                "ColorSpecular": [
+                    0.4901960492134094,
+                    0.08169934898614883,
+                    0.08169934898614883,
+                    1.0
+                ],
+                "ColorEmissive": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "SpecularPower": 1.0
+            },
+            "Textures": {
+                "DiffuseMap": "Level/Textures/terrain/grass_2048.jpg"
+            },
+            "CastShadow": true
+        },
+        "Collider": {
+            "Shape": {
+                "Type": "Hull",
+                "HalfExtents": [
+                    5.0,
+                    0.10000000149011612,
+                    5.0
+                ],
+                "Origin": [
+                    0.0,
+                    0.10000000149011612,
+                    0.0
+                ]
+            }
+        },
+        "Rigidbody": {
+            "Mass": 0.0
+        }
+    }
+}

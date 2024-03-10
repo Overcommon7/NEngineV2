@@ -13,6 +13,9 @@ namespace NEngine
 		void Deserialize(rapidjson::Value& value) override;
 
 		void SetPosition(const NMath::Vector3& position);
+
+		const Physics::Rigidbody& GetRigidbody() const { return mRigidbody; }
+		Physics::Rigidbody& GetRigidbody() { return mRigidbody; }
 	private:
 		friend class PhysicsService;
 		Physics::Rigidbody mRigidbody;

@@ -3,7 +3,7 @@ namespace NEngine
 {
 	class GameObject;
 
-	using CustomMake = function<bool(const string&, const rapidjson::Value&, GameObject&)>;
+	using CustomMake = function<bool(const string&, rapidjson::Value&, GameObject&)>;
 
 	class GameObjectFactory
 	{		

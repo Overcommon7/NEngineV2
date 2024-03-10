@@ -9,7 +9,7 @@ namespace NEngine
 	concept IsService = std::is_base_of_v<Service, T>;
 
 	class GameWorld;
-	using CustomService = function<bool(const string&, const rapidjson::Value&, GameWorld&)>;
+	using CustomService = function<bool(const string&, rapidjson::Value&, GameWorld&)>;
 
 	class GameWorld final
 	{

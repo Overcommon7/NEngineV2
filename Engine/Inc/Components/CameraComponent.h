@@ -4,9 +4,9 @@
 namespace NEngine
 {
     class CameraComponent : public Component   
-    {
-        SET_TYPE_ID(ComponentId::Camera);
+    {       
     public:
+        SET_TYPE_ID(ComponentId::Camera);
         void Initialize() override;
         void Terminate() override;
 

@@ -1,0 +1,35 @@
+{
+  "Name": "First Person Controller Level",
+  "Capacity": 50,
+  "Services": {
+    "Camera": {
+
+    },
+    "Update": {
+
+    },
+    "Physics": {
+      "Gravity": [ 0.0, -9.81, 0.0 ],
+      "SimStep": 10,
+      "FixedTimeStep": 0.0166667
+    },
+    "Render": {
+      "LightDirection": [ 1.0, -1.0, 1.0 ],
+      "ColorAmbient": [ 0.4, 0.4, 0.4, 1.0 ],
+      "ColorDiffuse": [ 0.7, 0.7, 0.7, 1.0 ],
+      "ColorSpecular": [ 0.9, 0.9, 0.9, 1.0 ]
+    }
+  },
+  "GameObjects": {
+    "MainCamera": {
+      "Template": "Level/Objects/Camera.json",
+      "Position": [ 1.0, 1.0, -4.0 ]
+    },
+    "Ground": {
+      "Template": "Level/Objects/Ground.json"
+    },
+    "FisrtPersonController": {
+      "Template": "Level/Objects/FirstPersonController.json"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "Components": {
+    "Transform": {
+      "Position": [ 0.0, 0.0, 0.0 ],
+      "Rotation": [ 0.0, 0.0, 0.0, 1.0 ],
+      "Scale": [ 1.0, 1.0, 1.0 ]
+    },
+    "Model": {
+      "FileName": "Level/Models/Walking/MainModel.model",
+      "Animations": [
+        "Level/Models/Walking/StrafeLeft.aniset",
+        "Level/Models/Walking/StrafeRight.aniset",
+        "Level/Models/Walking/WalkingBackwards.aniset",
+        "Level/Models/Walking/WalkingFowards.aniset"
+      ],
+      "CastShadow":  true
+    },
+    "Animator":{
+
+    },
+    "Collider": {
+      "Shape": {
+        "Type": "Hull",
+        "HalfExtents": [ 0.5, 1.0, 0.5 ],
+        "Origin": [ 0.0, 1.0, 0.5 ]
+      }
+    },
+    "Rigidbody": {
+      "Mass": 1.0
+    },
+    "FirstPersonController": {
+      
+    }
+  }
+}

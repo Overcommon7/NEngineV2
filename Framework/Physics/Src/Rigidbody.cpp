@@ -20,7 +20,6 @@ void Rigidbody::Initialize(NEngine::Graphics::Transform& graphicsTransform, cons
 
     mMotionState = new btDefaultMotionState(ConvertTobtTransform(graphicsTransform));
     mRigidbody = new btRigidBody(mass, mMotionState, shape.mCollisionShape);
-    mRigidbody->setRestitution(0.85f);
 }
 
 void Rigidbody::Terminate()

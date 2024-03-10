@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Source\GameState.cpp" />
+    <ClCompile Include="Source\WinMain.cpp" />
+    <ClCompile Include="Source\pch.cpp" />
+    <ClCompile Include="Source\CustomFactory.cpp" />
+    <ClCompile Include="FirstPersonController\FirstPersonController.cpp" />
+    <ClCompile Include="FirstPersonController\FirstPersonCameraUpdater.cpp" />
+    <ClCompile Include="FirstPersonController\FirstPersonMovement.cpp" />
+    <ClCompile Include="ImUtils\ImUtils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\GameState.h" />
+    <ClInclude Include="Source\pch.h" />
+    <ClInclude Include="Source\CustomFactory.h" />
+    <ClInclude Include="FirstPersonController\FirstPersonController.h" />
+    <ClInclude Include="FirstPersonController\FirstPersonCameraUpdater.h" />
+    <ClInclude Include="FirstPersonController\FirstPersonMovement.h" />
+    <ClInclude Include="ImUtils\ImUtils.h" />
+  </ItemGroup>
+</Project>
