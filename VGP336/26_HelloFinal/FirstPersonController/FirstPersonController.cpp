@@ -29,7 +29,7 @@ void FirstPersonController::Initialize()
 			options.AddClip(index, true, 0, 0);
 		++index;
 	}
-	options.SetWeight(1.f, 0);
+	options.SetWeight(1.f, 3);
 	mAnimator->SetBlending(true);
 	
 
@@ -62,18 +62,23 @@ void FirstPersonController::Update(float deltaTime)
 	if (mValues.useOrbitCamera)
 	{
 		if (input->IsMouseDown(MouseButton::RBUTTON))
-			FirstPersonMovement::Update(mTransform, mRigidbody, mMovementValues, mCameraValues.direction, deltaTime);
+		{			
+			FirstPersonMovement::Update(mTransform, mRigidbody, mMovementValues, deltaTime);
+		}	
 		else
+		{
 			OrbitCameraUpdate(deltaTime);
+		}
+			
 		
 	}
 	else
 	{		
-		FirstPersonMovement::Update(mTransform, mRigidbody, mMovementValues, mCameraValues.direction, deltaTime);
+		FirstPersonMovement::Update(mTransform, mRigidbody, mMovementValues, deltaTime);
 		FirstPersonCameraUpdater::Update(mCamera, mCameraValues, mCameraTransform, mTransform, deltaTime);
-		
+		UpdateRotation();		
 	}
-	
+
 	if (!input->IsKeyPressed(KeyCode::LEFT))
 		return;
 
@@ -125,7 +130,8 @@ void FirstPersonController::OrbitCameraUpdate(float deltaTime)
 	mCamera->Yaw(input->GetMouseMoveX() * turnSpeed);
 	mCamera->Pitch(input->GetMouseMoveY() * turnSpeed);
 
-
+	mValues.orbitCameraDirection = mCamera->GetDirection();
+	mValues.orbitCameraPosition = mCamera->GetPosition();
 
 }
 
@@ -135,12 +141,23 @@ void FirstPersonController::OnCameraSwitch()
 	{
 		mCameraTransform->position = mValues.orbitCameraPosition;
 		mCamera->SetPosition(mValues.orbitCameraPosition);
-		mCamera->SetLookAt(mValues.orbitCameraLookAt);
+		mCamera->SetDirection(mValues.orbitCameraDirection);
 	}
 	else
 	{
-		mCamera->SetLookAt(mCameraValues.direction);
+		mCamera->SetDirection(mCameraValues.direction);
 	}
+}
+
+void FirstPersonController::UpdateRotation()
+{
+	auto dir = mCamera->GetDirection();
+	auto temp = dir;
+	temp.y = 0;
+	mCamera->SetDirection(temp);
+	auto view = mCamera->GetViewMatrix();
+	mCamera->SetDirection(dir);
+	mTransform->rotation = Quaternion::CreateFromRotationMatrix(view);
 }
 
 void FirstPersonController::Deserialize(rapidjson::Value& value)

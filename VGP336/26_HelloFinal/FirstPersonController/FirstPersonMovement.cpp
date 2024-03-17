@@ -3,12 +3,14 @@
 
 #include "ImUtils/ImUtils.h"
 
-void FirstPersonMovement::Update(NEngine::Transform* transform, Rigidbody* rigidbody, Values& values, Vector3 cameraDirection, float deltaTime)
+void FirstPersonMovement::Update(NEngine::Transform* transform, Rigidbody* rigidbody, Values& values, float deltaTime)
 {
 	UpdateInput(values.mControls);
-	UpdateCharaterRotation(transform, rigidbody, values, cameraDirection);
 
-	Vector3 movementVelocity = UpdateMovement(rigidbody, values, cameraDirection, deltaTime);
+	auto m = transform->GetMatrix4();
+	const Vector3 look = { m._31,m._32,m._33 };
+	Vector3 movementVelocity = UpdateMovement(rigidbody, values, look, deltaTime);
+
 	Vector3 jumpVelocity = UpdateJump(rigidbody, values);
 	auto finalVelocity = movementVelocity + jumpVelocity;
 	rigidbody->SetVelocity(finalVelocity);
@@ -67,24 +69,7 @@ void FirstPersonMovement::UpdateInput(Values::Controls& controls)
 	
 }
 
-void FirstPersonMovement::UpdateCharaterRotation(NEngine::Transform* transform, Rigidbody* rigidbody, Values& values, Vector3 cameraDirection)
-{
-	Vector3 viewVector = cameraDirection;
-	viewVector.y = 0;
-
-	viewVector = Normalize(viewVector);
-	float angle = std::acosf(Dot(viewVector, cameraDirection));
-	angle = btDegrees(angle);
-	auto cross = Cross(viewVector, viewVector);
-
-	if (cross.y >= 0.0f)
-		angle *= -1;
-
-	transform->rotation = btQuaternion(Vector3::YAxis, angle);
-
-}
-
-Vector3 FirstPersonMovement::UpdateMovement(Rigidbody* rigidbody, Values& values, Vector3 cameraDirection, float deltaTime)
+Vector3 FirstPersonMovement::UpdateMovement(Rigidbody* rigidbody, Values& values, Vector3 direction, float deltaTime)
 {
 	auto& controls = values.mControls;
 	Vector3 velocity{};
@@ -93,20 +78,20 @@ Vector3 FirstPersonMovement::UpdateMovement(Rigidbody* rigidbody, Values& values
 
 	if (controls[BindType::Backward].isDown)
 	{
-		velocity -= values.mSpeed * deltaTime * cameraDirection;
+		velocity -= values.mSpeed * deltaTime * direction;
 	}
 	if (controls[BindType::Foward].isDown)
 	{
-		velocity += values.mSpeed * deltaTime * cameraDirection;
+		velocity += values.mSpeed * deltaTime * direction;
 	}
 	if (controls[BindType::Left].isDown)
 	{
-		const NMath::Vector3 right = NMath::Normalize(Cross(NMath::Vector3::YAxis, cameraDirection));
+		const NMath::Vector3 right = NMath::Normalize(Cross(NMath::Vector3::YAxis, direction));
 		velocity.x -= values.mSpeed * deltaTime;
 	}
 	if (controls[BindType::Right].isDown)
 	{
-		const NMath::Vector3 right = NMath::Normalize(Cross(NMath::Vector3::YAxis, cameraDirection));
+		const NMath::Vector3 right = NMath::Normalize(Cross(NMath::Vector3::YAxis, direction));
 		velocity.x += values.mSpeed * deltaTime;
 	}
 	

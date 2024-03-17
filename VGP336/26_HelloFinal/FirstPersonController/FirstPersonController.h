@@ -10,7 +10,7 @@ class FirstPersonController final : public Component
 		bool useOrbitCamera = false;
 		float orbitCameraSpeed = 15.f;
 		Vector3 orbitCameraPosition = { 0, 0, 0 };
-		Vector3 orbitCameraLookAt = { 0, 0, 1 };
+		Vector3 orbitCameraDirection = { 0, 0, 1 };
 	};
 public:
 	SET_TYPE_ID(CustomComponentId::FirstPersonController);
@@ -41,5 +41,6 @@ private:
 private:
 	void OrbitCameraUpdate(float deltaTime);
 	void OnCameraSwitch();
+	void UpdateRotation();
 };
 

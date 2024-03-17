@@ -56,15 +56,14 @@ public:
 
     };
 
-    static void Update(NEngine::Transform* transform, Rigidbody* rigidbody, Values& values, Vector3 cameraDirection, float deltaTime);
+    static void Update(NEngine::Transform* transform, Rigidbody* rigidbody, Values& values, float deltaTime);
     static void DebugUI(NEngine::Transform* transform, Rigidbody* rigidbody, Values& values);
 private:
     using Keybind = Values::Controls::Keybind;
     using BindType = Values::Controls::BindType;
     static void UpdateInput(Values::Controls& contols);
-    static Vector3 UpdateMovement(Rigidbody* rigidbody, Values& values, Vector3 cameraDirection, float deltaTime);
+    static Vector3 UpdateMovement(Rigidbody* rigidbody, Values& values, Vector3 direction, float deltaTime);
     static Vector3 UpdateJump(Rigidbody* rigidbody, Values& values);
-    static void UpdateCharaterRotation(NEngine::Transform* transform, Rigidbody* rigidbody, Values& values, Vector3 cameraDirection);
 
 
     //static constexpr auto sKeyCodes = magic_enum::enum_names<KeyCode>();
