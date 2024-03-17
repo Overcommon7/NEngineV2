@@ -11,6 +11,7 @@ class FirstPersonController final : public Component
 		float orbitCameraSpeed = 15.f;
 		Vector3 orbitCameraPosition = { 0, 0, 0 };
 		Vector3 orbitCameraDirection = { 0, 0, 1 };
+		float rotationOffset = 90.f;
 	};
 public:
 	SET_TYPE_ID(CustomComponentId::FirstPersonController);

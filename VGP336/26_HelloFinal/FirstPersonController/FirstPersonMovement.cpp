@@ -3,13 +3,12 @@
 
 #include "ImUtils/ImUtils.h"
 
-void FirstPersonMovement::Update(NEngine::Transform* transform, Rigidbody* rigidbody, Values& values, float deltaTime)
+void FirstPersonMovement::Update(NEngine::Transform* transform, Rigidbody* rigidbody, Vector3 cameraDirection, Values& values, float deltaTime)
 {
 	UpdateInput(values.mControls);
 
-	auto m = transform->GetMatrix4();
-	const Vector3 look = { m._31,m._32,m._33 };
-	Vector3 movementVelocity = UpdateMovement(rigidbody, values, look, deltaTime);
+	
+	Vector3 movementVelocity = UpdateMovement(rigidbody, values, cameraDirection, deltaTime);
 
 	Vector3 jumpVelocity = UpdateJump(rigidbody, values);
 	auto finalVelocity = movementVelocity + jumpVelocity;
@@ -34,9 +33,13 @@ void FirstPersonMovement::DebugUI(NEngine::Transform* transform, Rigidbody* rigi
 
 	Vector3 velocity(rigidbody->GetRigidbody()->getLinearVelocity());
 	Vector3 euler{};
-	ImUtils::DrawVector3("Velocity", velocity);
+	auto m = transform->GetMatrix4();
+	const Vector3 look = { m._31,m._32,m._33 };
 	btQuaternion(transform->rotation).getEulerZYX(euler.z, euler.y, euler.x);
+
+	ImUtils::DrawVector3("Velocity", velocity);
 	ImUtils::DrawVector3("Rotation", euler);
+	ImUtils::DrawVector3("Look", look);
 
 	const string isDown(" Is Down");
 	for (size_t i = 0; i < (size_t)BindType::Count; ++i)

@@ -20,6 +20,7 @@ void FirstPersonCameraUpdater::Update(Camera* camera, Values& values, NEngine::T
 	camera->Yaw(input->GetMouseMoveX() * values.sensitivity * deltaTime);
 	camera->Pitch(input->GetMouseMoveY() * values.sensitivity * deltaTime);
 	values.direction = camera->GetDirection();
+	
 }
 
 void FirstPersonCameraUpdater::DebugUI(Camera* camera, Values& values)

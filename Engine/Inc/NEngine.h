@@ -8,6 +8,8 @@
 #include "Component.h"
 #include "GameWorld.h"
 
+#include "SaveUtil.h"
+
 #include "Components/Transform.h"
 #include "Components/CameraComponent.h"
 #include "Components/FPSCamera.h"

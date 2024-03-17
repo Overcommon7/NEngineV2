@@ -102,7 +102,7 @@ Quaternion Quaternion::CreateFromRotationMatrix(const Matrix4& m) noexcept
 	}
 	else if (y >= w && y >= x && y >= z)
 	{
-		q.w = (m._31 - m._13) / (4.f * w); ;
+		q.w = (m._31 - m._13) / (4.f * w);
 		q.x = (m._12 - m._21) / (4.f * w);
 		q.y = y;
 		q.z = (m._23 - m._32) / (4.f * x);

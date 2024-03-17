@@ -56,7 +56,7 @@ public:
 
     };
 
-    static void Update(NEngine::Transform* transform, Rigidbody* rigidbody, Values& values, float deltaTime);
+    static void Update(NEngine::Transform* transform, Rigidbody* rigidbody, Vector3 cameraDirection, Values& values, float deltaTime);
     static void DebugUI(NEngine::Transform* transform, Rigidbody* rigidbody, Values& values);
 private:
     using Keybind = Values::Controls::Keybind;

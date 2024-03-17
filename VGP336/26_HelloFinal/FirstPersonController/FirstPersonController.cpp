@@ -2,6 +2,7 @@
 #include "FirstPersonController.h"
 
 #include "ImUtils/ImUtils.h"
+#include "FirstPersonAnimation.h"
 
 
 void FirstPersonController::Initialize()
@@ -63,21 +64,21 @@ void FirstPersonController::Update(float deltaTime)
 	{
 		if (input->IsMouseDown(MouseButton::RBUTTON))
 		{			
-			FirstPersonMovement::Update(mTransform, mRigidbody, mMovementValues, deltaTime);
+			FirstPersonMovement::Update(mTransform, mRigidbody, mCameraValues.direction, mMovementValues, deltaTime);
 		}	
 		else
 		{
 			OrbitCameraUpdate(deltaTime);
-		}
-			
-		
+		}		
 	}
 	else
 	{		
-		FirstPersonMovement::Update(mTransform, mRigidbody, mMovementValues, deltaTime);
+		FirstPersonMovement::Update(mTransform, mRigidbody, mCameraValues.direction, mMovementValues, deltaTime);
 		FirstPersonCameraUpdater::Update(mCamera, mCameraValues, mCameraTransform, mTransform, deltaTime);
-		UpdateRotation();		
+		//UpdateRotation();		
 	}
+
+	FirstPersonAnimation::Update(mAnimator, mRigidbody->GetRigidbody()->getLinearVelocity());
 
 	if (!input->IsKeyPressed(KeyCode::LEFT))
 		return;
@@ -95,6 +96,9 @@ void FirstPersonController::DebugUI()
 
 	FirstPersonMovement::DebugUI(mTransform, mRigidbody, mMovementValues);
 	FirstPersonCameraUpdater::DebugUI(mCamera, mCameraValues);
+
+	if (ImGui::Button("Save"))
+		mOwner->GetWorld().SaveTemplate(mOwner->GetTemplatePath(), mOwner->GetHandle());
 }
 
 void FirstPersonController::OrbitCameraUpdate(float deltaTime)
@@ -151,21 +155,65 @@ void FirstPersonController::OnCameraSwitch()
 
 void FirstPersonController::UpdateRotation()
 {
+	auto ValidateFloat = [](float value) -> bool {
+		return value != NAN && value != INFINITY && value != -INFINITY;
+		};
 	auto dir = mCamera->GetDirection();
 	auto temp = dir;
 	temp.y = 0;
 	mCamera->SetDirection(temp);
 	auto view = mCamera->GetViewMatrix();
-	mCamera->SetDirection(dir);
-	mTransform->rotation = Quaternion::CreateFromRotationMatrix(view);
+	mCamera->SetDirection(dir);	
+	auto rotation = Quaternion::CreateFromRotationMatrix(view * Matrix4::RotationY(btRadians(mValues.rotationOffset)));
+	if (ValidateFloat(rotation.x) && ValidateFloat(rotation.y) && ValidateFloat(rotation.z) && ValidateFloat(rotation.w))
+		mTransform->rotation = rotation;
 }
 
 void FirstPersonController::Deserialize(rapidjson::Value& value)
 {
+	if (value.HasMember("Speed"))
+		mMovementValues.mSpeed = value["Speed"].GetFloat();
+	if (value.HasMember("JumpForce"))
+		mMovementValues.mJumpForce = value["JumpForce"].GetFloat();
+	if (value.HasMember("LinearDamping"))
+		mMovementValues.mLinearDamping = value["LinearDamping"].GetFloat();
+	if (value.HasMember("AngularDamping"))
+		mMovementValues.mAngularDamping = value["AngularDamping"].GetFloat();
+
+	if (value.HasMember("RotationOffset"))
+		mValues.rotationOffset = value["RotationOffset"].GetFloat();
+	if (value.HasMember("OrbitCameraSpeed"))
+		mValues.orbitCameraSpeed = value["OrbitCameraSpeed"].GetFloat();
+
+	if (value.HasMember("Sensitivity"))
+		mCameraValues.sensitivity = value["Sensitivity"].GetFloat();
+
+	if (value.HasMember("Offset"))
+	{
+		const auto offset = value["Sensitivity"].GetArray();
+		mCameraValues.offset.x = offset[0].GetFloat();
+		mCameraValues.offset.y = offset[1].GetFloat();
+		mCameraValues.offset.z = offset[2].GetFloat();
+	}
+		
 }
 
 void FirstPersonController::Serialize(rapidjson::Document& doc, rapidjson::Value& value)
 {
+	rapidjson::Value component(rapidjson::kObjectType);
+	SaveUtil::SaveFloat("Speed", mMovementValues.mSpeed, doc, component);
+	SaveUtil::SaveFloat("JumpForce", mMovementValues.mJumpForce, doc, component);
+	SaveUtil::SaveFloat("LinearDamping", mMovementValues.mLinearDamping, doc, component);
+	SaveUtil::SaveFloat("AngularDamping", mMovementValues.mAngularDamping, doc, component);
+
+	SaveUtil::SaveFloat("RotationOffset", mValues.rotationOffset, doc, component);
+	SaveUtil::SaveFloat("OrbitCameraSpeed", mValues.orbitCameraSpeed, doc, component);
+
+	SaveUtil::SaveFloat("Sensitivity", mCameraValues.sensitivity, doc, component);
+	SaveUtil::SaveVector3("Offset", mCameraValues.offset, doc, component);
+
+	value.AddMember("FirstPersonController", component, doc.GetAllocator());
+	
 }
 
 
