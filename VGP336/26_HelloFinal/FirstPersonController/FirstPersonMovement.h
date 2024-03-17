@@ -48,20 +48,27 @@ public:
         };
 
 
-        float mSpeed = 40.f;
-        float mJumpForce = 75.f;
+        float mSpeed = 25.f;
+        float mJumpForce = 7.5f;
+        float mLinearDamping = 0.8f;
+        float mAngularDamping = 0.8f;
         Controls mControls{};
 
     };
 
-    static void Update(Rigidbody* rigidbody, Values& values, Camera* camera, float deltaTime);
-    static void DebugUI(Rigidbody* rigidbody, Values& values); 
+    static void Update(NEngine::Transform* transform, Rigidbody* rigidbody, Values& values, Vector3 cameraDirection, float deltaTime);
+    static void DebugUI(NEngine::Transform* transform, Rigidbody* rigidbody, Values& values);
 private:
     using Keybind = Values::Controls::Keybind;
     using BindType = Values::Controls::BindType;
     static void UpdateInput(Values::Controls& contols);
-    static Vector3 UpdateMovement(Rigidbody* rigidbody, Values& values, Camera* camera, float deltaTime);
-    static Vector3 UpdateJump(Rigidbody* rigidbody, Values& values, Camera* camera, float deltaTime);
+    static Vector3 UpdateMovement(Rigidbody* rigidbody, Values& values, Vector3 cameraDirection, float deltaTime);
+    static Vector3 UpdateJump(Rigidbody* rigidbody, Values& values);
+    static void UpdateCharaterRotation(NEngine::Transform* transform, Rigidbody* rigidbody, Values& values, Vector3 cameraDirection);
+
+
+    //static constexpr auto sKeyCodes = magic_enum::enum_names<KeyCode>();
+
 public:
     FirstPersonMovement() = delete;
     FirstPersonMovement(const FirstPersonMovement& f) = delete;

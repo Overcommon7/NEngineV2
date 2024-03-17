@@ -35,6 +35,14 @@ void Rigidbody::SetPosition(const NEngine::NMath::Vector3& position)
     mRigidbody->setWorldTransform(ConvertTobtTransform(*mGraphicsTransform));
 }
 
+void NEngine::Physics::Rigidbody::SetRotation(const NEngine::NMath::Quaternion& rotation)
+{
+    mGraphicsTransform->rotation = rotation;
+    mRigidbody->setWorldTransform(ConvertTobtTransform(*mGraphicsTransform));
+}
+
+
+
 void Rigidbody::SetVelocity(const NEngine::NMath::Vector3& velocity)
 {
     if (IsDynamic())
@@ -54,5 +62,5 @@ void Rigidbody::Update()
 {
     auto& worldTransform = mRigidbody->getWorldTransform();
     mGraphicsTransform->position = worldTransform.getOrigin();
-    mGraphicsTransform->rotation = worldTransform.getRotation();
+    //mGraphicsTransform->rotation = worldTransform.getRotation();
 }

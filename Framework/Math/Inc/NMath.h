@@ -68,6 +68,8 @@ namespace NEngine::NMath
 	inline Vector3 Normalize(Vector3 a)
 	{
 		float magA = sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
+		if (magA <= FLT_EPSILON)
+			return { 0, 0, 0 };
 		return a / magA;
 	}
 

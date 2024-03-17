@@ -3,8 +3,15 @@
 #include "FirstPersonCameraUpdater.h"
 #include "FirstPersonMovement.h"
 
-class FirstPersonController final : public NEngine::Component    
+class FirstPersonController final : public Component    
 {
+	struct Values
+	{
+		bool useOrbitCamera = false;
+		float orbitCameraSpeed = 15.f;
+		Vector3 orbitCameraPosition = { 0, 0, 0 };
+		Vector3 orbitCameraLookAt = { 0, 0, 1 };
+	};
 public:
 	SET_TYPE_ID(CustomComponentId::FirstPersonController);
 	void Initialize() override;
@@ -18,6 +25,7 @@ public:
 private:
 	FirstPersonCameraUpdater::Values mCameraValues;
 	FirstPersonMovement::Values mMovementValues;
+	Values mValues;
 
 	CameraComponent* mCameraComponent;
 	AnimatorComponent* mAnimatorComponent;
@@ -26,5 +34,12 @@ private:
 	Camera* mCamera;
 	Animator* mAnimator;
 	Rigidbody* mRigidbody;
+	NEngine::Transform* mTransform;
+	NEngine::Transform* mCameraTransform;
+
+	static inline bool imGuiHovered = false;
+private:
+	void OrbitCameraUpdate(float deltaTime);
+	void OnCameraSwitch();
 };
 

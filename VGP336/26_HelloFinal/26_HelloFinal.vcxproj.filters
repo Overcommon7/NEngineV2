@@ -9,6 +9,7 @@
     <ClCompile Include="FirstPersonController\FirstPersonCameraUpdater.cpp" />
     <ClCompile Include="FirstPersonController\FirstPersonMovement.cpp" />
     <ClCompile Include="ImUtils\ImUtils.cpp" />
+    <ClCompile Include="FirstPersonController\FirstPersonAnimation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameState.h" />
@@ -18,5 +19,6 @@
     <ClInclude Include="FirstPersonController\FirstPersonCameraUpdater.h" />
     <ClInclude Include="FirstPersonController\FirstPersonMovement.h" />
     <ClInclude Include="ImUtils\ImUtils.h" />
+    <ClInclude Include="FirstPersonController\FirstPersonAnimation.h" />
   </ItemGroup>
 </Project>

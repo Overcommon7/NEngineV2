@@ -96,6 +96,11 @@ size_t Animator::GetAnimationCount() const
 	return ModelManager::Get()->GetModel(mId)->animationClips.size();
 }
 
+const vector<AnimationClip>& NEngine::Graphics::Animator::GetAnimationClips()
+{
+	return ModelManager::Get()->GetModel(mId)->animationClips;
+}
+
 NMath::Matrix4 Animator::GetToParentTransform(const Bone* bone) const
 {
 	if (!mIsBlending && mClipData.index < 0)

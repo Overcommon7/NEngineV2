@@ -65,6 +65,7 @@ namespace NEngine::Graphics
 
 		bool IsFinished(int clipIndex = -1) const;
 		bool IsBlending() const;
+		const vector<AnimationClip>& GetAnimationClips();
 		size_t GetAnimationCount() const;
 		NMath::Matrix4 GetToParentTransform(const Bone* bone) const;
 

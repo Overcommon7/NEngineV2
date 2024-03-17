@@ -36,7 +36,6 @@ void GameState::DebugUI()
     ImGui::Begin("GameState", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
     mWorld.DebugUI();
 
-
     if (ImGui::Button("Edit##GameWrodl"))
     {
         MainApp().ChangeState(State::EDITOR);

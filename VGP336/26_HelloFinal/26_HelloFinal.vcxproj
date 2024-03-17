@@ -146,6 +146,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FirstPersonController\FirstPersonAnimation.cpp" />
     <ClCompile Include="FirstPersonController\FirstPersonMovement.cpp" />
     <ClCompile Include="FirstPersonController\FirstPersonCameraUpdater.cpp" />
     <ClCompile Include="FirstPersonController\FirstPersonController.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="Source\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FirstPersonController\FirstPersonAnimation.h" />
     <ClInclude Include="FirstPersonController\FirstPersonMovement.h" />
     <ClInclude Include="FirstPersonController\FirstPersonCameraUpdater.h" />
     <ClInclude Include="FirstPersonController\FirstPersonController.h" />

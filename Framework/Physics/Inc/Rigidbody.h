@@ -21,7 +21,9 @@ namespace NEngine::Physics
 		void Terminate();
 
 		void SetPosition(const NEngine::NMath::Vector3& position);
+		void SetRotation(const NEngine::NMath::Quaternion& rotation);
 		void SetVelocity(const NEngine::NMath::Vector3& velocity);
+
 
 		bool IsDynamic() const;
 

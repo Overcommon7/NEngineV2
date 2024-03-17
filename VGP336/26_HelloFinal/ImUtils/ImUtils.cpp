@@ -13,7 +13,7 @@ bool ImUtils::SerializeVector3(const string& name, Vector3& vector, float speed)
 
 bool ImUtils::SerializeFloat(const string& name, float& num, float speed)
 {
-	return ImGui::DragFloat(name.c_str(), &num);
+	return ImGui::DragFloat(name.c_str(), &num, speed);
 }
 
 bool ImUtils::SerializeBool(const string& name, bool& value)
